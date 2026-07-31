@@ -20,7 +20,7 @@ coins_url = (
     "https://api.coingecko.com/api/v3/coins/markets"
     "?vs_currency=usd"
     "&order=market_cap_desc"
-    "&per_page=100"
+    "&per_page=250"
     "&page=1"
     "&price_change_percentage=7d"
 )
@@ -63,6 +63,7 @@ for coin in coins:
 
     score = 0
 
+    # Momentum
     if change >= 5:
         score += 2
 
@@ -72,20 +73,27 @@ for coin in coins:
     if change >= 30:
         score += 1
 
+    # Volume
     if volume >= 50000000:
         score += 1
 
     if volume >= 200000000:
         score += 1
 
+    # Volume activity
     if volume_ratio >= 5:
         score += 1
 
+    # Quality
     if market_cap >= 500000000:
         score += 1
 
     if market_cap >= 2000000000:
         score += 1
+
+    # Ignore weak liquidity
+    if volume < 10000000:
+        continue
 
     if score >= 5:
 
@@ -97,7 +105,6 @@ for coin in coins:
                 "price": price,
                 "change": change,
                 "volume": volume,
-                "market_cap": market_cap,
                 "ratio": volume_ratio
             }
         )
@@ -118,12 +125,12 @@ if signals:
     for item in signals:
 
         report += (
-            f"🥇 {rank}. {item['symbol']} - {item['name']}\n"
-            f"Score: {item['score']}/10\n"
-            f"Price: ${item['price']}\n"
-            f"7D Change: {item['change']:.2f}%\n"
-            f"Volume: ${item['volume']:,.0f}\n"
-            f"Vol/Market Cap: {item['ratio']:.2f}%\n\n"
+            f"🏆 {rank}. {item['symbol']} - {item['name']}\n"
+            f"⭐ Score: {item['score']}/10\n"
+            f"💰 Price: ${item['price']}\n"
+            f"📈 7D: {item['change']:.2f}%\n"
+            f"📊 Volume: ${item['volume']:,.0f}\n"
+            f"🔥 Vol/Cap: {item['ratio']:.2f}%\n\n"
         )
 
         rank += 1
