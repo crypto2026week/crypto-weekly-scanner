@@ -12,6 +12,7 @@ coins_url = (
     "&order=market_cap_desc"
     "&per_page=50"
     "&page=1"
+    "&price_change_percentage=7d"
 )
 
 response = requests.get(coins_url, timeout=10)
@@ -24,12 +25,12 @@ for coin in coins:
     name = coin["name"]
     symbol = coin["symbol"].upper()
     price = coin["current_price"]
-    change = coin["price_change_percentage_7d_in_currency"]
+    change = coin.get("price_change_percentage_7d_in_currency", 0)
 
     report += (
         f"{symbol} - {name}\n"
         f"Price: ${price}\n"
-        f"7D Change: {change}%\n\n"
+        f"7D Change: {change:.2f}%\n\n"
     )
 
 print(report)
