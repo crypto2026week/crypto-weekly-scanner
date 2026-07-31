@@ -56,9 +56,13 @@ for coin in coins:
         0
     )
 
+    if market_cap == 0:
+        continue
+
+    volume_ratio = (volume / market_cap) * 100
+
     score = 0
 
-    # Weekly momentum
     if change >= 5:
         score += 2
 
@@ -68,39 +72,61 @@ for coin in coins:
     if change >= 30:
         score += 1
 
-    # Volume confirmation
     if volume >= 50000000:
         score += 1
 
     if volume >= 200000000:
         score += 1
 
-    # Market cap quality
+    if volume_ratio >= 5:
+        score += 1
+
     if market_cap >= 500000000:
         score += 1
 
     if market_cap >= 2000000000:
         score += 1
 
-    # Avoid weak signals
     if score >= 5:
 
         signals.append(
-            f"🚀 {symbol} - {name}\n"
-            f"Score: {score}/10\n"
-            f"Price: ${price}\n"
-            f"7D Change: {change:.2f}%\n"
-            f"Volume: ${volume:,.0f}\n"
-            f"Market Cap: ${market_cap:,.0f}\n"
+            {
+                "symbol": symbol,
+                "name": name,
+                "score": score,
+                "price": price,
+                "change": change,
+                "volume": volume,
+                "market_cap": market_cap,
+                "ratio": volume_ratio
+            }
         )
+
+
+signals.sort(
+    key=lambda x: x["score"],
+    reverse=True
+)
 
 
 if signals:
 
-    report = (
-        "📊 Weekly Scanner Signals\n\n"
-        + "\n".join(signals)
-    )
+    report = "📊 Weekly Scanner Signals\n\n"
+
+    rank = 1
+
+    for item in signals:
+
+        report += (
+            f"🥇 {rank}. {item['symbol']} - {item['name']}\n"
+            f"Score: {item['score']}/10\n"
+            f"Price: ${item['price']}\n"
+            f"7D Change: {item['change']:.2f}%\n"
+            f"Volume: ${item['volume']:,.0f}\n"
+            f"Vol/Market Cap: {item['ratio']:.2f}%\n\n"
+        )
+
+        rank += 1
 
 else:
 
@@ -129,8 +155,6 @@ if telegram_token and telegram_chat_id:
         data=payload,
         timeout=10
     )
-
-    print(result.text)
 
     if result.ok:
         print("Telegram report sent successfully")
