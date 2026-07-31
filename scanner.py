@@ -1,21 +1,37 @@
 import os
 import requests
+import ccxt
 
 print("Crypto Weekly Scanner Started")
 
 telegram_token = os.getenv("TELEGRAM_TOKEN")
 telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
 
-if telegram_token and telegram_chat_id:
-    print("Telegram settings loaded successfully")
+exchange = ccxt.binance()
 
-    message = "Crypto Weekly Scanner is running ✅"
+symbols = [
+    "BTC/USDT",
+    "ETH/USDT",
+    "BNB/USDT"
+]
+
+report = "📊 Crypto Weekly Scanner Report\n\n"
+
+for symbol in symbols:
+    ticker = exchange.fetch_ticker(symbol)
+    price = ticker["last"]
+
+    report += f"{symbol}: {price} USDT\n"
+
+print(report)
+
+if telegram_token and telegram_chat_id:
 
     url = f"https://api.telegram.org/bot{telegram_token}/sendMessage"
 
     payload = {
         "chat_id": telegram_chat_id,
-        "text": message
+        "text": report
     }
 
     response = requests.post(url, data=payload, timeout=10)
@@ -23,9 +39,9 @@ if telegram_token and telegram_chat_id:
     print(response.text)
 
     if response.ok:
-        print("Telegram message sent successfully")
+        print("Telegram report sent successfully")
     else:
-        print("Telegram message failed")
+        print("Telegram report failed")
 
 else:
     print("Telegram settings are missing")
