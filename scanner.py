@@ -18,7 +18,9 @@ if telegram_token and telegram_chat_id:
         "text": message
     }
 
-    response = requests.post(url, data=payload)
+    response = requests.post(url, data=payload, timeout=10)
+
+    print(response.text)
 
     if response.ok:
         print("Telegram message sent successfully")
