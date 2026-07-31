@@ -13,7 +13,11 @@ stablecoins = [
     "USD1",
     "USDG",
     "DAI",
-    "TUSD"
+    "TUSD",
+    "PYUSD",
+    "FDUSD",
+    "USDE",
+    "USDP"
 ]
 
 coins_url = (
@@ -34,8 +38,12 @@ signals = []
 for coin in coins:
 
     symbol = coin["symbol"].upper()
+    name_lower = coin["name"].lower()
 
     if symbol in stablecoins:
+        continue
+
+    if "usd" in name_lower or "dollar" in name_lower or "stable" in name_lower:
         continue
 
     name = coin["name"]
@@ -61,17 +69,20 @@ for coin in coins:
 
     volume_ratio = (volume / market_cap) * 100
 
+    if volume < 10000000:
+        continue
+
     score = 0
 
-    # Momentum
+    # Weekly momentum
     if change >= 5:
-        score += 2
+        score += 3
 
     if change >= 15:
-        score += 2
+        score += 3
 
     if change >= 30:
-        score += 1
+        score += 2
 
     # Volume
     if volume >= 50000000:
@@ -80,22 +91,18 @@ for coin in coins:
     if volume >= 200000000:
         score += 1
 
-    # Volume activity
+    # Trading activity
     if volume_ratio >= 5:
-        score += 1
+        score += 2
 
-    # Quality
+    # Project quality
     if market_cap >= 500000000:
         score += 1
 
     if market_cap >= 2000000000:
         score += 1
 
-    # Ignore weak liquidity
-    if volume < 10000000:
-        continue
-
-    if score >= 5:
+    if score >= 6:
 
         signals.append(
             {
@@ -126,7 +133,7 @@ if signals:
 
         report += (
             f"🏆 {rank}. {item['symbol']} - {item['name']}\n"
-            f"⭐ Score: {item['score']}/10\n"
+            f"⭐ Score: {item['score']}/12\n"
             f"💰 Price: ${item['price']}\n"
             f"📈 7D: {item['change']:.2f}%\n"
             f"📊 Volume: ${item['volume']:,.0f}\n"
