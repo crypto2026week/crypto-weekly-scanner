@@ -10,7 +10,7 @@ coins_url = (
     "https://api.coingecko.com/api/v3/coins/markets"
     "?vs_currency=usd"
     "&order=market_cap_desc"
-    "&per_page=50"
+    "&per_page=100"
     "&page=1"
     "&price_change_percentage=7d"
 )
@@ -19,18 +19,34 @@ response = requests.get(coins_url, timeout=10)
 
 coins = response.json()
 
-report = "📊 Crypto Weekly Scanner Report\n\n"
+signals = []
 
 for coin in coins:
     name = coin["name"]
     symbol = coin["symbol"].upper()
     price = coin["current_price"]
-    change = coin.get("price_change_percentage_7d_in_currency", 0)
 
-    report += (
-        f"{symbol} - {name}\n"
-        f"Price: ${price}\n"
-        f"7D Change: {change:.2f}%\n\n"
+    change = coin.get(
+        "price_change_percentage_7d_in_currency",
+        0
+    )
+
+    if change >= 5:
+        signals.append(
+            f"🚀 {symbol} - {name}\n"
+            f"Price: ${price}\n"
+            f"7D Change: +{change:.2f}%\n"
+        )
+
+if signals:
+    report = (
+        "📊 Weekly Scanner Signals\n\n"
+        + "\n".join(signals)
+    )
+else:
+    report = (
+        "📊 Weekly Scanner\n\n"
+        "No strong signals found this scan."
     )
 
 print(report)
