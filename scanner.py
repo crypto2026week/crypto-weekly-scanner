@@ -31,11 +31,18 @@ for coin in coins:
         0
     )
 
-    if change >= 5:
+    volume = coin.get(
+        "total_volume",
+        0
+    )
+
+    if change >= 5 and volume >= 50000000:
+
         signals.append(
             f"🚀 {symbol} - {name}\n"
             f"Price: ${price}\n"
             f"7D Change: +{change:.2f}%\n"
+            f"Volume: ${volume:,.0f}\n"
         )
 
 if signals:
@@ -46,7 +53,7 @@ if signals:
 else:
     report = (
         "📊 Weekly Scanner\n\n"
-        "No strong signals found this scan."
+        "No strong signals found."
     )
 
 print(report)
