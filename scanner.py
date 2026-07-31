@@ -54,6 +54,10 @@ for coin in coins:
         0
     )
 
+    # شرط الحركة الأساسية
+    if change < 5:
+        continue
+
     volume = coin.get(
         "total_volume",
         0
@@ -67,14 +71,14 @@ for coin in coins:
     if market_cap == 0:
         continue
 
-    volume_ratio = (volume / market_cap) * 100
-
     if volume < 10000000:
         continue
 
+    volume_ratio = (volume / market_cap) * 100
+
     score = 0
 
-    # Weekly momentum
+    # Momentum
     if change >= 5:
         score += 3
 
@@ -95,12 +99,13 @@ for coin in coins:
     if volume_ratio >= 5:
         score += 2
 
-    # Project quality
+    # Quality
     if market_cap >= 500000000:
         score += 1
 
     if market_cap >= 2000000000:
         score += 1
+
 
     if score >= 6:
 
