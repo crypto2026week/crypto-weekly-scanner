@@ -36,13 +36,36 @@ for coin in coins:
         0
     )
 
-    if change >= 5 and volume >= 50000000:
+    market_cap = coin.get(
+        "market_cap",
+        0
+    )
 
+    score = 0
+
+    if change >= 5:
+        score += 1
+
+    if change >= 15:
+        score += 1
+
+    if volume >= 50000000:
+        score += 1
+
+    if volume >= 200000000:
+        score += 1
+
+    if market_cap >= 500000000:
+        score += 1
+
+    if score >= 3:
         signals.append(
             f"🚀 {symbol} - {name}\n"
+            f"Score: {score}/5\n"
             f"Price: ${price}\n"
-            f"7D Change: +{change:.2f}%\n"
+            f"7D Change: {change:.2f}%\n"
             f"Volume: ${volume:,.0f}\n"
+            f"Market Cap: ${market_cap:,.0f}\n"
         )
 
 if signals:
