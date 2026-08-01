@@ -111,12 +111,19 @@ for coin in coins:
     if market_cap >= 2000000000:
         score += 1
 
-    if score >= 6:
+       if score >= 5: 
+                   if score >= 10:
+            opportunity = "🟢 Strong Opportunity"
+        elif score >= 7:
+            opportunity = "🟡 Early Opportunity"
+        else:
+            opportunity = "🔴 High Risk"
 
         signals.append(
             {
                 "symbol": symbol,
                 "name": name,
+                    "opportunity": opportunity,
                 "score": score,
                 "price": price,
                 "change": change,
@@ -142,6 +149,7 @@ if signals:
 
         report += (
             f"🏆 {rank}. {item['symbol']} - {item['name']}\n"
+f"{item['opportunity']}\n"
             f"⭐ Score: {item['score']}/12\n"
             f"💰 Price: ${item['price']}\n"
             f"📈 7D: {item['change']:.2f}%\n"
