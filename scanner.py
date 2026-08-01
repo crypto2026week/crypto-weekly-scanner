@@ -110,6 +110,8 @@ for coin in coins:
 
     if market_cap >= 2000000000:
         score += 1
+
+     
         if score >= 5:
 
         if score >= 10:
