@@ -109,7 +109,8 @@ for coin in coins:
         score += 1
 
     if market_cap >= 2000000000:
-        score += 1    if score >= 5:
+        score += 1
+        if score >= 5:
 
         if score >= 10:
             opportunity = "🟢 Strong Opportunity"
