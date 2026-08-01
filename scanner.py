@@ -5,6 +5,7 @@ print("Crypto Weekly Scanner Started")
 
 telegram_token = os.getenv("TELEGRAM_TOKEN")
 telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
+coingecko_api_key = os.getenv("COINGECKO_API_KEY")
 
 stablecoins = [
     "USDT",
@@ -29,7 +30,16 @@ coins_url = (
     "&price_change_percentage=7d"
 )
 
-response = requests.get(coins_url, timeout=10)
+headers = {}
+
+if coingecko_api_key:
+    headers["x-cg-demo-api-key"] = coingecko_api_key
+
+response = requests.get(
+    coins_url,
+    headers=headers,
+    timeout=10
+)
 
 coins = response.json()
 
@@ -54,7 +64,6 @@ for coin in coins:
         0
     )
 
-    # شرط الحركة الأساسية
     if change < 5:
         continue
 
@@ -78,7 +87,6 @@ for coin in coins:
 
     score = 0
 
-    # Momentum
     if change >= 5:
         score += 3
 
@@ -88,24 +96,20 @@ for coin in coins:
     if change >= 30:
         score += 2
 
-    # Volume
     if volume >= 50000000:
         score += 1
 
     if volume >= 200000000:
         score += 1
 
-    # Trading activity
     if volume_ratio >= 5:
         score += 2
 
-    # Quality
     if market_cap >= 500000000:
         score += 1
 
     if market_cap >= 2000000000:
         score += 1
-
 
     if score >= 6:
 
