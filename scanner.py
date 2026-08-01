@@ -185,11 +185,10 @@ if telegram_token and telegram_chat_id:
     }
 
     result = requests.post(
-    telegram_url,
-    data=payload,
-    timeout=30
-    
-    ) 
+        telegram_url,
+        data=payload,
+        timeout=30
+    )
 
     if result.ok:
         print("Telegram report sent successfully")
