@@ -109,10 +109,9 @@ for coin in coins:
         score += 1
 
     if market_cap >= 2000000000:
-        score += 1
+        score += 1    if score >= 5:
 
-       if score >= 5: 
-                   if score >= 10:
+        if score >= 10:
             opportunity = "🟢 Strong Opportunity"
         elif score >= 7:
             opportunity = "🟡 Early Opportunity"
@@ -123,11 +122,12 @@ for coin in coins:
             {
                 "symbol": symbol,
                 "name": name,
-                    "opportunity": opportunity,
+                "opportunity": opportunity,
                 "score": score,
                 "price": price,
                 "change": change,
                 "volume": volume,
+                "market_cap": market_cap,
                 "ratio": volume_ratio
             }
         )
@@ -141,7 +141,7 @@ signals.sort(
 
 if signals:
 
-    report = "📊 Weekly Scanner Signals\n\n"
+    report = "📊 Weekly Scanner V2.1\n\n"
 
     rank = 1
 
@@ -149,10 +149,11 @@ if signals:
 
         report += (
             f"🏆 {rank}. {item['symbol']} - {item['name']}\n"
-f"{item['opportunity']}\n"
+            f"{item['opportunity']}\n"
             f"⭐ Score: {item['score']}/12\n"
             f"💰 Price: ${item['price']}\n"
             f"📈 7D: {item['change']:.2f}%\n"
+            f"💎 Market Cap: ${item['market_cap']:,.0f}\n"
             f"📊 Volume: ${item['volume']:,.0f}\n"
             f"🔥 Vol/Cap: {item['ratio']:.2f}%\n\n"
         )
@@ -162,7 +163,7 @@ f"{item['opportunity']}\n"
 else:
 
     report = (
-        "📊 Weekly Scanner\n\n"
+        "📊 Weekly Scanner V2.1\n\n"
         "No strong signals found."
     )
 
