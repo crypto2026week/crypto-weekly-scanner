@@ -115,16 +115,16 @@ for coin in coins:
     risk = 0
 
 
-    # Momentum
+    # Momentum V3.1 (Early Move Detection)
 
-    if 5 <= change <= 20:
-        momentum += 20
+if 5 <= change <= 15:
+    momentum += 25
 
-    elif 20 < change <= 40:
-        momentum += 15
+elif 15 < change <= 30:
+    momentum += 15
 
-    elif change > 40:
-        momentum += 8
+elif change > 30:
+    momentum += 5
 
 
     # Volume
