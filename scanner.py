@@ -110,10 +110,10 @@ for coin in coins:
     volume_score = 0
     liquidity = 0
     early_trend = 0
-    risk = 0
+    market_cap_score = 0
 
 
-    # Momentum V3.1
+    # Momentum
 
     if 5 <= change <= 15:
         momentum += 25
@@ -142,7 +142,8 @@ for coin in coins:
     if volume_ratio >= 15:
         liquidity += 10
 
-    # Early Trend V3.1
+
+    # Early Trend
 
     if 5 <= change <= 25:
         early_trend += 15
@@ -151,16 +152,16 @@ for coin in coins:
         early_trend += 5
 
 
-    # Market Cap Opportunity V3.1
+    # Market Cap Opportunity
 
     if 50000000 <= market_cap <= 500000000:
-        risk += 10
+        market_cap_score += 10
 
     elif 500000000 < market_cap <= 1000000000:
-        risk += 7
+        market_cap_score += 7
 
     else:
-        risk += 4
+        market_cap_score += 4
 
 
     confidence = (
@@ -168,7 +169,7 @@ for coin in coins:
         + volume_score
         + liquidity
         + early_trend
-        + risk
+        + market_cap_score
     )
 
 
@@ -199,7 +200,7 @@ for coin in coins:
                 "volume_score": volume_score,
                 "liquidity": liquidity,
                 "early_trend": early_trend,
-                "risk": risk
+                "market_cap_score": market_cap_score
             }
         )
 
@@ -207,9 +208,7 @@ for coin in coins:
 signals.sort(
     key=lambda x: x["confidence"],
     reverse=True
-)
-
-
+    )
 
 if signals:
 
@@ -242,8 +241,8 @@ if signals:
             f"🚀 Early Trend: "
             f"{item['early_trend']}/15\n"
 
-            f"⚠️ Risk: "
-            f"{item['risk']}/10\n\n"
+            f"🏦 Market Cap Score: "
+            f"{item['market_cap_score']}/10\n\n"
 
             f"💰 Price: ${item['price']}\n"
 
