@@ -1,7 +1,7 @@
 import os
 import requests
 
-print("Crypto Early Trend Scanner V3 Started")
+print("Crypto Early Trend Scanner V3.1 Started")
 
 telegram_token = os.getenv("TELEGRAM_TOKEN")
 telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
@@ -104,9 +104,7 @@ for coin in coins:
     ) * 100
 
 
-    #
-    # Confidence Engine
-    #
+    # Confidence Engine V3.1
 
     momentum = 0
     volume_score = 0
@@ -115,16 +113,16 @@ for coin in coins:
     risk = 0
 
 
-    # Momentum V3.1 (Early Move Detection)
+    # Momentum V3.1
 
-if 5 <= change <= 15:
-    momentum += 25
+    if 5 <= change <= 15:
+        momentum += 25
 
-elif 15 < change <= 30:
-    momentum += 15
+    elif 15 < change <= 30:
+        momentum += 15
 
-elif change > 30:
-    momentum += 5
+    elif change > 30:
+        momentum += 5
 
 
     # Volume
@@ -144,26 +142,26 @@ elif change > 30:
     if volume_ratio >= 15:
         liquidity += 10
 
+    # Early Trend V3.1
 
-    # Early trend
+    if 5 <= change <= 25:
+        early_trend += 15
 
-    if change >= 5:
+    elif change > 25:
         early_trend += 5
 
-    if change <= 25:
-        early_trend += 10
 
+    # Market Cap Opportunity V3.1
 
-    # Risk
-
-    if market_cap >= 1000000000:
+    if 50000000 <= market_cap <= 500000000:
         risk += 10
 
-    elif market_cap >= 100000000:
+    elif 500000000 < market_cap <= 1000000000:
         risk += 7
 
     else:
         risk += 4
+
 
     confidence = (
         momentum
@@ -206,7 +204,6 @@ elif change > 30:
         )
 
 
-
 signals.sort(
     key=lambda x: x["confidence"],
     reverse=True
@@ -217,7 +214,7 @@ signals.sort(
 if signals:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V3\n\n"
+        "🚨 Crypto Early Trend Scanner V3.1\n\n"
     )
 
 
@@ -269,7 +266,7 @@ if signals:
 else:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V3\n\n"
+        "🚨 Crypto Early Trend Scanner V3.1\n\n"
         "No high confidence opportunities found."
     )
 
@@ -316,4 +313,4 @@ else:
 
     print(
         "Telegram settings are missing"
-    )
+        )
