@@ -3,6 +3,9 @@ name: Crypto Weekly Scanner
 on:
   workflow_dispatch:
 
+  schedule:
+    - cron: "0 */6 * * *"
+
 jobs:
   scan:
     runs-on: ubuntu-latest
