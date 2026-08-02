@@ -1,7 +1,8 @@
 import os
 import requests
 
-print("Crypto Early Trend Scanner V3.1 Started")
+print("Crypto Early Trend Scanner V4 Started")
+
 
 telegram_token = os.getenv("TELEGRAM_TOKEN")
 telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
@@ -71,7 +72,11 @@ for coin in coins:
         continue
 
 
-    price = coin.get("current_price", 0)
+    price = coin.get(
+        "current_price",
+        0
+    )
+
 
     change = coin.get(
         "price_change_percentage_7d_in_currency",
@@ -104,34 +109,43 @@ for coin in coins:
     ) * 100
 
 
-    # Confidence Engine V3.1
+    # V4 Confidence Engine
 
     momentum = 0
     volume_score = 0
     liquidity = 0
     early_trend = 0
     market_cap_score = 0
+    volume_spike = 0
 
+    # Momentum Detection
 
-    # Momentum
-
-    if 5 <= change <= 15:
+    if 5 <= change <= 20:
         momentum += 25
 
-    elif 15 < change <= 30:
+    elif 20 < change <= 35:
         momentum += 15
 
-    elif change > 30:
+    elif change > 35:
         momentum += 5
 
 
-    # Volume
+    # Volume Power
 
     if volume >= 50000000:
         volume_score += 15
 
     if volume >= 200000000:
         volume_score += 10
+
+
+    # Volume Spike Detection
+
+    if volume_ratio >= 10:
+        volume_spike += 15
+
+    elif volume_ratio >= 5:
+        volume_spike += 8
 
 
     # Liquidity
@@ -143,16 +157,16 @@ for coin in coins:
         liquidity += 10
 
 
-    # Early Trend
+    # Early Trend Detection
 
-    if 5 <= change <= 25:
+    if 5 <= change <= 20:
         early_trend += 15
 
-    elif change > 25:
+    elif change > 20:
         early_trend += 5
 
 
-    # Market Cap Opportunity
+    # Small Cap Opportunity
 
     if 50000000 <= market_cap <= 500000000:
         market_cap_score += 10
@@ -170,19 +184,20 @@ for coin in coins:
         + liquidity
         + early_trend
         + market_cap_score
+        + volume_spike
     )
 
 
-    if confidence >= 60:
+    if confidence >= 70:
 
-        if confidence >= 85:
-            opportunity = "🟢 Strong Early Opportunity"
+        if confidence >= 90:
+            opportunity = "🟢 Strong Early Signal"
 
-        elif confidence >= 70:
-            opportunity = "🟡 Early Opportunity"
+        elif confidence >= 80:
+            opportunity = "🟡 Good Early Signal"
 
         else:
-            opportunity = "🔴 High Risk Opportunity"
+            opportunity = "🔴 Watchlist"
 
 
         signals.append(
@@ -200,7 +215,8 @@ for coin in coins:
                 "volume_score": volume_score,
                 "liquidity": liquidity,
                 "early_trend": early_trend,
-                "market_cap_score": market_cap_score
+                "market_cap_score": market_cap_score,
+                "volume_spike": volume_spike
             }
         )
 
@@ -208,12 +224,13 @@ for coin in coins:
 signals.sort(
     key=lambda x: x["confidence"],
     reverse=True
-    )
+)
+
 
 if signals:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V3.1\n\n"
+        "🚨 Crypto Early Trend Scanner V4\n\n"
     )
 
 
@@ -229,35 +246,19 @@ if signals:
             f"🎯 Confidence: "
             f"{item['confidence']}/100\n\n"
 
-            f"📈 Momentum: "
-            f"{item['momentum']}/30\n"
-
-            f"📊 Volume: "
-            f"{item['volume_score']}/25\n"
-
-            f"💧 Liquidity: "
-            f"{item['liquidity']}/20\n"
-
-            f"🚀 Early Trend: "
-            f"{item['early_trend']}/15\n"
-
-            f"🏦 Market Cap Score: "
-            f"{item['market_cap_score']}/10\n\n"
+            f"📈 Momentum: {item['momentum']}/25\n"
+            f"📊 Volume: {item['volume_score']}/25\n"
+            f"🔥 Volume Spike: {item['volume_spike']}/15\n"
+            f"💧 Liquidity: {item['liquidity']}/20\n"
+            f"🚀 Early Trend: {item['early_trend']}/15\n"
+            f"🏦 Market Cap: {item['market_cap_score']}/10\n\n"
 
             f"💰 Price: ${item['price']}\n"
-
             f"📈 7D: {item['change']:.2f}%\n"
-
-            f"💎 Market Cap: "
-            f"${item['market_cap']:,.0f}\n"
-
-            f"📊 Volume: "
-            f"${item['volume']:,.0f}\n"
-
-            f"🔥 Vol/Cap: "
-            f"{item['ratio']:.2f}%\n\n"
+            f"💎 Market Cap: ${item['market_cap']:,.0f}\n"
+            f"📊 Volume: ${item['volume']:,.0f}\n"
+            f"🔥 Vol/Cap: {item['ratio']:.2f}%\n\n"
         )
-
 
         rank += 1
 
@@ -265,18 +266,15 @@ if signals:
 else:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V3.1\n\n"
-        "No high confidence opportunities found."
+        "🚨 Crypto Early Trend Scanner V4\n\n"
+        "No early signals found."
     )
-
 
 
 print(report)
 
 
-
 if telegram_token and telegram_chat_id:
-
 
     telegram_url = (
         f"https://api.telegram.org/bot"
