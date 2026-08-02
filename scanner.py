@@ -162,9 +162,11 @@ for coin in coins:
     elif market_cap >= 100000000:
         risk += 7
 
-    else:
+        else:
         risk += 4
-            confidence = (
+
+
+    confidence = (
         momentum
         + volume_score
         + liquidity
