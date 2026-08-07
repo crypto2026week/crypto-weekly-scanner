@@ -1,7 +1,7 @@
 import os
 import requests
 
-print("Crypto Early Trend Scanner V4 Started")
+print("Crypto Early Trend Scanner V4.1 Started")
 
 
 telegram_token = os.getenv("TELEGRAM_TOKEN")
@@ -9,7 +9,7 @@ telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
 coingecko_api_key = os.getenv("COINGECKO_API_KEY")
 
 
-stablecoins = [
+excluded_symbols = [
     "USDT",
     "USDC",
     "USDS",
@@ -20,7 +20,9 @@ stablecoins = [
     "PYUSD",
     "FDUSD",
     "USDE",
-    "USDP"
+    "USDP",
+    "PAXG",
+    "XAUT"
 ]
 
 
@@ -60,7 +62,7 @@ for coin in coins:
     name_lower = name.lower()
 
 
-    if symbol in stablecoins:
+    if symbol in excluded_symbols:
         continue
 
 
@@ -68,6 +70,7 @@ for coin in coins:
         "usd" in name_lower
         or "dollar" in name_lower
         or "stable" in name_lower
+        or "gold" in name_lower
     ):
         continue
 
@@ -109,7 +112,7 @@ for coin in coins:
     ) * 100
 
 
-    # V4 Confidence Engine
+    # V4.1 Confidence Engine
 
     momentum = 0
     volume_score = 0
@@ -117,6 +120,7 @@ for coin in coins:
     early_trend = 0
     market_cap_score = 0
     volume_spike = 0
+
 
     # Momentum Detection
 
@@ -128,7 +132,6 @@ for coin in coins:
 
     elif change > 35:
         momentum += 5
-
 
     # Volume Power
 
@@ -166,7 +169,7 @@ for coin in coins:
         early_trend += 5
 
 
-    # Small Cap Opportunity
+    # Market Cap Opportunity
 
     if 50000000 <= market_cap <= 500000000:
         market_cap_score += 10
@@ -230,7 +233,7 @@ signals.sort(
 if signals:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V4\n\n"
+        "🚨 Crypto Early Trend Scanner V4.1\n\n"
     )
 
 
@@ -266,7 +269,7 @@ if signals:
 else:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V4\n\n"
+        "🚨 Crypto Early Trend Scanner V4.1\n\n"
         "No early signals found."
     )
 
