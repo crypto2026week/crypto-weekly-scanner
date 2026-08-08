@@ -135,6 +135,9 @@ for coin in coins:
     if market_cap <= 0:
         continue
 
+    if volume < 5000000:
+        continue
+
 
     # -----------------------------------------------------
     # VOLUME / MARKET CAP
@@ -278,7 +281,7 @@ for coin in coins:
 
 
     # -----------------------------------------------------
-    # CONFIDENCE / 100
+    # CONFIDENCE
     # -----------------------------------------------------
 
     confidence = (
@@ -296,9 +299,57 @@ for coin in coins:
         confidence = 0
 
     if confidence > 100:
-        confidence = 100# ============================================================
+        confidence = 100
+
+
+    # -----------------------------------------------------
+    # SIGNAL FILTER
+    # -----------------------------------------------------
+
+    if confidence < 70:
+        continue
+
+
+    # -----------------------------------------------------
+    # OPPORTUNITY LEVEL
+    # -----------------------------------------------------
+
+    if confidence >= 90:
+        opportunity = "🟢 Strong Early Signal"
+
+    elif confidence >= 80:
+        opportunity = "🟡 Good Early Signal"
+
+    else:
+        opportunity = "🔴 Watchlist"
+
+
+    # -----------------------------------------------------
+    # SAVE SIGNAL
+    # -----------------------------------------------------
+
+    signals.append(
+        {
+            "symbol": symbol,
+            "name": name,
+            "confidence": confidence,
+            "opportunity": opportunity,
+            "price": price,
+            "change": change,
+            "volume": volume,
+            "market_cap": market_cap,
+            "ratio": volume_ratio,
+            "momentum": momentum,
+            "volume_quality": volume_quality,
+            "liquidity": liquidity,
+            "early_trend": early_trend,
+            "market_cap_score": market_cap_score,
+            "volume_spike": volume_spike,
+            "late_move_penalty": late_move_penalty
+        }
+    )# =========================================================
 # PART 2 — REPORT + TELEGRAM
-# ============================================================
+# =========================================================
 
 signals.sort(
     key=lambda x: x["confidence"],
@@ -309,7 +360,7 @@ signals.sort(
 if signals:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V5\n\n"
+        "🚨 Crypto Early Trend Scanner V4.2\n\n"
     )
 
     rank = 1
@@ -323,18 +374,41 @@ if signals:
             f"🎯 Confidence: "
             f"{item['confidence']}/100\n\n"
 
-            f"📈 Momentum: {item['momentum']}/25\n"
-            f"📊 Volume: {item['volume_score']}/25\n"
-            f"🔥 Volume Spike: {item['volume_spike']}/15\n"
-            f"💧 Liquidity: {item['liquidity']}/20\n"
-            f"🚀 Early Trend: {item['early_trend']}/15\n"
-            f"🏦 Market Cap: {item['market_cap_score']}/10\n\n"
+            f"📈 Momentum: "
+            f"{item['momentum']}/20\n"
 
-            f"💰 Price: ${item['price']}\n"
-            f"📈 7D: {item['change']:.2f}%\n"
-            f"💎 Market Cap: ${item['market_cap']:,.0f}\n"
-            f"📊 Volume: ${item['volume']:,.0f}\n"
-            f"🔥 Vol/Cap: {item['ratio']:.2f}%\n\n"
+            f"📊 Volume Quality: "
+            f"{item['volume_quality']}/20\n"
+
+            f"🔥 Volume Spike: "
+            f"{item['volume_spike']}/10\n"
+
+            f"💧 Liquidity: "
+            f"{item['liquidity']}/15\n"
+
+            f"🚀 Early Trend: "
+            f"{item['early_trend']}/15\n"
+
+            f"🏦 Market Cap: "
+            f"{item['market_cap_score']}/10\n"
+
+            f"⚠️ Late Move Penalty: "
+            f"-{item['late_move_penalty']}/10\n\n"
+
+            f"💰 Price: "
+            f"${item['price']}\n"
+
+            f"📈 7D: "
+            f"{item['change']:.2f}%\n"
+
+            f"💎 Market Cap: "
+            f"${item['market_cap']:,.0f}\n"
+
+            f"📊 Volume: "
+            f"${item['volume']:,.0f}\n"
+
+            f"🔥 Vol/Cap: "
+            f"{item['ratio']:.2f}%\n\n"
         )
 
         rank += 1
@@ -343,17 +417,21 @@ if signals:
 else:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V5\n\n"
+        "🚨 Crypto Early Trend Scanner V4.2\n\n"
         "No early signals found."
     )
 
 
+# =========================================================
+# PRINT REPORT
+# =========================================================
+
 print(report)
 
 
-# ============================================================
+# =========================================================
 # TELEGRAM
-# ============================================================
+# =========================================================
 
 if telegram_token and telegram_chat_id:
 
@@ -362,10 +440,12 @@ if telegram_token and telegram_chat_id:
         f"{telegram_token}/sendMessage"
     )
 
+
     payload = {
         "chat_id": telegram_chat_id,
         "text": report[:4000]
     }
+
 
     result = requests.post(
         telegram_url,
@@ -373,18 +453,26 @@ if telegram_token and telegram_chat_id:
         timeout=30
     )
 
+
     if result.ok:
+
         print(
             "Telegram report sent successfully"
         )
 
     else:
+
         print(
             "Telegram report failed"
         )
+
+        print(
+            result.text
+        )
+
 
 else:
 
     print(
         "Telegram settings are missing"
-    )
+)
