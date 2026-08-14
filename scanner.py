@@ -159,12 +159,13 @@ for coin in coins:
         0
     )
 
-    change = coin.get(
+        change = coin.get(
         "price_change_percentage_7d_in_currency",
         0
     )
+
     if change is None:
-    continue
+        continue
 
     volume = coin.get(
         "total_volume",
