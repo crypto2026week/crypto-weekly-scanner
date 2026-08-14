@@ -5,7 +5,6 @@ from pathlib import Path
 
 print("Crypto Early Trend Scanner V4.3 Started")
 
-
 telegram_token = os.getenv("TELEGRAM_TOKEN")
 telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
 coingecko_api_key = os.getenv("COINGECKO_API_KEY")
@@ -59,7 +58,15 @@ if HISTORY_FILE.exists():
 
             history = json.load(f)
 
-    except Exception:
+        if not isinstance(history, dict):
+            history = {}
+
+    except Exception as error:
+
+        print(
+            "History load failed:",
+            error
+        )
 
         history = {}
 
@@ -101,7 +108,6 @@ response.raise_for_status()
 
 coins = response.json()
 
-
 signals = []
 
 
@@ -111,9 +117,15 @@ signals = []
 
 for coin in coins:
 
-    symbol = coin["symbol"].upper()
+    symbol = coin.get(
+        "symbol",
+        ""
+    ).upper()
 
-    name = coin["name"]
+    name = coin.get(
+        "name",
+        ""
+    )
 
     name_lower = name.lower()
 
@@ -197,17 +209,11 @@ for coin in coins:
     # =====================================================
 
     momentum = 0
-
     volume_quality = 0
-
     liquidity = 0
-
     early_trend = 0
-
     market_cap_score = 0
-
     volume_spike = 0
-
     late_move_penalty = 0
 
 
@@ -374,11 +380,9 @@ for coin in coins:
 
 
     if base_score < 0:
-
         base_score = 0
 
     if base_score > 100:
-
         base_score = 100
 
 
@@ -387,7 +391,12 @@ for coin in coins:
     # =====================================================
 
     if symbol not in history:
+        history[symbol] = []
 
+    if not isinstance(
+        history[symbol],
+        list
+    ):
         history[symbol] = []
 
 
@@ -401,8 +410,6 @@ for coin in coins:
         }
     )
 
-
-    # Keep only recent observations
 
     history[symbol] = history[symbol][
         -MAX_HISTORY:
@@ -421,24 +428,16 @@ for coin in coins:
 
     persistence_score = 0
 
-
     if previous_count >= 1:
-
         persistence_score = 3
 
-
     if previous_count >= 2:
-
         persistence_score = 5
 
-
     if previous_count >= 4:
-
         persistence_score = 7
 
-
     if previous_count >= 6:
-
         persistence_score = 10
 
 
@@ -448,13 +447,14 @@ for coin in coins:
 
     rising_observations = 0
 
-
     if len(history[symbol]) >= 2:
 
         recent = history[symbol][-5:]
 
-
-        for i in range(1, len(recent)):
+        for i in range(
+            1,
+            len(recent)
+        ):
 
             if (
                 recent[i]["price"]
@@ -470,14 +470,10 @@ for coin in coins:
 
     continuity_bonus = 0
 
-
     if rising_observations >= 2:
-
         continuity_bonus = 2
 
-
     if rising_observations >= 3:
-
         continuity_bonus = 4
 
 
@@ -492,10 +488,7 @@ for coin in coins:
     )
 
 
-    # Never allow confidence above 100
-
     if confidence > 100:
-
         confidence = 100
 
 
@@ -504,7 +497,6 @@ for coin in coins:
     # =====================================================
 
     if confidence < MIN_CONFIDENCE:
-
         continue
 
 
@@ -559,9 +551,7 @@ for coin in coins:
         and stage == "🟢 EARLY"
     ):
 
-        opportunity = (
-            "🟢 STRONG EARLY"
-        )
+        opportunity = "🟢 STRONG EARLY"
 
     elif (
         confidence >= 80
@@ -571,9 +561,7 @@ for coin in coins:
         ]
     ):
 
-        opportunity = (
-            "🟡 GOOD EARLY"
-        )
+        opportunity = "🟡 GOOD EARLY"
 
     elif (
         confidence >= 75
@@ -581,15 +569,11 @@ for coin in coins:
         and stage != "🔴 LATE"
     ):
 
-        opportunity = (
-            "🔥 PERSISTENT TREND"
-        )
+        opportunity = "🔥 PERSISTENT TREND"
 
     else:
 
-        opportunity = (
-            "🔴 WATCHLIST"
-        )
+        opportunity = "🔴 WATCHLIST"
 
 
     # =====================================================
@@ -647,7 +631,13 @@ except Exception as error:
     print(
         "History save failed:",
         error
-        # =========================================================
+    )
+
+
+# =========================================================
+# END OF PART 1
+# =========================================================
+# =========================================================
 # PART 2 — REPORT + TELEGRAM
 # =========================================================
 
@@ -673,11 +663,9 @@ if signals:
 
     rank = 1
 
-
     for item in signals[:5]:
 
         report += (
-
             f"🏆 {rank}. "
             f"{item['symbol']} - "
             f"{item['name']}\n"
@@ -737,7 +725,6 @@ if signals:
 
         rank += 1
 
-
 else:
 
     report = (
@@ -764,12 +751,10 @@ if telegram_token and telegram_chat_id:
         f"{telegram_token}/sendMessage"
     )
 
-
     payload = {
         "chat_id": telegram_chat_id,
         "text": report[:4000]
     }
-
 
     try:
 
@@ -778,7 +763,6 @@ if telegram_token and telegram_chat_id:
             data=payload,
             timeout=30
         )
-
 
         if result.ok:
 
@@ -796,7 +780,6 @@ if telegram_token and telegram_chat_id:
                 result.text
             )
 
-
     except Exception as error:
 
         print(
@@ -804,10 +787,8 @@ if telegram_token and telegram_chat_id:
             error
         )
 
-
 else:
 
     print(
         "Telegram settings are missing"
     )
-)
