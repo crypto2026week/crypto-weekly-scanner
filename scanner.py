@@ -3,7 +3,7 @@ import requests
 import json
 from pathlib import Path
 
-print("Crypto Early Trend Scanner V4.3 Started")
+print("Crypto Early Trend Scanner V4.3.1 Started")
 
 telegram_token = os.getenv("TELEGRAM_TOKEN")
 telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
@@ -11,7 +11,7 @@ coingecko_api_key = os.getenv("COINGECKO_API_KEY")
 
 
 # =========================================================
-# V4.3 CONFIGURATION
+# V4.3.1 CONFIGURATION
 # =========================================================
 
 HISTORY_FILE = Path("scanner_history.json")
@@ -391,7 +391,7 @@ for coin in coins:
 
 
     # =====================================================
-    # HISTORY TRACKING
+    # HISTORY PREVIOUS DATA
     # =====================================================
 
     if symbol not in history:
@@ -403,6 +403,130 @@ for coin in coins:
     ):
         history[symbol] = []
 
+
+    # -----------------------------------------------------
+    # IMPORTANT:
+    # Read previous history BEFORE adding current data.
+    # This prevents current volume from contaminating
+    # the historical volume average.
+    # -----------------------------------------------------
+
+    previous_history = history[symbol].copy()
+
+
+    # =====================================================
+    # V4.3.1 OBSERVATION
+    # HISTORICAL VOLUME
+    # =====================================================
+
+    historical_volumes = []
+
+    for record in previous_history[-6:]:
+
+        historical_volume = record.get(
+            "volume",
+            0
+        )
+
+        if historical_volume:
+
+            historical_volumes.append(
+                historical_volume
+            )
+
+
+    historical_volume_avg = 0
+
+    if historical_volumes:
+
+        historical_volume_avg = (
+            sum(historical_volumes)
+            / len(historical_volumes)
+        )
+
+
+    # =====================================================
+    # V4.3.1 OBSERVATION
+    # HISTORICAL VOLUME SPIKE
+    # =====================================================
+
+    volume_spike_x = 0
+
+    if historical_volume_avg > 0:
+
+        volume_spike_x = (
+            volume
+            / historical_volume_avg
+        )
+
+
+    # =====================================================
+    # V4.3.1 OBSERVATION
+    # VOLUME CONTINUATION
+    # =====================================================
+
+    volume_continuation = "⚪ NEW"
+
+    if len(historical_volumes) >= 2:
+
+        recent_volumes = historical_volumes[-3:]
+
+        rising_volume_count = 0
+
+        for i in range(
+            1,
+            len(recent_volumes)
+        ):
+
+            if (
+                recent_volumes[i]
+                > recent_volumes[i - 1]
+            ):
+
+                rising_volume_count += 1
+
+
+        if (
+            rising_volume_count >= 2
+            and volume_spike_x >= 1.10
+        ):
+
+            volume_continuation = "🟢 STRONG"
+
+        elif (
+            rising_volume_count >= 1
+            and volume_spike_x >= 1.00
+        ):
+
+            volume_continuation = "🟡 STABLE"
+
+        elif volume_spike_x < 0.80:
+
+            volume_continuation = "🔴 WEAK"
+
+        else:
+
+            volume_continuation = "⚪ MIXED"
+
+
+    elif len(historical_volumes) == 1:
+
+        if volume_spike_x >= 1.10:
+
+            volume_continuation = "🟡 INITIAL RISE"
+
+        elif volume_spike_x < 0.80:
+
+            volume_continuation = "🔴 INITIAL DROP"
+
+        else:
+
+            volume_continuation = "⚪ INITIAL"
+
+
+    # =====================================================
+    # ADD CURRENT OBSERVATION TO HISTORY
+    # =====================================================
 
     history[symbol].append(
         {
@@ -606,7 +730,12 @@ for coin in coins:
             "early_trend": early_trend,
             "market_cap_score": market_cap_score,
             "volume_spike": volume_spike,
-            "late_move_penalty": late_move_penalty
+            "late_move_penalty": late_move_penalty,
+
+            # V4.3.1 OBSERVATION
+            "historical_volume_avg": historical_volume_avg,
+            "volume_spike_x": volume_spike_x,
+            "volume_continuation": volume_continuation
         }
     )
 
@@ -641,9 +770,11 @@ except Exception as error:
 # =========================================================
 # END OF PART 1
 # =========================================================
+
 # =========================================================
 # PART 2 — REPORT + TELEGRAM
 # =========================================================
+
 
 signals.sort(
     key=lambda x: (
@@ -662,7 +793,9 @@ signals.sort(
 if signals:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V4.3\n\n"
+        "🚨 Crypto Early Trend Scanner V4.3.1\n\n"
+        "🧪 V4.3.1 Observation Mode\n"
+        "⚠️ New volume metrics do NOT affect ranking.\n\n"
     )
 
     rank = 1
@@ -690,8 +823,8 @@ if signals:
             f"📊 Volume Quality: "
             f"{item['volume_quality']}/20\n"
 
-            f"🔥 Volume Spike: "
-            f"{item['volume_spike']}/10\n"
+            f"🔥 Vol/Cap: "
+            f"{item['ratio']:.2f}%\n"
 
             f"💧 Liquidity: "
             f"{item['liquidity']}/15\n"
@@ -720,11 +853,21 @@ if signals:
             f"💎 Market Cap: "
             f"${item['market_cap']:,.0f}\n"
 
-            f"📊 Volume: "
-            f"${item['volume']:,.0f}\n"
+            f"📊 Current Volume: "
+            f"${item['volume']:,.0f}\n\n"
 
-            f"🔥 Vol/Cap: "
-            f"{item['ratio']:.2f}%\n\n"
+            f"🧪 V4.3.1 OBSERVATION\n"
+
+            f"📊 Historical Vol Avg: "
+            f"${item['historical_volume_avg']:,.0f}\n"
+
+            f"🔥 Historical Volume Spike: "
+            f"{item['volume_spike_x']:.2f}x\n"
+
+            f"🔄 Volume Continuation: "
+            f"{item['volume_continuation']}\n\n"
+
+            "────────────────────\n\n"
         )
 
         rank += 1
@@ -732,7 +875,8 @@ if signals:
 else:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V4.3\n\n"
+        "🚨 Crypto Early Trend Scanner V4.3.1\n\n"
+        "🧪 Observation Mode\n\n"
         "No early signals found."
     )
 
