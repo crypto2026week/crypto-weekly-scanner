@@ -97,9 +97,11 @@ if HISTORY_FILE.exists():
 
             history = json.load(f)
 
+
         if not isinstance(history, dict):
 
             history = {}
+
 
     except Exception as error:
 
@@ -109,6 +111,7 @@ if HISTORY_FILE.exists():
         )
 
         history = {}
+
 
 else:
 
@@ -157,6 +160,7 @@ try:
 
     coins = response.json()
 
+
     if not isinstance(coins, list):
 
         print(
@@ -164,6 +168,7 @@ try:
         )
 
         coins = []
+
 
 except requests.RequestException as error:
 
@@ -174,6 +179,7 @@ except requests.RequestException as error:
 
     coins = []
 
+
 except ValueError as error:
 
     print(
@@ -182,6 +188,7 @@ except ValueError as error:
     )
 
     coins = []
+
 
 except Exception as error:
 
@@ -202,13 +209,25 @@ signals = []
 
 for coin in coins:
 
-    if not isinstance(coin, dict):
+    if not isinstance(
+        coin,
+        dict
+    ):
+
         continue
 
 
     # =====================================================
     # BASIC DATA
     # =====================================================
+
+    coin_id = str(
+        coin.get(
+            "id",
+            ""
+        )
+    ).strip()
+
 
     symbol = str(
         coin.get(
@@ -233,10 +252,18 @@ for coin in coins:
     # BASIC VALIDATION
     # =====================================================
 
-    if not symbol:
+    if not coin_id:
+
         continue
 
+
+    if not symbol:
+
+        continue
+
+
     if not name:
+
         continue
 
 
@@ -245,6 +272,7 @@ for coin in coins:
     # =====================================================
 
     if symbol in excluded_symbols:
+
         continue
 
 
@@ -272,13 +300,16 @@ for coin in coins:
         "current_price"
     )
 
+
     change = coin.get(
         "price_change_percentage_7d_in_currency"
     )
 
+
     volume = coin.get(
         "total_volume"
     )
+
 
     market_cap = coin.get(
         "market_cap"
@@ -290,24 +321,35 @@ for coin in coins:
     # =====================================================
 
     if price is None:
+
         continue
+
 
     if change is None:
+
         continue
+
 
     if volume is None:
+
         continue
 
+
     if market_cap is None:
+
         continue
 
 
     try:
 
         price = float(price)
+
         change = float(change)
+
         volume = float(volume)
+
         market_cap = float(market_cap)
+
 
     except (
         TypeError,
@@ -318,12 +360,17 @@ for coin in coins:
 
 
     if price <= 0:
+
         continue
+
 
     if market_cap <= 0:
+
         continue
 
+
     if volume <= 0:
+
         continue
 
 
@@ -332,9 +379,12 @@ for coin in coins:
     # =====================================================
 
     if volume < MIN_VOLUME_USD:
+
         continue
 
+
     if market_cap < MIN_MARKET_CAP_USD:
+
         continue
 
 
@@ -374,13 +424,16 @@ for coin in coins:
 
         momentum = 20
 
+
     elif 20 < change <= 30:
 
         momentum = 12
 
+
     elif 30 < change <= 50:
 
         momentum = 5
+
 
     elif change > 50:
 
@@ -395,17 +448,21 @@ for coin in coins:
 
         volume_quality = 20
 
+
     elif volume >= 100_000_000:
 
         volume_quality = 16
+
 
     elif volume >= 50_000_000:
 
         volume_quality = 12
 
+
     elif volume >= 25_000_000:
 
         volume_quality = 6
+
 
     else:
 
@@ -420,13 +477,16 @@ for coin in coins:
 
         liquidity = 8
 
+
     elif 10 <= volume_ratio < 20:
 
         liquidity = 12
 
+
     elif 20 <= volume_ratio < 40:
 
         liquidity = 15
+
 
     elif volume_ratio >= 40:
 
@@ -441,13 +501,16 @@ for coin in coins:
 
         early_trend = 15
 
+
     elif 15 < change <= 25:
 
         early_trend = 12
 
+
     elif 25 < change <= 40:
 
         early_trend = 6
+
 
     elif change > 40:
 
@@ -462,13 +525,16 @@ for coin in coins:
 
         market_cap_score = 10
 
+
     elif 500_000_000 < market_cap <= 1_000_000_000:
 
         market_cap_score = 7
 
+
     elif 1_000_000_000 < market_cap <= 5_000_000_000:
 
         market_cap_score = 5
+
 
     else:
 
@@ -483,13 +549,16 @@ for coin in coins:
 
         volume_ratio_score = 10
 
+
     elif 20 <= volume_ratio < 40:
 
         volume_ratio_score = 8
 
+
     elif volume_ratio >= 40:
 
         volume_ratio_score = 5
+
 
     elif 5 <= volume_ratio < 10:
 
@@ -504,9 +573,11 @@ for coin in coins:
 
         late_move_penalty = 3
 
+
     elif 50 < change <= 100:
 
         late_move_penalty = 6
+
 
     elif change > 100:
 
@@ -541,29 +612,34 @@ for coin in coins:
     # HISTORY VALIDATION
     # =====================================================
 
-    if symbol not in history:
+    # IMPORTANT:
+    # Use CoinGecko ID instead of symbol.
+    # Symbols are not guaranteed to be unique.
 
-        history[symbol] = []
+    if coin_id not in history:
+
+        history[coin_id] = []
 
 
     if not isinstance(
-        history[symbol],
+        history[coin_id],
         list
     ):
 
-        history[symbol] = []
+        history[coin_id] = []
 
 
-    # -----------------------------------------------------
-    # IMPORTANT:
-    # previous_history is taken BEFORE adding the current
-    # observation.
-    # -----------------------------------------------------
+    # =====================================================
+    # PREVIOUS HISTORY
+    # =====================================================
 
     previous_history = [
         record
-        for record in history[symbol]
-        if isinstance(record, dict)
+        for record in history[coin_id]
+        if isinstance(
+            record,
+            dict
+        )
     ]
 
 
@@ -594,6 +670,7 @@ for coin in coins:
             historical_volume = float(
                 historical_volume
             )
+
 
         except (
             TypeError,
@@ -648,6 +725,7 @@ for coin in coins:
         recent_volumes = (
             historical_volumes[-3:]
         )
+
 
         rising_volume_count = 0
 
@@ -715,11 +793,13 @@ for coin in coins:
                 "🟡 INITIAL STRONG"
             )
 
+
         elif volume_spike_x >= 1.00:
 
             volume_continuation = (
                 "🟡 INITIAL RISE"
             )
+
 
         elif (
             volume_spike_x > 0
@@ -730,6 +810,7 @@ for coin in coins:
             volume_continuation = (
                 "🔴 INITIAL DROP"
             )
+
 
         else:
 
@@ -749,6 +830,7 @@ for coin in coins:
                 "🟡 INITIAL RISE"
             )
 
+
         elif (
             volume_spike_x > 0
             and volume_spike_x
@@ -758,6 +840,7 @@ for coin in coins:
             volume_continuation = (
                 "🔴 INITIAL DROP"
             )
+
 
         else:
 
@@ -877,8 +960,7 @@ for coin in coins:
         elif (
             volume_spike_x
             > VOLUME_WEAK_THRESHOLD
-            and volume_spike_x
-            < 1.00
+            and volume_spike_x < 1.00
         ):
 
             volume_weight = (
@@ -901,7 +983,7 @@ for coin in coins:
     # PERSISTENCE SCORE
     # =====================================================
 
-    # This is based on previous observations only.
+    # Previous observations only.
     # Current observation is NOT included.
 
     persistence_score = 0
@@ -931,15 +1013,14 @@ for coin in coins:
     # TREND CONTINUITY
     # =====================================================
 
-    # IMPORTANT:
-    # Calculate continuity BEFORE adding current price.
-    # This prevents the current observation from artificially
-    # creating a continuity bonus.
+    # Calculate BEFORE adding current observation.
 
     rising_observations = 0
 
 
-    recent_history = previous_history[-5:]
+    recent_history = (
+        previous_history[-5:]
+    )
 
 
     if len(recent_history) >= 2:
@@ -949,18 +1030,21 @@ for coin in coins:
             len(recent_history)
         ):
 
-            previous_price = recent_history[
-                i - 1
-            ].get(
-                "price",
-                0
+            previous_price = (
+                recent_history[i - 1]
+                .get(
+                    "price",
+                    0
+                )
             )
 
-            current_price = recent_history[
-                i
-            ].get(
-                "price",
-                0
+
+            current_price = (
+                recent_history[i]
+                .get(
+                    "price",
+                    0
+                )
             )
 
 
@@ -973,6 +1057,7 @@ for coin in coins:
                 current_price = float(
                     current_price
                 )
+
 
             except (
                 TypeError,
@@ -1038,38 +1123,44 @@ for coin in coins:
     # STAGE DETECTION
     # =====================================================
 
-    if change <= 15:
+    # IMPORTANT:
+    # Negative / low momentum must NOT be labeled EARLY.
+
+    if 5 <= change <= 15:
 
         stage = "🟢 EARLY"
 
-    elif change <= 25:
+
+    elif 15 < change <= 25:
 
         stage = "🟡 DEVELOPING"
 
-    elif change <= 50:
+
+    elif 25 < change <= 50:
 
         stage = "🟠 EXTENDED"
 
-    else:
+
+    elif change > 50:
 
         stage = "🔴 LATE"
+
+
+    else:
+
+        stage = "⚪ NO MOMENTUM"
 
 
     # =====================================================
     # PERSISTENCE LABEL
     # =====================================================
 
-    if previous_count >= 6:
+    if previous_count >= 4:
 
         persistence_label = (
             "🔥 Persistent"
         )
 
-    elif previous_count >= 4:
-
-        persistence_label = (
-            "🔥 Persistent"
-        )
 
     elif previous_count >= 2:
 
@@ -1077,27 +1168,19 @@ for coin in coins:
             "📌 Repeated"
         )
 
+
     elif previous_count >= 1:
 
         persistence_label = (
             "👀 Returning"
         )
 
+
     else:
 
         persistence_label = (
             "🆕 New"
         )
-
-
-    # =====================================================
-    # SIGNAL FILTER
-    # =====================================================
-
-    if confidence < MIN_CONFIDENCE:
-
-        # Still save the observation below.
-        pass
 
 
     # =====================================================
@@ -1134,7 +1217,10 @@ for coin in coins:
     elif (
         confidence >= 75
         and persistence_score >= 5
-        and stage != "🔴 LATE"
+        and stage not in [
+            "🔴 LATE",
+            "⚪ NO MOMENTUM"
+        ]
     ):
 
         opportunity = (
@@ -1153,15 +1239,27 @@ for coin in coins:
     # ADD CURRENT OBSERVATION TO HISTORY
     # =====================================================
 
-    history[symbol].append(
+    history[coin_id].append(
         {
+            "symbol": symbol,
+            "name": name,
+
             "price": price,
+
             "change": change,
+
             "volume": volume,
+
             "market_cap": market_cap,
+
             "base_score": base_score,
+
             "volume_spike_x": volume_spike_x,
-            "volume_confirmation": volume_confirmation,
+
+            "volume_confirmation": (
+                volume_confirmation
+            ),
+
             "volume_weight": volume_weight
         }
     )
@@ -1171,8 +1269,10 @@ for coin in coins:
     # LIMIT HISTORY SIZE
     # =====================================================
 
-    history[symbol] = (
-        history[symbol][-MAX_HISTORY:]
+    history[coin_id] = (
+        history[coin_id][
+            -MAX_HISTORY:
+        ]
     )
 
 
@@ -1187,19 +1287,33 @@ for coin in coins:
 
     signals.append(
         {
+            "coin_id": coin_id,
+
             "symbol": symbol,
+
             "name": name,
 
             "confidence": confidence,
+
             "raw_confidence": raw_confidence,
+
             "base_score": base_score,
 
             "opportunity": opportunity,
-            "stage": stage,
-            "persistence_label": persistence_label,
 
-            "persistence_score": persistence_score,
-            "continuity_bonus": continuity_bonus,
+            "stage": stage,
+
+            "persistence_label": (
+                persistence_label
+            ),
+
+            "persistence_score": (
+                persistence_score
+            ),
+
+            "continuity_bonus": (
+                continuity_bonus
+            ),
 
             "volume_confirmation": (
                 volume_confirmation
@@ -1208,15 +1322,21 @@ for coin in coins:
             "volume_weight": volume_weight,
 
             "price": price,
+
             "change": change,
+
             "volume": volume,
+
             "market_cap": market_cap,
 
             "ratio": volume_ratio,
 
             "momentum": momentum,
+
             "volume_quality": volume_quality,
+
             "liquidity": liquidity,
+
             "early_trend": early_trend,
 
             "market_cap_score": (
@@ -1265,9 +1385,11 @@ try:
             indent=2
         )
 
+
     print(
         "History saved successfully"
     )
+
 
 except Exception as error:
 
@@ -1316,9 +1438,17 @@ if signals:
 
     rank = 1
 
-    for item in signals[:5]:
 
-        confirmation = item["volume_confirmation"]
+    # =====================================================
+    # TOP SIGNALS
+    # =====================================================
+
+    for item in signals[:TOP_SIGNALS]:
+
+        confirmation = (
+            item["volume_confirmation"]
+        )
+
 
         # -------------------------------------------------
         # VOLUME CONFIRMATION LABEL
@@ -1330,11 +1460,13 @@ if signals:
                 f"🟢 Volume Confirmed +{confirmation}"
             )
 
+
         elif confirmation < 0:
 
             confirmation_label = (
                 f"🔴 Volume Weak {confirmation}"
             )
+
 
         else:
 
@@ -1344,10 +1476,11 @@ if signals:
 
 
         # -------------------------------------------------
-        # BUILD SIGNAL REPORT
+        # BUILD SIGNAL TEXT
         # -------------------------------------------------
 
         signal_text = (
+
             f"🏆 {rank}. "
             f"{item['symbol']} - "
             f"{item['name']}\n"
@@ -1357,17 +1490,27 @@ if signals:
             f"{item['stage']} | "
             f"{item['persistence_label']}\n\n"
 
+
+            # -------------------------------------------------
+            # CONFIDENCE
+            # -------------------------------------------------
+
             f"🎯 Confidence: "
             f"{item['confidence']:.0f}/100\n"
 
             f"🧠 Base Score: "
-            f"{item['base_score']}/100\n"
+            f"{item['base_score']:.0f}/100\n"
 
             f"🧪 Volume Confirmation: "
             f"{confirmation_label}\n"
 
             f"⚖️ Volume Weight: "
             f"{item['volume_weight']:.2f}x\n\n"
+
+
+            # -------------------------------------------------
+            # SCORE BREAKDOWN
+            # -------------------------------------------------
 
             f"📈 Momentum: "
             f"{item['momentum']}/20\n"
@@ -1390,11 +1533,21 @@ if signals:
             f"⚠️ Late Move Penalty: "
             f"-{item['late_move_penalty']}/10\n\n"
 
+
+            # -------------------------------------------------
+            # HISTORY / CONTINUITY
+            # -------------------------------------------------
+
             f"🔁 Persistence: "
             f"{item['persistence_score']}/10\n"
 
             f"📌 Continuity Bonus: "
             f"+{item['continuity_bonus']}\n\n"
+
+
+            # -------------------------------------------------
+            # MARKET DATA
+            # -------------------------------------------------
 
             f"💰 Price: "
             f"${item['price']:.8f}\n"
@@ -1407,6 +1560,11 @@ if signals:
 
             f"📊 Current Volume: "
             f"${item['volume']:,.0f}\n\n"
+
+
+            # -------------------------------------------------
+            # VOLUME ANALYSIS
+            # -------------------------------------------------
 
             f"🧪 V4.5 VOLUME ANALYSIS\n"
 
@@ -1422,6 +1580,7 @@ if signals:
             "────────────────────\n\n"
         )
 
+
         report += signal_text
 
         rank += 1
@@ -1431,8 +1590,11 @@ else:
 
     report = (
         "🚨 Crypto Early Trend Scanner V4.5\n\n"
+
         "🧪 V4.5 Volume Confirmation Mode\n"
+
         "📊 Volume confirmation affects confidence.\n\n"
+
         "❌ No qualifying signals found."
     )
 
@@ -1442,10 +1604,15 @@ else:
 # =========================================================
 
 print("\n")
+
 print("=" * 60)
+
 print("FINAL SCANNER REPORT")
+
 print("=" * 60)
+
 print(report)
+
 print("=" * 60)
 
 
@@ -1465,21 +1632,26 @@ if telegram_token and telegram_chat_id:
     # TELEGRAM SAFE MESSAGE SENDER
     # =====================================================
 
-    # Telegram has a message size limit.
-    # Instead of cutting the report at 4000 characters,
-    # split it cleanly between signals.
+    # Telegram message limit is approximately 4096 characters.
+    # Keep a safety margin.
 
     MAX_TELEGRAM_LENGTH = 4000
 
 
-    def split_telegram_message(text, max_length=4000):
+    def split_telegram_message(
+        text,
+        max_length=MAX_TELEGRAM_LENGTH
+    ):
 
         parts = []
 
         current_part = ""
 
 
-        # Split primarily by signal separator
+        # -------------------------------------------------
+        # Split report by signal separator
+        # -------------------------------------------------
+
         sections = text.split(
             "────────────────────"
         )
@@ -1489,18 +1661,24 @@ if telegram_token and telegram_chat_id:
 
             section = section.strip()
 
+
             if not section:
+
                 continue
 
 
-            # Restore separator between sections
+            # Restore separator
+
             section = (
                 section
                 + "\n\n────────────────────\n\n"
             )
 
 
-            # If adding this section stays within limit
+            # -------------------------------------------------
+            # Add section if it fits
+            # -------------------------------------------------
+
             if (
                 len(current_part)
                 + len(section)
@@ -1509,9 +1687,11 @@ if telegram_token and telegram_chat_id:
 
                 current_part += section
 
+
             else:
 
-                # Save current part first
+                # Save existing part
+
                 if current_part.strip():
 
                     parts.append(
@@ -1519,19 +1699,27 @@ if telegram_token and telegram_chat_id:
                     )
 
 
-                # If a single section is still too long,
-                # split it safely by characters.
+                # -------------------------------------------------
+                # Single section may itself be too large
+                # -------------------------------------------------
+
                 while len(section) > max_length:
 
                     parts.append(
                         section[:max_length]
                     )
 
-                    section = section[max_length:]
+                    section = (
+                        section[max_length:]
+                    )
 
 
                 current_part = section
 
+
+        # -------------------------------------------------
+        # Save final part
+        # -------------------------------------------------
 
         if current_part.strip():
 
@@ -1543,6 +1731,10 @@ if telegram_token and telegram_chat_id:
         return parts
 
 
+    # =====================================================
+    # SPLIT REPORT
+    # =====================================================
+
     telegram_messages = (
         split_telegram_message(
             report,
@@ -1552,10 +1744,27 @@ if telegram_token and telegram_chat_id:
 
 
     # =====================================================
+    # SAFETY CHECK
+    # =====================================================
+
+    if not telegram_messages:
+
+        telegram_messages = [
+            "🚨 Crypto Early Trend Scanner V4.5\n\n"
+            "❌ Empty report."
+        ]
+
+
+    # =====================================================
     # SEND ALL TELEGRAM PARTS
     # =====================================================
 
     telegram_success = True
+
+
+    total_messages = len(
+        telegram_messages
+    )
 
 
     for message_number, telegram_text in enumerate(
@@ -1578,28 +1787,41 @@ if telegram_token and telegram_chat_id:
             )
 
 
+            # -------------------------------------------------
+            # SUCCESS
+            # -------------------------------------------------
+
             if result.ok:
 
                 print(
                     f"Telegram message "
                     f"{message_number}/"
-                    f"{len(telegram_messages)} "
+                    f"{total_messages} "
                     f"sent successfully"
                 )
+
+
+            # -------------------------------------------------
+            # API ERROR
+            # -------------------------------------------------
 
             else:
 
                 telegram_success = False
 
+
                 print(
                     f"Telegram message "
-                    f"{message_number} failed"
+                    f"{message_number}/"
+                    f"{total_messages} failed"
                 )
+
 
                 print(
                     "HTTP Status:",
                     result.status_code
                 )
+
 
                 print(
                     "Response:",
@@ -1611,9 +1833,12 @@ if telegram_token and telegram_chat_id:
 
             telegram_success = False
 
+
             print(
                 f"Telegram request failed "
-                f"for message {message_number}:",
+                f"for message "
+                f"{message_number}/"
+                f"{total_messages}:",
                 error
             )
 
@@ -1622,9 +1847,12 @@ if telegram_token and telegram_chat_id:
 
             telegram_success = False
 
+
             print(
                 f"Unexpected Telegram error "
-                f"for message {message_number}:",
+                f"for message "
+                f"{message_number}/"
+                f"{total_messages}:",
                 error
             )
 
@@ -1639,6 +1867,7 @@ if telegram_token and telegram_chat_id:
             "Telegram report sent successfully"
         )
 
+
     else:
 
         print(
@@ -1646,19 +1875,26 @@ if telegram_token and telegram_chat_id:
         )
 
 
+# =========================================================
+# TELEGRAM SETTINGS MISSING
+# =========================================================
+
 else:
 
     print(
         "Telegram settings are missing"
     )
 
+
     print(
         "Required environment variables:"
     )
 
+
     print(
         "TELEGRAM_TOKEN"
     )
+
 
     print(
         "TELEGRAM_CHAT_ID"
