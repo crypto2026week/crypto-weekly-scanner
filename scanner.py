@@ -3,7 +3,7 @@ import requests
 import json
 from pathlib import Path
 
-print("Crypto Early Trend Scanner V4.4 Started")
+print("Crypto Early Trend Scanner V4.5 Started")
 
 telegram_token = os.getenv("TELEGRAM_TOKEN")
 telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
@@ -11,7 +11,7 @@ coingecko_api_key = os.getenv("COINGECKO_API_KEY")
 
 
 # =========================================================
-# V4.4 CONFIGURATION
+# V4.5 CONFIGURATION
 # =========================================================
 
 HISTORY_FILE = Path("scanner_history.json")
@@ -24,7 +24,7 @@ HISTORICAL_VOLUME_LOOKBACK = 6
 
 
 # =========================================================
-# V4.4 VOLUME CONFIRMATION
+# V4.5 VOLUME CONFIRMATION
 # =========================================================
 
 VOLUME_CONFIRMATION_ENABLED = True
@@ -32,11 +32,24 @@ VOLUME_CONFIRMATION_ENABLED = True
 VOLUME_STRONG_THRESHOLD = 1.10
 VOLUME_WEAK_THRESHOLD = 0.80
 
-VOLUME_BONUS_STRONG = 3
+VOLUME_BONUS_STRONG = 5
 VOLUME_BONUS_STABLE = 1
-VOLUME_PENALTY_WEAK = 3
+VOLUME_PENALTY_WEAK = 7
 
-MAX_VOLUME_ADJUSTMENT = 6
+MAX_VOLUME_ADJUSTMENT = 8
+
+
+# =========================================================
+# V4.5 VOLUME WEIGHT
+# =========================================================
+
+# حجم التداول أصبح عاملًا أقوى في الثقة النهائية
+# الهدف: منع استمرار الإشارة القوية عندما يكون الحجم ضعيفًا
+
+VOLUME_WEIGHT_STRONG = 1.10
+VOLUME_WEIGHT_STABLE = 1.00
+VOLUME_WEIGHT_NEUTRAL = 0.97
+VOLUME_WEIGHT_WEAK = 0.90
 
 
 # =========================================================
@@ -267,7 +280,7 @@ for coin in coins:
 
 
     # =====================================================
-    # V4.4 SCORE COMPONENTS
+    # V4.5 SCORE COMPONENTS
     # =====================================================
 
     momentum = 0
@@ -474,6 +487,7 @@ for coin in coins:
 
 
     # عدد القراءات السابقة قبل إضافة القراءة الحالية
+
     previous_count = len(
         previous_history
     )
@@ -672,7 +686,7 @@ for coin in coins:
 
 
     # =====================================================
-    # V4.4 VOLUME CONFIRMATION
+    # V4.5 VOLUME CONFIRMATION
     # =====================================================
 
     volume_confirmation = 0
@@ -747,6 +761,80 @@ for coin in coins:
 
 
     # =====================================================
+    # V4.5 VOLUME WEIGHT SELECTION
+    # =====================================================
+
+    volume_weight = VOLUME_WEIGHT_NEUTRAL
+
+
+    if (
+        volume_spike_x
+        >= VOLUME_STRONG_THRESHOLD
+    ):
+
+        volume_weight = (
+            VOLUME_WEIGHT_STRONG
+        )
+
+
+    elif (
+        volume_spike_x >= 1.00
+        and volume_spike_x
+        < VOLUME_STRONG_THRESHOLD
+    ):
+
+        volume_weight = (
+            VOLUME_WEIGHT_STABLE
+        )
+
+
+    elif (
+        volume_spike_x > VOLUME_WEAK_THRESHOLD
+        and volume_spike_x < 1.00
+    ):
+
+        volume_weight = (
+            VOLUME_WEIGHT_NEUTRAL
+        )
+
+
+    elif (
+        volume_spike_x > 0
+        and volume_spike_x
+        <= VOLUME_WEAK_THRESHOLD
+    ):
+
+        volume_weight = (
+            VOLUME_WEIGHT_WEAK
+        )
+
+
+    # =====================================================
+    # ADD CURRENT OBSERVATION TO HISTORY
+    # =====================================================
+
+    history[symbol].append(
+        {
+            "price": price,
+            "change": change,
+            "volume": volume,
+            "market_cap": market_cap,
+            "base_score": base_score,
+            "volume_spike_x": volume_spike_x,
+            "volume_confirmation": volume_confirmation,
+            "volume_weight": volume_weight
+        }
+    )
+
+
+    history[symbol] = (
+        history[symbol][
+            -MAX_HISTORY:
+        ]
+    )
+
+
+    # =====================================================
     # PERSISTENCE SCORE / 10
     # =====================================================
 
@@ -771,30 +859,6 @@ for coin in coins:
     if previous_count >= 6:
 
         persistence_score = 10
-
-
-    # =====================================================
-    # ADD CURRENT OBSERVATION TO HISTORY
-    # =====================================================
-
-    history[symbol].append(
-        {
-            "price": price,
-            "change": change,
-            "volume": volume,
-            "market_cap": market_cap,
-            "base_score": base_score,
-            "volume_spike_x": volume_spike_x,
-            "volume_confirmation": volume_confirmation
-        }
-    )
-
-
-    history[symbol] = (
-        history[symbol][
-            -MAX_HISTORY:
-        ]
-    )
 
 
     # =====================================================
@@ -855,14 +919,21 @@ for coin in coins:
 
 
     # =====================================================
-    # V4.4 FINAL CONFIDENCE
+    # V4.5 FINAL CONFIDENCE
     # =====================================================
 
-    confidence = (
+    raw_confidence = (
         base_score
         + persistence_score
         + continuity_bonus
         + volume_confirmation
+    )
+
+
+    # تطبيق وزن الحجم على الثقة النهائية
+    confidence = (
+        raw_confidence
+        * volume_weight
     )
 
 
@@ -942,6 +1013,8 @@ for coin in coins:
     if (
         confidence >= 85
         and stage == "🟢 EARLY"
+        and volume_continuation
+        != "🔴 WEAK"
     ):
 
         opportunity = (
@@ -955,6 +1028,8 @@ for coin in coins:
             "🟢 EARLY",
             "🟡 DEVELOPING"
         ]
+        and volume_continuation
+        != "🔴 WEAK"
     ):
 
         opportunity = (
@@ -990,6 +1065,7 @@ for coin in coins:
             "name": name,
 
             "confidence": confidence,
+            "raw_confidence": raw_confidence,
             "base_score": base_score,
 
             "opportunity": opportunity,
@@ -998,7 +1074,12 @@ for coin in coins:
 
             "persistence_score": persistence_score,
             "continuity_bonus": continuity_bonus,
-            "volume_confirmation": volume_confirmation,
+
+            "volume_confirmation": (
+                volume_confirmation
+            ),
+
+            "volume_weight": volume_weight,
 
             "price": price,
             "change": change,
@@ -1012,10 +1093,17 @@ for coin in coins:
             "liquidity": liquidity,
             "early_trend": early_trend,
 
-            "market_cap_score": market_cap_score,
-            "volume_ratio_score": volume_ratio_score,
+            "market_cap_score": (
+                market_cap_score
+            ),
 
-            "late_move_penalty": late_move_penalty,
+            "volume_ratio_score": (
+                volume_ratio_score
+            ),
+
+            "late_move_penalty": (
+                late_move_penalty
+            ),
 
             "historical_volume_avg": (
                 historical_volume_avg
@@ -1066,7 +1154,6 @@ except Exception as error:
 # PART 2 — REPORT + TELEGRAM
 # =========================================================
 
-
 # =========================================================
 # SORT SIGNALS
 # =========================================================
@@ -1100,11 +1187,6 @@ if signals:
 
         confirmation = item["volume_confirmation"]
 
-
-        # -------------------------------------------------
-        # VOLUME CONFIRMATION LABEL
-        # -------------------------------------------------
-
         if confirmation > 0:
 
             confirmation_label = (
@@ -1124,11 +1206,6 @@ if signals:
             confirmation_label = (
                 "⚪ Volume Neutral"
             )
-
-
-        # -------------------------------------------------
-        # BUILD SIGNAL REPORT
-        # -------------------------------------------------
 
         report += (
             f"🏆 {rank}. "
@@ -1204,7 +1281,6 @@ if signals:
 
         rank += 1
 
-
 else:
 
     report = (
@@ -1238,26 +1314,19 @@ if telegram_token and telegram_chat_id:
         f"{telegram_token}/sendMessage"
     )
 
-
-    # -----------------------------------------------------
-    # TELEGRAM MESSAGE LIMIT
-    # -----------------------------------------------------
-
     # Telegram message limit is approximately 4096 characters.
     # Keep a small safety margin.
 
     telegram_text = report[:4000]
-
 
     payload = {
         "chat_id": telegram_chat_id,
         "text": telegram_text
     }
 
-
-    # -----------------------------------------------------
+    # =====================================================
     # SEND TELEGRAM MESSAGE
-    # -----------------------------------------------------
+    # =====================================================
 
     try:
 
@@ -1266,7 +1335,6 @@ if telegram_token and telegram_chat_id:
             data=payload,
             timeout=30
         )
-
 
         if result.ok:
 
@@ -1290,7 +1358,6 @@ if telegram_token and telegram_chat_id:
                 result.text
             )
 
-
     except requests.RequestException as error:
 
         print(
@@ -1298,14 +1365,12 @@ if telegram_token and telegram_chat_id:
             error
         )
 
-
     except Exception as error:
 
         print(
             "Unexpected Telegram error:",
             error
         )
-
 
 else:
 
