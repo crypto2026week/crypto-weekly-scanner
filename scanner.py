@@ -3,7 +3,7 @@ import requests
 import json
 from pathlib import Path
 
-print("Crypto Early Trend Scanner V4.3.1 Started")
+print("Crypto Early Trend Scanner V4.4 Started")
 
 telegram_token = os.getenv("TELEGRAM_TOKEN")
 telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
@@ -11,7 +11,7 @@ coingecko_api_key = os.getenv("COINGECKO_API_KEY")
 
 
 # =========================================================
-# V4.3.1 CONFIGURATION
+# V4.4 CONFIGURATION
 # =========================================================
 
 HISTORY_FILE = Path("scanner_history.json")
@@ -19,6 +19,22 @@ HISTORY_FILE = Path("scanner_history.json")
 MIN_VOLUME_USD = 5_000_000
 MIN_CONFIDENCE = 65
 MAX_HISTORY = 12
+
+
+# =========================================================
+# V4.4 VOLUME CONFIRMATION
+# =========================================================
+
+VOLUME_CONFIRMATION_ENABLED = True
+
+VOLUME_STRONG_THRESHOLD = 1.10
+VOLUME_WEAK_THRESHOLD = 0.80
+
+VOLUME_BONUS_STRONG = 3
+VOLUME_BONUS_STABLE = 1
+VOLUME_PENALTY_WEAK = 3
+
+MAX_VOLUME_ADJUSTMENT = 6
 
 
 # =========================================================
@@ -159,7 +175,6 @@ for coin in coins:
         0
     )
 
-
     change = coin.get(
         "price_change_percentage_7d_in_currency",
         0
@@ -209,7 +224,7 @@ for coin in coins:
 
 
     # =====================================================
-    # V4.3 SCORE COMPONENTS
+    # V4.4 SCORE COMPONENTS
     # =====================================================
 
     momentum = 0
@@ -404,18 +419,10 @@ for coin in coins:
         history[symbol] = []
 
 
-    # -----------------------------------------------------
-    # IMPORTANT:
-    # Read previous history BEFORE adding current data.
-    # This prevents current volume from contaminating
-    # the historical volume average.
-    # -----------------------------------------------------
-
     previous_history = history[symbol].copy()
 
 
     # =====================================================
-    # V4.3.1 OBSERVATION
     # HISTORICAL VOLUME
     # =====================================================
 
@@ -446,7 +453,6 @@ for coin in coins:
 
 
     # =====================================================
-    # V4.3.1 OBSERVATION
     # HISTORICAL VOLUME SPIKE
     # =====================================================
 
@@ -461,7 +467,6 @@ for coin in coins:
 
 
     # =====================================================
-    # V4.3.1 OBSERVATION
     # VOLUME CONTINUATION
     # =====================================================
 
@@ -525,6 +530,40 @@ for coin in coins:
 
 
     # =====================================================
+    # V4.4 VOLUME CONFIRMATION
+    # =====================================================
+
+    volume_confirmation = 0
+
+    if VOLUME_CONFIRMATION_ENABLED:
+
+        if volume_spike_x >= VOLUME_STRONG_THRESHOLD:
+
+            volume_confirmation = VOLUME_BONUS_STRONG
+
+        elif (
+            volume_spike_x >= 1.00
+            and volume_spike_x < VOLUME_STRONG_THRESHOLD
+        ):
+
+            volume_confirmation = VOLUME_BONUS_STABLE
+
+        elif (
+            volume_spike_x > VOLUME_WEAK_THRESHOLD
+            and volume_spike_x < 1.00
+        ):
+
+            volume_confirmation = 0
+
+        elif (
+            volume_spike_x > 0
+            and volume_spike_x <= VOLUME_WEAK_THRESHOLD
+        ):
+
+            volume_confirmation = -VOLUME_PENALTY_WEAK
+
+
+    # =====================================================
     # ADD CURRENT OBSERVATION TO HISTORY
     # =====================================================
 
@@ -534,7 +573,9 @@ for coin in coins:
             "change": change,
             "volume": volume,
             "market_cap": market_cap,
-            "confidence": base_score
+            "confidence": base_score,
+            "volume_spike_x": volume_spike_x,
+            "volume_confirmation": volume_confirmation
         }
     )
 
@@ -606,18 +647,22 @@ for coin in coins:
 
 
     # =====================================================
-    # V4.3 FINAL CONFIDENCE
+    # V4.4 FINAL CONFIDENCE
     # =====================================================
 
     confidence = (
         base_score
         + persistence_score
         + continuity_bonus
+        + volume_confirmation
     )
 
 
     if confidence > 100:
         confidence = 100
+
+    if confidence < 0:
+        confidence = 0
 
 
     # =====================================================
@@ -719,6 +764,7 @@ for coin in coins:
             "persistence_label": persistence_label,
             "persistence_score": persistence_score,
             "continuity_bonus": continuity_bonus,
+            "volume_confirmation": volume_confirmation,
             "price": price,
             "change": change,
             "volume": volume,
@@ -731,8 +777,6 @@ for coin in coins:
             "market_cap_score": market_cap_score,
             "volume_spike": volume_spike,
             "late_move_penalty": late_move_penalty,
-
-            # V4.3.1 OBSERVATION
             "historical_volume_avg": historical_volume_avg,
             "volume_spike_x": volume_spike_x,
             "volume_continuation": volume_continuation
@@ -780,6 +824,7 @@ signals.sort(
     key=lambda x: (
         x["confidence"],
         x["persistence_score"],
+        x["volume_confirmation"],
         x["change"]
     ),
     reverse=True
@@ -793,14 +838,37 @@ signals.sort(
 if signals:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V4.3.1\n\n"
-        "🧪 V4.3.1 Observation Mode\n"
-        "⚠️ New volume metrics do NOT affect ranking.\n\n"
+        "🚨 Crypto Early Trend Scanner V4.4\n\n"
+        "🧪 V4.4 Volume Confirmation Mode\n"
+        "📊 Volume confirmation now affects confidence.\n\n"
     )
 
     rank = 1
 
     for item in signals[:5]:
+
+        confirmation = item["volume_confirmation"]
+
+        if confirmation > 0:
+
+            confirmation_label = (
+                f"🟢 Volume Confirmed "
+                f"+{confirmation}"
+            )
+
+        elif confirmation < 0:
+
+            confirmation_label = (
+                f"🔴 Volume Weak "
+                f"{confirmation}"
+            )
+
+        else:
+
+            confirmation_label = (
+                "⚪ Volume Neutral"
+            )
+
 
         report += (
             f"🏆 {rank}. "
@@ -815,7 +883,10 @@ if signals:
             f"{item['confidence']}/100\n"
 
             f"🧠 Base Score: "
-            f"{item['base_score']}/100\n\n"
+            f"{item['base_score']}/100\n"
+
+            f"🧪 Volume Confirmation: "
+            f"{confirmation_label}\n\n"
 
             f"📈 Momentum: "
             f"{item['momentum']}/20\n"
@@ -856,7 +927,7 @@ if signals:
             f"📊 Current Volume: "
             f"${item['volume']:,.0f}\n\n"
 
-            f"🧪 V4.3.1 OBSERVATION\n"
+            f"🧪 V4.4 VOLUME ANALYSIS\n"
 
             f"📊 Historical Vol Avg: "
             f"${item['historical_volume_avg']:,.0f}\n"
@@ -872,12 +943,13 @@ if signals:
 
         rank += 1
 
+
 else:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V4.3.1\n\n"
-        "🧪 Observation Mode\n\n"
-        "No early signals found."
+        "🚨 Crypto Early Trend Scanner V4.4\n\n"
+        "🧪 Volume Confirmation Mode\n\n"
+        "No qualifying signals found."
     )
 
 
@@ -939,4 +1011,4 @@ else:
 
     print(
         "Telegram settings are missing"
-    )
+)
