@@ -3,7 +3,13 @@ import requests
 import json
 from pathlib import Path
 
+
 print("Crypto Early Trend Scanner V4.5 Started")
+
+
+# =========================================================
+# ENVIRONMENT
+# =========================================================
 
 telegram_token = os.getenv("TELEGRAM_TOKEN")
 telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
@@ -17,10 +23,15 @@ coingecko_api_key = os.getenv("COINGECKO_API_KEY")
 HISTORY_FILE = Path("scanner_history.json")
 
 MIN_VOLUME_USD = 5_000_000
+MIN_MARKET_CAP_USD = 50_000_000
+
 MIN_CONFIDENCE = 65
+
 MAX_HISTORY = 12
 
 HISTORICAL_VOLUME_LOOKBACK = 6
+
+TOP_SIGNALS = 5
 
 
 # =========================================================
@@ -43,12 +54,9 @@ MAX_VOLUME_ADJUSTMENT = 8
 # V4.5 VOLUME WEIGHT
 # =========================================================
 
-# حجم التداول أصبح عاملًا أقوى في الثقة النهائية
-# الهدف: منع استمرار الإشارة القوية عندما يكون الحجم ضعيفًا
-
 VOLUME_WEIGHT_STRONG = 1.10
 VOLUME_WEIGHT_STABLE = 1.00
-VOLUME_WEIGHT_NEUTRAL = 0.97
+VOLUME_WEIGHT_NEUTRAL = 1.00
 VOLUME_WEIGHT_WEAK = 0.90
 
 
@@ -56,7 +64,7 @@ VOLUME_WEIGHT_WEAK = 0.90
 # EXCLUSION FILTER
 # =========================================================
 
-excluded_symbols = [
+excluded_symbols = {
     "USDT",
     "USDC",
     "USDS",
@@ -70,7 +78,7 @@ excluded_symbols = [
     "USDP",
     "PAXG",
     "XAUT"
-]
+}
 
 
 # =========================================================
@@ -90,6 +98,7 @@ if HISTORY_FILE.exists():
             history = json.load(f)
 
         if not isinstance(history, dict):
+
             history = {}
 
     except Exception as error:
@@ -120,7 +129,10 @@ coins_url = (
 )
 
 
-headers = {}
+headers = {
+    "Accept": "application/json"
+}
+
 
 if coingecko_api_key:
 
@@ -138,7 +150,7 @@ try:
     response = requests.get(
         coins_url,
         headers=headers,
-        timeout=15
+        timeout=20
     )
 
     response.raise_for_status()
@@ -153,10 +165,28 @@ try:
 
         coins = []
 
-except Exception as error:
+except requests.RequestException as error:
 
     print(
         "CoinGecko request failed:",
+        error
+    )
+
+    coins = []
+
+except ValueError as error:
+
+    print(
+        "CoinGecko JSON decode failed:",
+        error
+    )
+
+    coins = []
+
+except Exception as error:
+
+    print(
+        "Unexpected CoinGecko error:",
         error
     )
 
@@ -172,22 +202,36 @@ signals = []
 
 for coin in coins:
 
-    symbol = coin.get(
-        "symbol",
-        ""
-    ).upper()
+    if not isinstance(coin, dict):
+        continue
 
-    name = coin.get(
-        "name",
-        ""
-    )
+
+    # =====================================================
+    # BASIC DATA
+    # =====================================================
+
+    symbol = str(
+        coin.get(
+            "symbol",
+            ""
+        )
+    ).upper().strip()
+
+
+    name = str(
+        coin.get(
+            "name",
+            ""
+        )
+    ).strip()
+
 
     name_lower = name.lower()
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # BASIC VALIDATION
-    # -----------------------------------------------------
+    # =====================================================
 
     if not symbol:
         continue
@@ -196,9 +240,9 @@ for coin in coins:
         continue
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # EXCLUSION FILTER
-    # -----------------------------------------------------
+    # =====================================================
 
     if symbol in excluded_symbols:
         continue
@@ -207,45 +251,48 @@ for coin in coins:
     if (
         "usd" in name_lower
         or "dollar" in name_lower
+        or "stablecoin" in name_lower
+        or "stable coin" in name_lower
         or "stable" in name_lower
         or "gold" in name_lower
         or "tokenized stock" in name_lower
+        or "tokenised stock" in name_lower
         or "bstocks" in name_lower
         or "stock" in name_lower
     ):
+
         continue
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # MARKET DATA
-    # -----------------------------------------------------
+    # =====================================================
 
     price = coin.get(
-        "current_price",
-        0
+        "current_price"
     )
 
     change = coin.get(
-        "price_change_percentage_7d_in_currency",
-        0
+        "price_change_percentage_7d_in_currency"
     )
 
     volume = coin.get(
-        "total_volume",
-        0
+        "total_volume"
     )
 
     market_cap = coin.get(
-        "market_cap",
-        0
+        "market_cap"
     )
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # DATA VALIDATION
-    # -----------------------------------------------------
+    # =====================================================
 
     if price is None:
+        continue
+
+    if change is None:
         continue
 
     if volume is None:
@@ -254,25 +301,46 @@ for coin in coins:
     if market_cap is None:
         continue
 
-    if change is None:
+
+    try:
+
+        price = float(price)
+        change = float(change)
+        volume = float(volume)
+        market_cap = float(market_cap)
+
+    except (
+        TypeError,
+        ValueError
+    ):
+
         continue
+
 
     if price <= 0:
-        continue
-
-    if volume <= 0:
         continue
 
     if market_cap <= 0:
         continue
 
-    if volume < MIN_VOLUME_USD:
+    if volume <= 0:
         continue
 
 
-    # -----------------------------------------------------
+    # =====================================================
+    # MINIMUM MARKET REQUIREMENTS
+    # =====================================================
+
+    if volume < MIN_VOLUME_USD:
+        continue
+
+    if market_cap < MIN_MARKET_CAP_USD:
+        continue
+
+
+    # =====================================================
     # VOLUME / MARKET CAP
-    # -----------------------------------------------------
+    # =====================================================
 
     volume_ratio = (
         volume / market_cap
@@ -280,21 +348,27 @@ for coin in coins:
 
 
     # =====================================================
-    # V4.5 SCORE COMPONENTS
+    # SCORE COMPONENTS
     # =====================================================
 
     momentum = 0
+
     volume_quality = 0
+
     liquidity = 0
+
     early_trend = 0
+
     market_cap_score = 0
+
     volume_ratio_score = 0
+
     late_move_penalty = 0
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # MOMENTUM / 20
-    # -----------------------------------------------------
+    # =====================================================
 
     if 5 <= change <= 20:
 
@@ -313,9 +387,9 @@ for coin in coins:
         momentum = 2
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # VOLUME QUALITY / 20
-    # -----------------------------------------------------
+    # =====================================================
 
     if volume >= 200_000_000:
 
@@ -338,9 +412,9 @@ for coin in coins:
         volume_quality = 2
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # LIQUIDITY / 15
-    # -----------------------------------------------------
+    # =====================================================
 
     if 5 <= volume_ratio < 10:
 
@@ -359,9 +433,9 @@ for coin in coins:
         liquidity = 10
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # EARLY TREND / 15
-    # -----------------------------------------------------
+    # =====================================================
 
     if 5 <= change <= 15:
 
@@ -380,9 +454,9 @@ for coin in coins:
         early_trend = 2
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # MARKET CAP OPPORTUNITY / 10
-    # -----------------------------------------------------
+    # =====================================================
 
     if 50_000_000 <= market_cap <= 500_000_000:
 
@@ -401,9 +475,9 @@ for coin in coins:
         market_cap_score = 3
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # VOLUME / CAP SCORE
-    # -----------------------------------------------------
+    # =====================================================
 
     if 10 <= volume_ratio < 20:
 
@@ -422,9 +496,9 @@ for coin in coins:
         volume_ratio_score = 6
 
 
-    # -----------------------------------------------------
+    # =====================================================
     # LATE MOVE PENALTY / 10
-    # -----------------------------------------------------
+    # =====================================================
 
     if 20 < change <= 50:
 
@@ -454,18 +528,17 @@ for coin in coins:
     )
 
 
-    if base_score < 0:
-
-        base_score = 0
-
-
-    if base_score > 100:
-
-        base_score = 100
+    base_score = max(
+        0,
+        min(
+            100,
+            base_score
+        )
+    )
 
 
     # =====================================================
-    # HISTORY PREVIOUS DATA
+    # HISTORY VALIDATION
     # =====================================================
 
     if symbol not in history:
@@ -481,12 +554,18 @@ for coin in coins:
         history[symbol] = []
 
 
-    previous_history = (
-        history[symbol].copy()
-    )
+    # -----------------------------------------------------
+    # IMPORTANT:
+    # previous_history is taken BEFORE adding the current
+    # observation.
+    # -----------------------------------------------------
 
+    previous_history = [
+        record
+        for record in history[symbol]
+        if isinstance(record, dict)
+    ]
 
-    # عدد القراءات السابقة قبل إضافة القراءة الحالية
 
     previous_count = len(
         previous_history
@@ -504,34 +583,34 @@ for coin in coins:
         -HISTORICAL_VOLUME_LOOKBACK:
     ]:
 
-        if not isinstance(
-            record,
-            dict
-        ):
-
-            continue
-
-
         historical_volume = record.get(
             "volume",
             0
         )
 
 
-        if (
-            isinstance(
-                historical_volume,
-                (int, float)
+        try:
+
+            historical_volume = float(
+                historical_volume
             )
-            and historical_volume > 0
+
+        except (
+            TypeError,
+            ValueError
         ):
+
+            continue
+
+
+        if historical_volume > 0:
 
             historical_volumes.append(
                 historical_volume
             )
 
 
-    historical_volume_avg = 0
+    historical_volume_avg = 0.0
 
 
     if historical_volumes:
@@ -546,7 +625,7 @@ for coin in coins:
     # HISTORICAL VOLUME SPIKE
     # =====================================================
 
-    volume_spike_x = 0
+    volume_spike_x = 0.0
 
 
     if historical_volume_avg > 0:
@@ -566,7 +645,9 @@ for coin in coins:
 
     if len(historical_volumes) >= 3:
 
-        recent_volumes = historical_volumes[-3:]
+        recent_volumes = (
+            historical_volumes[-3:]
+        )
 
         rising_volume_count = 0
 
@@ -686,7 +767,7 @@ for coin in coins:
 
 
     # =====================================================
-    # V4.5 VOLUME CONFIRMATION
+    # VOLUME CONFIRMATION
     # =====================================================
 
     volume_confirmation = 0
@@ -694,7 +775,16 @@ for coin in coins:
 
     if VOLUME_CONFIRMATION_ENABLED:
 
-        if (
+        # -------------------------------------------------
+        # No historical baseline = neutral.
+        # -------------------------------------------------
+
+        if historical_volume_avg <= 0:
+
+            volume_confirmation = 0
+
+
+        elif (
             volume_spike_x
             >= VOLUME_STRONG_THRESHOLD
         ):
@@ -737,106 +827,82 @@ for coin in coins:
 
 
     # =====================================================
-    # SAFETY LIMIT FOR VOLUME ADJUSTMENT
+    # SAFETY LIMIT
     # =====================================================
 
-    if (
-        volume_confirmation
-        > MAX_VOLUME_ADJUSTMENT
-    ):
-
-        volume_confirmation = (
-            MAX_VOLUME_ADJUSTMENT
+    volume_confirmation = max(
+        -MAX_VOLUME_ADJUSTMENT,
+        min(
+            MAX_VOLUME_ADJUSTMENT,
+            volume_confirmation
         )
-
-
-    if (
-        volume_confirmation
-        < -MAX_VOLUME_ADJUSTMENT
-    ):
-
-        volume_confirmation = (
-            -MAX_VOLUME_ADJUSTMENT
-        )
-
-
-    # =====================================================
-    # V4.5 VOLUME WEIGHT SELECTION
-    # =====================================================
-
-    volume_weight = VOLUME_WEIGHT_NEUTRAL
-
-
-    if (
-        volume_spike_x
-        >= VOLUME_STRONG_THRESHOLD
-    ):
-
-        volume_weight = (
-            VOLUME_WEIGHT_STRONG
-        )
-
-
-    elif (
-        volume_spike_x >= 1.00
-        and volume_spike_x
-        < VOLUME_STRONG_THRESHOLD
-    ):
-
-        volume_weight = (
-            VOLUME_WEIGHT_STABLE
-        )
-
-
-    elif (
-        volume_spike_x > VOLUME_WEAK_THRESHOLD
-        and volume_spike_x < 1.00
-    ):
-
-        volume_weight = (
-            VOLUME_WEIGHT_NEUTRAL
-        )
-
-
-    elif (
-        volume_spike_x > 0
-        and volume_spike_x
-        <= VOLUME_WEAK_THRESHOLD
-    ):
-
-        volume_weight = (
-            VOLUME_WEIGHT_WEAK
-        )
-
-
-    # =====================================================
-    # ADD CURRENT OBSERVATION TO HISTORY
-    # =====================================================
-
-    history[symbol].append(
-        {
-            "price": price,
-            "change": change,
-            "volume": volume,
-            "market_cap": market_cap,
-            "base_score": base_score,
-            "volume_spike_x": volume_spike_x,
-            "volume_confirmation": volume_confirmation,
-            "volume_weight": volume_weight
-        }
-    )
-
-
-    history[symbol] = (
-        history[symbol][
-            -MAX_HISTORY:
-        ]
     )
 
 
     # =====================================================
-    # PERSISTENCE SCORE / 10
+    # VOLUME WEIGHT
     # =====================================================
+
+    # No historical baseline:
+    # do NOT penalize the first observation.
+
+    volume_weight = (
+        VOLUME_WEIGHT_NEUTRAL
+    )
+
+
+    if historical_volume_avg > 0:
+
+        if (
+            volume_spike_x
+            >= VOLUME_STRONG_THRESHOLD
+        ):
+
+            volume_weight = (
+                VOLUME_WEIGHT_STRONG
+            )
+
+
+        elif (
+            volume_spike_x >= 1.00
+            and volume_spike_x
+            < VOLUME_STRONG_THRESHOLD
+        ):
+
+            volume_weight = (
+                VOLUME_WEIGHT_STABLE
+            )
+
+
+        elif (
+            volume_spike_x
+            > VOLUME_WEAK_THRESHOLD
+            and volume_spike_x
+            < 1.00
+        ):
+
+            volume_weight = (
+                VOLUME_WEIGHT_NEUTRAL
+            )
+
+
+        elif (
+            volume_spike_x > 0
+            and volume_spike_x
+            <= VOLUME_WEAK_THRESHOLD
+        ):
+
+            volume_weight = (
+                VOLUME_WEIGHT_WEAK
+            )
+
+
+    # =====================================================
+    # PERSISTENCE SCORE
+    # =====================================================
+
+    # This is based on previous observations only.
+    # Current observation is NOT included.
 
     persistence_score = 0
 
@@ -865,32 +931,55 @@ for coin in coins:
     # TREND CONTINUITY
     # =====================================================
 
+    # IMPORTANT:
+    # Calculate continuity BEFORE adding current price.
+    # This prevents the current observation from artificially
+    # creating a continuity bonus.
+
     rising_observations = 0
 
 
-    if len(history[symbol]) >= 2:
+    recent_history = previous_history[-5:]
 
-        recent = history[symbol][-5:]
 
+    if len(recent_history) >= 2:
 
         for i in range(
             1,
-            len(recent)
+            len(recent_history)
         ):
 
-            previous_price = recent[
+            previous_price = recent_history[
                 i - 1
             ].get(
                 "price",
                 0
             )
 
-            current_price = recent[
+            current_price = recent_history[
                 i
             ].get(
                 "price",
                 0
             )
+
+
+            try:
+
+                previous_price = float(
+                    previous_price
+                )
+
+                current_price = float(
+                    current_price
+                )
+
+            except (
+                TypeError,
+                ValueError
+            ):
+
+                continue
 
 
             if (
@@ -919,7 +1008,7 @@ for coin in coins:
 
 
     # =====================================================
-    # V4.5 FINAL CONFIDENCE
+    # FINAL CONFIDENCE
     # =====================================================
 
     raw_confidence = (
@@ -930,31 +1019,19 @@ for coin in coins:
     )
 
 
-    # تطبيق وزن الحجم على الثقة النهائية
-
     confidence = (
         raw_confidence
         * volume_weight
     )
 
 
-    if confidence > 100:
-
-        confidence = 100
-
-
-    if confidence < 0:
-
-        confidence = 0
-
-
-    # =====================================================
-    # SIGNAL FILTER
-    # =====================================================
-
-    if confidence < MIN_CONFIDENCE:
-
-        continue
+    confidence = max(
+        0,
+        min(
+            100,
+            confidence
+        )
+    )
 
 
     # =====================================================
@@ -982,7 +1059,13 @@ for coin in coins:
     # PERSISTENCE LABEL
     # =====================================================
 
-    if previous_count >= 4:
+    if previous_count >= 6:
+
+        persistence_label = (
+            "🔥 Persistent"
+        )
+
+    elif previous_count >= 4:
 
         persistence_label = (
             "🔥 Persistent"
@@ -1005,6 +1088,16 @@ for coin in coins:
         persistence_label = (
             "🆕 New"
         )
+
+
+    # =====================================================
+    # SIGNAL FILTER
+    # =====================================================
+
+    if confidence < MIN_CONFIDENCE:
+
+        # Still save the observation below.
+        pass
 
 
     # =====================================================
@@ -1057,8 +1150,40 @@ for coin in coins:
 
 
     # =====================================================
-    # SAVE SIGNAL
+    # ADD CURRENT OBSERVATION TO HISTORY
     # =====================================================
+
+    history[symbol].append(
+        {
+            "price": price,
+            "change": change,
+            "volume": volume,
+            "market_cap": market_cap,
+            "base_score": base_score,
+            "volume_spike_x": volume_spike_x,
+            "volume_confirmation": volume_confirmation,
+            "volume_weight": volume_weight
+        }
+    )
+
+
+    # =====================================================
+    # LIMIT HISTORY SIZE
+    # =====================================================
+
+    history[symbol] = (
+        history[symbol][-MAX_HISTORY:]
+    )
+
+
+    # =====================================================
+    # SAVE ONLY QUALIFYING SIGNALS
+    # =====================================================
+
+    if confidence < MIN_CONFIDENCE:
+
+        continue
+
 
     signals.append(
         {
@@ -1140,6 +1265,10 @@ try:
             indent=2
         )
 
+    print(
+        "History saved successfully"
+    )
+
 except Exception as error:
 
     print(
@@ -1150,6 +1279,8 @@ except Exception as error:
 
 # =========================================================
 # END OF PART 1
+# =========================================================
+# PART 2 CONTINUES BELOW
 # =========================================================
 # =========================================================
 # PART 2 — REPORT + TELEGRAM
@@ -1189,7 +1320,6 @@ if signals:
 
         confirmation = item["volume_confirmation"]
 
-
         # -------------------------------------------------
         # VOLUME CONFIRMATION LABEL
         # -------------------------------------------------
@@ -1197,15 +1327,13 @@ if signals:
         if confirmation > 0:
 
             confirmation_label = (
-                f"🟢 Volume Confirmed "
-                f"+{confirmation}"
+                f"🟢 Volume Confirmed +{confirmation}"
             )
 
         elif confirmation < 0:
 
             confirmation_label = (
-                f"🔴 Volume Weak "
-                f"{confirmation}"
+                f"🔴 Volume Weak {confirmation}"
             )
 
         else:
@@ -1219,7 +1347,7 @@ if signals:
         # BUILD SIGNAL REPORT
         # -------------------------------------------------
 
-        report += (
+        signal_text = (
             f"🏆 {rank}. "
             f"{item['symbol']} - "
             f"{item['name']}\n"
@@ -1294,6 +1422,8 @@ if signals:
             "────────────────────\n\n"
         )
 
+        report += signal_text
+
         rank += 1
 
 
@@ -1331,71 +1461,188 @@ if telegram_token and telegram_chat_id:
     )
 
 
-    # -----------------------------------------------------
-    # TELEGRAM MESSAGE LIMIT
-    # -----------------------------------------------------
-
-    # Telegram message limit is approximately 4096 characters.
-    # Keep a small safety margin.
-
-    telegram_text = report[:4000]
-
-
-    payload = {
-        "chat_id": telegram_chat_id,
-        "text": telegram_text
-    }
-
-
     # =====================================================
-    # SEND TELEGRAM MESSAGE
+    # TELEGRAM SAFE MESSAGE SENDER
     # =====================================================
 
-    try:
+    # Telegram has a message size limit.
+    # Instead of cutting the report at 4000 characters,
+    # split it cleanly between signals.
 
-        result = requests.post(
-            telegram_url,
-            data=payload,
-            timeout=30
+    MAX_TELEGRAM_LENGTH = 4000
+
+
+    def split_telegram_message(text, max_length=4000):
+
+        parts = []
+
+        current_part = ""
+
+
+        # Split primarily by signal separator
+        sections = text.split(
+            "────────────────────"
         )
 
 
-        if result.ok:
+        for section in sections:
 
-            print(
-                "Telegram report sent successfully"
-            )
+            section = section.strip()
 
-        else:
+            if not section:
+                continue
 
-            print(
-                "Telegram report failed"
-            )
 
-            print(
-                "HTTP Status:",
-                result.status_code
-            )
-
-            print(
-                "Response:",
-                result.text
+            # Restore separator between sections
+            section = (
+                section
+                + "\n\n────────────────────\n\n"
             )
 
 
-    except requests.RequestException as error:
+            # If adding this section stays within limit
+            if (
+                len(current_part)
+                + len(section)
+                <= max_length
+            ):
+
+                current_part += section
+
+            else:
+
+                # Save current part first
+                if current_part.strip():
+
+                    parts.append(
+                        current_part.strip()
+                    )
+
+
+                # If a single section is still too long,
+                # split it safely by characters.
+                while len(section) > max_length:
+
+                    parts.append(
+                        section[:max_length]
+                    )
+
+                    section = section[max_length:]
+
+
+                current_part = section
+
+
+        if current_part.strip():
+
+            parts.append(
+                current_part.strip()
+            )
+
+
+        return parts
+
+
+    telegram_messages = (
+        split_telegram_message(
+            report,
+            MAX_TELEGRAM_LENGTH
+        )
+    )
+
+
+    # =====================================================
+    # SEND ALL TELEGRAM PARTS
+    # =====================================================
+
+    telegram_success = True
+
+
+    for message_number, telegram_text in enumerate(
+        telegram_messages,
+        start=1
+    ):
+
+        payload = {
+            "chat_id": telegram_chat_id,
+            "text": telegram_text
+        }
+
+
+        try:
+
+            result = requests.post(
+                telegram_url,
+                data=payload,
+                timeout=30
+            )
+
+
+            if result.ok:
+
+                print(
+                    f"Telegram message "
+                    f"{message_number}/"
+                    f"{len(telegram_messages)} "
+                    f"sent successfully"
+                )
+
+            else:
+
+                telegram_success = False
+
+                print(
+                    f"Telegram message "
+                    f"{message_number} failed"
+                )
+
+                print(
+                    "HTTP Status:",
+                    result.status_code
+                )
+
+                print(
+                    "Response:",
+                    result.text
+                )
+
+
+        except requests.RequestException as error:
+
+            telegram_success = False
+
+            print(
+                f"Telegram request failed "
+                f"for message {message_number}:",
+                error
+            )
+
+
+        except Exception as error:
+
+            telegram_success = False
+
+            print(
+                f"Unexpected Telegram error "
+                f"for message {message_number}:",
+                error
+            )
+
+
+    # =====================================================
+    # TELEGRAM FINAL STATUS
+    # =====================================================
+
+    if telegram_success:
 
         print(
-            "Telegram request failed:",
-            error
+            "Telegram report sent successfully"
         )
 
-
-    except Exception as error:
+    else:
 
         print(
-            "Unexpected Telegram error:",
-            error
+            "Telegram report completed with errors"
         )
 
 
@@ -1403,6 +1650,18 @@ else:
 
     print(
         "Telegram settings are missing"
+    )
+
+    print(
+        "Required environment variables:"
+    )
+
+    print(
+        "TELEGRAM_TOKEN"
+    )
+
+    print(
+        "TELEGRAM_CHAT_ID"
     )
 
 
