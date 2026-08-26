@@ -931,6 +931,7 @@ for coin in coins:
 
 
     # تطبيق وزن الحجم على الثقة النهائية
+
     confidence = (
         raw_confidence
         * volume_weight
@@ -1154,6 +1155,7 @@ except Exception as error:
 # PART 2 — REPORT + TELEGRAM
 # =========================================================
 
+
 # =========================================================
 # SORT SIGNALS
 # =========================================================
@@ -1176,8 +1178,8 @@ signals.sort(
 if signals:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V4.4\n\n"
-        "🧪 V4.4 Volume Confirmation Mode\n"
+        "🚨 Crypto Early Trend Scanner V4.5\n\n"
+        "🧪 V4.5 Volume Confirmation Mode\n"
         "📊 Volume confirmation affects confidence.\n\n"
     )
 
@@ -1186,6 +1188,11 @@ if signals:
     for item in signals[:5]:
 
         confirmation = item["volume_confirmation"]
+
+
+        # -------------------------------------------------
+        # VOLUME CONFIRMATION LABEL
+        # -------------------------------------------------
 
         if confirmation > 0:
 
@@ -1207,6 +1214,11 @@ if signals:
                 "⚪ Volume Neutral"
             )
 
+
+        # -------------------------------------------------
+        # BUILD SIGNAL REPORT
+        # -------------------------------------------------
+
         report += (
             f"🏆 {rank}. "
             f"{item['symbol']} - "
@@ -1218,13 +1230,16 @@ if signals:
             f"{item['persistence_label']}\n\n"
 
             f"🎯 Confidence: "
-            f"{item['confidence']}/100\n"
+            f"{item['confidence']:.0f}/100\n"
 
             f"🧠 Base Score: "
             f"{item['base_score']}/100\n"
 
             f"🧪 Volume Confirmation: "
-            f"{confirmation_label}\n\n"
+            f"{confirmation_label}\n"
+
+            f"⚖️ Volume Weight: "
+            f"{item['volume_weight']:.2f}x\n\n"
 
             f"📈 Momentum: "
             f"{item['momentum']}/20\n"
@@ -1265,7 +1280,7 @@ if signals:
             f"📊 Current Volume: "
             f"${item['volume']:,.0f}\n\n"
 
-            f"🧪 V4.4 VOLUME ANALYSIS\n"
+            f"🧪 V4.5 VOLUME ANALYSIS\n"
 
             f"📊 Historical Vol Avg: "
             f"${item['historical_volume_avg']:,.0f}\n"
@@ -1281,11 +1296,12 @@ if signals:
 
         rank += 1
 
+
 else:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V4.4\n\n"
-        "🧪 V4.4 Volume Confirmation Mode\n"
+        "🚨 Crypto Early Trend Scanner V4.5\n\n"
+        "🧪 V4.5 Volume Confirmation Mode\n"
         "📊 Volume confirmation affects confidence.\n\n"
         "❌ No qualifying signals found."
     )
@@ -1314,15 +1330,22 @@ if telegram_token and telegram_chat_id:
         f"{telegram_token}/sendMessage"
     )
 
+
+    # -----------------------------------------------------
+    # TELEGRAM MESSAGE LIMIT
+    # -----------------------------------------------------
+
     # Telegram message limit is approximately 4096 characters.
     # Keep a small safety margin.
 
     telegram_text = report[:4000]
 
+
     payload = {
         "chat_id": telegram_chat_id,
         "text": telegram_text
     }
+
 
     # =====================================================
     # SEND TELEGRAM MESSAGE
@@ -1335,6 +1358,7 @@ if telegram_token and telegram_chat_id:
             data=payload,
             timeout=30
         )
+
 
         if result.ok:
 
@@ -1358,6 +1382,7 @@ if telegram_token and telegram_chat_id:
                 result.text
             )
 
+
     except requests.RequestException as error:
 
         print(
@@ -1365,12 +1390,14 @@ if telegram_token and telegram_chat_id:
             error
         )
 
+
     except Exception as error:
 
         print(
             "Unexpected Telegram error:",
             error
         )
+
 
 else:
 
@@ -1384,5 +1411,5 @@ else:
 # =========================================================
 
 print(
-    "Crypto Early Trend Scanner V4.4 Finished"
-)
+    "Crypto Early Trend Scanner V4.5 Finished"
+        )
