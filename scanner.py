@@ -20,6 +20,9 @@ MIN_VOLUME_USD = 5_000_000
 MIN_CONFIDENCE = 65
 MAX_HISTORY = 12
 
+# عدد القراءات التاريخية المستخدمة لحساب متوسط الحجم
+HISTORICAL_VOLUME_LOOKBACK = 6
+
 
 # =========================================================
 # V4.4 VOLUME CONFIRMATION
@@ -34,6 +37,7 @@ VOLUME_BONUS_STRONG = 3
 VOLUME_BONUS_STABLE = 1
 VOLUME_PENALTY_WEAK = 3
 
+# الحد الأقصى النظري لتأثير تأكيد الحجم
 MAX_VOLUME_ADJUSTMENT = 6
 
 
@@ -114,15 +118,39 @@ if coingecko_api_key:
     )
 
 
-response = requests.get(
-    coins_url,
-    headers=headers,
-    timeout=15
-)
+# =========================================================
+# API REQUEST
+# =========================================================
 
-response.raise_for_status()
+try:
 
-coins = response.json()
+    response = requests.get(
+        coins_url,
+        headers=headers,
+        timeout=15
+    )
+
+    response.raise_for_status()
+
+    coins = response.json()
+
+    if not isinstance(coins, list):
+
+        print(
+            "CoinGecko returned invalid data"
+        )
+
+        coins = []
+
+except Exception as error:
+
+    print(
+        "CoinGecko request failed:",
+        error
+    )
+
+    coins = []
+
 
 signals = []
 
@@ -144,6 +172,17 @@ for coin in coins:
     )
 
     name_lower = name.lower()
+
+
+    # -----------------------------------------------------
+    # BASIC VALIDATION
+    # -----------------------------------------------------
+
+    if not symbol:
+        continue
+
+    if not name:
+        continue
 
 
     # -----------------------------------------------------
@@ -180,9 +219,6 @@ for coin in coins:
         0
     )
 
-    if change is None:
-        continue
-
     volume = coin.get(
         "total_volume",
         0
@@ -198,13 +234,22 @@ for coin in coins:
     # DATA VALIDATION
     # -----------------------------------------------------
 
-    if not price:
+    if price is None:
         continue
 
-    if not volume:
+    if volume is None:
         continue
 
-    if not market_cap:
+    if market_cap is None:
+        continue
+
+    if change is None:
+        continue
+
+    if price <= 0:
+        continue
+
+    if volume <= 0:
         continue
 
     if market_cap <= 0:
@@ -232,7 +277,7 @@ for coin in coins:
     liquidity = 0
     early_trend = 0
     market_cap_score = 0
-    volume_spike = 0
+    volume_ratio_score = 0
     late_move_penalty = 0
 
 
@@ -346,24 +391,24 @@ for coin in coins:
 
 
     # -----------------------------------------------------
-    # VOLUME SPIKE / 10
+    # VOLUME / CAP SCORE
     # -----------------------------------------------------
 
     if 10 <= volume_ratio < 20:
 
-        volume_spike = 10
+        volume_ratio_score = 10
 
     elif 20 <= volume_ratio < 40:
 
-        volume_spike = 8
+        volume_ratio_score = 8
 
     elif volume_ratio >= 40:
 
-        volume_spike = 5
+        volume_ratio_score = 5
 
     elif 5 <= volume_ratio < 10:
 
-        volume_spike = 6
+        volume_ratio_score = 6
 
 
     # -----------------------------------------------------
@@ -393,15 +438,18 @@ for coin in coins:
         + liquidity
         + early_trend
         + market_cap_score
-        + volume_spike
+        + volume_ratio_score
         - late_move_penalty
     )
 
 
     if base_score < 0:
+
         base_score = 0
 
+
     if base_score > 100:
+
         base_score = 100
 
 
@@ -410,16 +458,21 @@ for coin in coins:
     # =====================================================
 
     if symbol not in history:
+
         history[symbol] = []
+
 
     if not isinstance(
         history[symbol],
         list
     ):
+
         history[symbol] = []
 
 
-    previous_history = history[symbol].copy()
+    previous_history = (
+        history[symbol].copy()
+    )
 
 
     # =====================================================
@@ -428,14 +481,32 @@ for coin in coins:
 
     historical_volumes = []
 
-    for record in previous_history[-6:]:
+
+    for record in previous_history[
+        -HISTORICAL_VOLUME_LOOKBACK:
+    ]:
+
+        if not isinstance(
+            record,
+            dict
+        ):
+
+            continue
+
 
         historical_volume = record.get(
             "volume",
             0
         )
 
-        if historical_volume:
+
+        if (
+            isinstance(
+                historical_volume,
+                (int, float)
+            )
+            and historical_volume > 0
+        ):
 
             historical_volumes.append(
                 historical_volume
@@ -443,6 +514,7 @@ for coin in coins:
 
 
     historical_volume_avg = 0
+
 
     if historical_volumes:
 
@@ -458,6 +530,7 @@ for coin in coins:
 
     volume_spike_x = 0
 
+
     if historical_volume_avg > 0:
 
         volume_spike_x = (
@@ -472,11 +545,16 @@ for coin in coins:
 
     volume_continuation = "⚪ NEW"
 
-    if len(historical_volumes) >= 2:
+
+    # نحتاج 3 قراءات تاريخية على الأقل
+    # حتى نستطيع تقييم استمرار ارتفاع الحجم بشكل حقيقي
+
+    if len(historical_volumes) >= 3:
 
         recent_volumes = historical_volumes[-3:]
 
         rising_volume_count = 0
+
 
         for i in range(
             1,
@@ -493,40 +571,93 @@ for coin in coins:
 
         if (
             rising_volume_count >= 2
-            and volume_spike_x >= 1.10
+            and volume_spike_x >= VOLUME_STRONG_THRESHOLD
         ):
 
-            volume_continuation = "🟢 STRONG"
+            volume_continuation = (
+                "🟢 STRONG"
+            )
+
 
         elif (
             rising_volume_count >= 1
             and volume_spike_x >= 1.00
         ):
 
-            volume_continuation = "🟡 STABLE"
+            volume_continuation = (
+                "🟡 STABLE"
+            )
 
-        elif volume_spike_x < 0.80:
 
-            volume_continuation = "🔴 WEAK"
+        elif (
+            volume_spike_x > 0
+            and volume_spike_x <= VOLUME_WEAK_THRESHOLD
+        ):
+
+            volume_continuation = (
+                "🔴 WEAK"
+            )
+
 
         else:
 
-            volume_continuation = "⚪ MIXED"
+            volume_continuation = (
+                "⚪ MIXED"
+            )
+
+
+    elif len(historical_volumes) == 2:
+
+        if volume_spike_x >= VOLUME_STRONG_THRESHOLD:
+
+            volume_continuation = (
+                "🟡 INITIAL STRONG"
+            )
+
+        elif volume_spike_x >= 1.00:
+
+            volume_continuation = (
+                "🟡 INITIAL RISE"
+            )
+
+        elif (
+            volume_spike_x > 0
+            and volume_spike_x <= VOLUME_WEAK_THRESHOLD
+        ):
+
+            volume_continuation = (
+                "🔴 INITIAL DROP"
+            )
+
+        else:
+
+            volume_continuation = (
+                "⚪ INITIAL"
+            )
 
 
     elif len(historical_volumes) == 1:
 
-        if volume_spike_x >= 1.10:
+        if volume_spike_x >= VOLUME_STRONG_THRESHOLD:
 
-            volume_continuation = "🟡 INITIAL RISE"
+            volume_continuation = (
+                "🟡 INITIAL RISE"
+            )
 
-        elif volume_spike_x < 0.80:
+        elif (
+            volume_spike_x > 0
+            and volume_spike_x <= VOLUME_WEAK_THRESHOLD
+        ):
 
-            volume_continuation = "🔴 INITIAL DROP"
+            volume_continuation = (
+                "🔴 INITIAL DROP"
+            )
 
         else:
 
-            volume_continuation = "⚪ INITIAL"
+            volume_continuation = (
+                "⚪ INITIAL"
+            )
 
 
     # =====================================================
@@ -535,32 +666,67 @@ for coin in coins:
 
     volume_confirmation = 0
 
+
     if VOLUME_CONFIRMATION_ENABLED:
 
-        if volume_spike_x >= VOLUME_STRONG_THRESHOLD:
+        if (
+            volume_spike_x
+            >= VOLUME_STRONG_THRESHOLD
+        ):
 
-            volume_confirmation = VOLUME_BONUS_STRONG
+            volume_confirmation = (
+                VOLUME_BONUS_STRONG
+            )
+
 
         elif (
             volume_spike_x >= 1.00
-            and volume_spike_x < VOLUME_STRONG_THRESHOLD
+            and volume_spike_x
+            < VOLUME_STRONG_THRESHOLD
         ):
 
-            volume_confirmation = VOLUME_BONUS_STABLE
+            volume_confirmation = (
+                VOLUME_BONUS_STABLE
+            )
+
 
         elif (
-            volume_spike_x > VOLUME_WEAK_THRESHOLD
-            and volume_spike_x < 1.00
+            volume_spike_x
+            > VOLUME_WEAK_THRESHOLD
+            and volume_spike_x
+            < 1.00
         ):
 
             volume_confirmation = 0
 
+
         elif (
             volume_spike_x > 0
-            and volume_spike_x <= VOLUME_WEAK_THRESHOLD
+            and volume_spike_x
+            <= VOLUME_WEAK_THRESHOLD
         ):
 
-            volume_confirmation = -VOLUME_PENALTY_WEAK
+            volume_confirmation = (
+                -VOLUME_PENALTY_WEAK
+            )
+
+
+    # =====================================================
+    # SAFETY LIMIT FOR VOLUME ADJUSTMENT
+    # =====================================================
+
+    if volume_confirmation > MAX_VOLUME_ADJUSTMENT:
+
+        volume_confirmation = (
+            MAX_VOLUME_ADJUSTMENT
+        )
+
+
+    if volume_confirmation < -MAX_VOLUME_ADJUSTMENT:
+
+        volume_confirmation = (
+            -MAX_VOLUME_ADJUSTMENT
+        )
 
 
     # =====================================================
@@ -573,17 +739,25 @@ for coin in coins:
             "change": change,
             "volume": volume,
             "market_cap": market_cap,
-            "confidence": base_score,
+            "base_score": base_score,
             "volume_spike_x": volume_spike_x,
             "volume_confirmation": volume_confirmation
         }
     )
 
 
-    history[symbol] = history[symbol][
-        -MAX_HISTORY:
-    ]
+    # Keep only latest observations
 
+    history[symbol] = (
+        history[symbol][
+            -MAX_HISTORY:
+        ]
+    )
+
+
+    # =====================================================
+    # PREVIOUS OBSERVATION COUNT
+    # =====================================================
 
     previous_count = max(
         0,
@@ -597,16 +771,24 @@ for coin in coins:
 
     persistence_score = 0
 
+
     if previous_count >= 1:
+
         persistence_score = 3
 
+
     if previous_count >= 2:
+
         persistence_score = 5
 
+
     if previous_count >= 4:
+
         persistence_score = 7
 
+
     if previous_count >= 6:
+
         persistence_score = 10
 
 
@@ -616,18 +798,35 @@ for coin in coins:
 
     rising_observations = 0
 
+
     if len(history[symbol]) >= 2:
 
         recent = history[symbol][-5:]
+
 
         for i in range(
             1,
             len(recent)
         ):
 
+            previous_price = recent[
+                i - 1
+            ].get(
+                "price",
+                0
+            )
+
+            current_price = recent[
+                i
+            ].get(
+                "price",
+                0
+            )
+
+
             if (
-                recent[i]["price"]
-                > recent[i - 1]["price"]
+                previous_price > 0
+                and current_price > previous_price
             ):
 
                 rising_observations += 1
@@ -639,10 +838,14 @@ for coin in coins:
 
     continuity_bonus = 0
 
+
     if rising_observations >= 2:
+
         continuity_bonus = 2
 
+
     if rising_observations >= 3:
+
         continuity_bonus = 4
 
 
@@ -659,9 +862,12 @@ for coin in coins:
 
 
     if confidence > 100:
+
         confidence = 100
 
+
     if confidence < 0:
+
         confidence = 0
 
 
@@ -670,6 +876,7 @@ for coin in coins:
     # =====================================================
 
     if confidence < MIN_CONFIDENCE:
+
         continue
 
 
@@ -700,19 +907,27 @@ for coin in coins:
 
     if previous_count >= 4:
 
-        persistence_label = "🔥 Persistent"
+        persistence_label = (
+            "🔥 Persistent"
+        )
 
     elif previous_count >= 2:
 
-        persistence_label = "📌 Repeated"
+        persistence_label = (
+            "📌 Repeated"
+        )
 
     elif previous_count >= 1:
 
-        persistence_label = "👀 Returning"
+        persistence_label = (
+            "👀 Returning"
+        )
 
     else:
 
-        persistence_label = "🆕 New"
+        persistence_label = (
+            "🆕 New"
+        )
 
 
     # =====================================================
@@ -724,7 +939,10 @@ for coin in coins:
         and stage == "🟢 EARLY"
     ):
 
-        opportunity = "🟢 STRONG EARLY"
+        opportunity = (
+            "🟢 STRONG EARLY"
+        )
+
 
     elif (
         confidence >= 80
@@ -734,7 +952,10 @@ for coin in coins:
         ]
     ):
 
-        opportunity = "🟡 GOOD EARLY"
+        opportunity = (
+            "🟡 GOOD EARLY"
+        )
+
 
     elif (
         confidence >= 75
@@ -742,11 +963,16 @@ for coin in coins:
         and stage != "🔴 LATE"
     ):
 
-        opportunity = "🔥 PERSISTENT TREND"
+        opportunity = (
+            "🔥 PERSISTENT TREND"
+        )
+
 
     else:
 
-        opportunity = "🔴 WATCHLIST"
+        opportunity = (
+            "🔴 WATCHLIST"
+        )
 
 
     # =====================================================
@@ -757,29 +983,46 @@ for coin in coins:
         {
             "symbol": symbol,
             "name": name,
+
             "confidence": confidence,
             "base_score": base_score,
+
             "opportunity": opportunity,
             "stage": stage,
             "persistence_label": persistence_label,
+
             "persistence_score": persistence_score,
             "continuity_bonus": continuity_bonus,
             "volume_confirmation": volume_confirmation,
+
             "price": price,
             "change": change,
             "volume": volume,
             "market_cap": market_cap,
+
             "ratio": volume_ratio,
+
             "momentum": momentum,
             "volume_quality": volume_quality,
             "liquidity": liquidity,
             "early_trend": early_trend,
+
             "market_cap_score": market_cap_score,
-            "volume_spike": volume_spike,
+            "volume_ratio_score": volume_ratio_score,
+
             "late_move_penalty": late_move_penalty,
-            "historical_volume_avg": historical_volume_avg,
-            "volume_spike_x": volume_spike_x,
-            "volume_continuation": volume_continuation
+
+            "historical_volume_avg": (
+                historical_volume_avg
+            ),
+
+            "volume_spike_x": (
+                volume_spike_x
+            ),
+
+            "volume_continuation": (
+                volume_continuation
+            )
         }
     )
 
@@ -817,8 +1060,16 @@ except Exception as error:
 
 # =========================================================
 # PART 2 — REPORT + TELEGRAM
+# ========================================================
+
+# =========================================================
+# PART 2 — REPORT + TELEGRAM
 # =========================================================
 
+
+# =========================================================
+# SORT SIGNALS
+# =========================================================
 
 signals.sort(
     key=lambda x: (
@@ -840,7 +1091,7 @@ if signals:
     report = (
         "🚨 Crypto Early Trend Scanner V4.4\n\n"
         "🧪 V4.4 Volume Confirmation Mode\n"
-        "📊 Volume confirmation now affects confidence.\n\n"
+        "📊 Volume confirmation affects confidence.\n\n"
     )
 
     rank = 1
@@ -848,6 +1099,11 @@ if signals:
     for item in signals[:5]:
 
         confirmation = item["volume_confirmation"]
+
+
+        # -------------------------------------------------
+        # VOLUME CONFIRMATION LABEL
+        # -------------------------------------------------
 
         if confirmation > 0:
 
@@ -870,12 +1126,17 @@ if signals:
             )
 
 
+        # -------------------------------------------------
+        # BUILD SIGNAL
+        # -------------------------------------------------
+
         report += (
             f"🏆 {rank}. "
             f"{item['symbol']} - "
             f"{item['name']}\n"
 
             f"{item['opportunity']}\n"
+
             f"{item['stage']} | "
             f"{item['persistence_label']}\n\n"
 
@@ -916,7 +1177,7 @@ if signals:
             f"+{item['continuity_bonus']}\n\n"
 
             f"💰 Price: "
-            f"${item['price']}\n"
+            f"${item['price']:.8f}\n"
 
             f"📈 7D: "
             f"{item['change']:.2f}%\n"
@@ -948,8 +1209,9 @@ else:
 
     report = (
         "🚨 Crypto Early Trend Scanner V4.4\n\n"
-        "🧪 Volume Confirmation Mode\n\n"
-        "No qualifying signals found."
+        "🧪 V4.4 Volume Confirmation Mode\n"
+        "📊 Volume confirmation affects confidence.\n\n"
+        "❌ No qualifying signals found."
     )
 
 
@@ -957,11 +1219,16 @@ else:
 # PRINT REPORT
 # =========================================================
 
+print("\n")
+print("=" * 60)
+print("FINAL SCANNER REPORT")
+print("=" * 60)
 print(report)
+print("=" * 60)
 
 
 # =========================================================
-# TELEGRAM
+# TELEGRAM CONFIGURATION CHECK
 # =========================================================
 
 if telegram_token and telegram_chat_id:
@@ -971,10 +1238,26 @@ if telegram_token and telegram_chat_id:
         f"{telegram_token}/sendMessage"
     )
 
+
+    # -----------------------------------------------------
+    # TELEGRAM MESSAGE LIMIT
+    # -----------------------------------------------------
+
+    # Telegram allows approximately 4096 characters.
+    # We use 4000 to keep a safety margin.
+
+    telegram_text = report[:4000]
+
+
     payload = {
         "chat_id": telegram_chat_id,
-        "text": report[:4000]
+        "text": telegram_text
     }
+
+
+    # -----------------------------------------------------
+    # SEND TELEGRAM MESSAGE
+    # -----------------------------------------------------
 
     try:
 
@@ -983,6 +1266,7 @@ if telegram_token and telegram_chat_id:
             data=payload,
             timeout=30
         )
+
 
         if result.ok:
 
@@ -997,18 +1281,43 @@ if telegram_token and telegram_chat_id:
             )
 
             print(
+                "HTTP Status:",
+                result.status_code
+            )
+
+            print(
+                "Response:",
                 result.text
             )
 
-    except Exception as error:
+
+    except requests.RequestException as error:
 
         print(
             "Telegram request failed:",
             error
         )
 
+
+    except Exception as error:
+
+        print(
+            "Unexpected Telegram error:",
+            error
+        )
+
+
 else:
 
     print(
         "Telegram settings are missing"
+    )
+
+
+# =========================================================
+# FINAL STATUS
+# =========================================================
+
+print(
+    "Crypto Early Trend Scanner V4.4 Finished"
 )
