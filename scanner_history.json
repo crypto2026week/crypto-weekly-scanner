@@ -1,13 +1,6 @@
 {
   "BTC": [
     {
-      "price": 77345,
-      "change": 22.5,
-      "volume": 28542534356,
-      "market_cap": 1552053263775,
-      "confidence": 44
-    },
-    {
       "price": 77078,
       "change": 22.8,
       "volume": 31672557184,
@@ -83,16 +76,16 @@
       "volume": 33209195723,
       "market_cap": 1583580198230,
       "confidence": 44
+    },
+    {
+      "price": 78363,
+      "change": 20.9,
+      "volume": 29760002089,
+      "market_cap": 1573505121683,
+      "confidence": 44
     }
   ],
   "ETH": [
-    {
-      "price": 2448.41,
-      "change": 30.0,
-      "volume": 15559475437,
-      "market_cap": 295437089360,
-      "confidence": 52
-    },
     {
       "price": 2430.9,
       "change": 29.2,
@@ -169,16 +162,16 @@
       "volume": 12360369867,
       "market_cap": 297081726720,
       "confidence": 38
+    },
+    {
+      "price": 2453.3,
+      "change": 26.9,
+      "volume": 11770709422,
+      "market_cap": 296037749827,
+      "confidence": 38
     }
   ],
   "BNB": [
-    {
-      "price": 699.68,
-      "change": 15.5,
-      "volume": 1072039436,
-      "market_cap": 93155074672,
-      "confidence": 55
-    },
     {
       "price": 696.34,
       "change": 16.1,
@@ -255,16 +248,16 @@
       "volume": 854895461,
       "market_cap": 92918206549,
       "confidence": 55
+    },
+    {
+      "price": 700.19,
+      "change": 16.0,
+      "volume": 849041054,
+      "market_cap": 93241499995,
+      "confidence": 55
     }
   ],
   "XRP": [
-    {
-      "price": 1.51,
-      "change": 50.8,
-      "volume": 5298090439,
-      "market_cap": 94629044120,
-      "confidence": 35
-    },
     {
       "price": 1.47,
       "change": 48.7,
@@ -341,16 +334,16 @@
       "volume": 3476327634,
       "market_cap": 89881079813,
       "confidence": 27
+    },
+    {
+      "price": 1.39,
+      "change": 37.9,
+      "volume": 3618114109,
+      "market_cap": 86975874644,
+      "confidence": 31
     }
   ],
   "SOL": [
-    {
-      "price": 95.29,
-      "change": 26.7,
-      "volume": 4451978703,
-      "market_cap": 55568058954,
-      "confidence": 52
-    },
     {
       "price": 93.69,
       "change": 25.8,
@@ -427,16 +420,16 @@
       "volume": 3568852677,
       "market_cap": 56589583620,
       "confidence": 52
+    },
+    {
+      "price": 96.43,
+      "change": 23.2,
+      "volume": 3078445062,
+      "market_cap": 56249286014,
+      "confidence": 58
     }
   ],
   "TRX": [
-    {
-      "price": 0.34384,
-      "change": 3.6,
-      "volume": 358934014,
-      "market_cap": 32632757415,
-      "confidence": 23
-    },
     {
       "price": 0.343142,
       "change": 3.3,
@@ -513,16 +506,16 @@
       "volume": 560008306,
       "market_cap": 31993816852,
       "confidence": 23
+    },
+    {
+      "price": 0.334755,
+      "change": 0.7,
+      "volume": 553077202,
+      "market_cap": 31770093994,
+      "confidence": 23
     }
   ],
   "HYPE": [
-    {
-      "price": 81.09,
-      "change": 40.8,
-      "volume": 863822058,
-      "market_cap": 18032798002,
-      "confidence": 27
-    },
     {
       "price": 79.59,
       "change": 38.4,
@@ -599,16 +592,16 @@
       "volume": 1020089109,
       "market_cap": 18167316744,
       "confidence": 41
+    },
+    {
+      "price": 81.77,
+      "change": 37.5,
+      "volume": 1165720481,
+      "market_cap": 18187420589,
+      "confidence": 45
     }
   ],
   "DOGE": [
-    {
-      "price": 0.092937,
-      "change": 32.9,
-      "volume": 1237601767,
-      "market_cap": 14465505533,
-      "confidence": 45
-    },
     {
       "price": 0.091244,
       "change": 31.0,
@@ -685,16 +678,16 @@
       "volume": 732272073,
       "market_cap": 13483253887,
       "confidence": 58
+    },
+    {
+      "price": 0.085609,
+      "change": 21.6,
+      "volume": 646012040,
+      "market_cap": 13326125849,
+      "confidence": 44
     }
   ],
   "RAIN": [
-    {
-      "price": 0.01398908,
-      "change": 10.7,
-      "volume": 35707475,
-      "market_cap": 10026933926,
-      "confidence": 44
-    },
     {
       "price": 0.01389467,
       "change": 7.2,
@@ -771,16 +764,16 @@
       "volume": 37350024,
       "market_cap": 12494176994,
       "confidence": 17
+    },
+    {
+      "price": 0.01746266,
+      "change": 33.7,
+      "volume": 51149089,
+      "market_cap": 12392774721,
+      "confidence": 23
     }
   ],
   "ZEC": [
-    {
-      "price": 872.64,
-      "change": 77.7,
-      "volume": 1453430499,
-      "market_cap": 14720646959,
-      "confidence": 35
-    },
     {
       "price": 833.7,
       "change": 71.3,
@@ -857,16 +850,16 @@
       "volume": 1147978116,
       "market_cap": 13315705048,
       "confidence": 35
+    },
+    {
+      "price": 769.24,
+      "change": 50.5,
+      "volume": 1058516658,
+      "market_cap": 13016046780,
+      "confidence": 35
     }
   ],
   "XMR": [
-    {
-      "price": 426.77,
-      "change": 3.2,
-      "volume": 104819045,
-      "market_cap": 8026229279,
-      "confidence": 19
-    },
     {
       "price": 416.81,
       "change": 1.5,
@@ -943,16 +936,16 @@
       "volume": 95860321,
       "market_cap": 8416464954,
       "confidence": 50
+    },
+    {
+      "price": 438.01,
+      "change": 5.8,
+      "volume": 88655594,
+      "market_cap": 8229688208,
+      "confidence": 50
     }
   ],
   "LINK": [
-    {
-      "price": 11.59,
-      "change": 23.0,
-      "volume": 597513884,
-      "market_cap": 8670663069,
-      "confidence": 58
-    },
     {
       "price": 11.37,
       "change": 20.5,
@@ -1029,16 +1022,16 @@
       "volume": 372884267,
       "market_cap": 8479146806,
       "confidence": 55
+    },
+    {
+      "price": 11.33,
+      "change": 16.2,
+      "volume": 355880766,
+      "market_cap": 8473612747,
+      "confidence": 55
     }
   ],
   "ADA": [
-    {
-      "price": 0.224917,
-      "change": 27.7,
-      "volume": 572980709,
-      "market_cap": 8434998757,
-      "confidence": 52
-    },
     {
       "price": 0.217679,
       "change": 25.2,
@@ -1115,16 +1108,16 @@
       "volume": 395103321,
       "market_cap": 7882475748,
       "confidence": 69
+    },
+    {
+      "price": 0.207976,
+      "change": 19.0,
+      "volume": 366714893,
+      "market_cap": 7797024098,
+      "confidence": 55
     }
   ],
   "WBT": [
-    {
-      "price": 72.3,
-      "change": 32.2,
-      "volume": 137199570,
-      "market_cap": 8529203750,
-      "confidence": 27
-    },
     {
       "price": 71.96,
       "change": 32.3,
@@ -1201,16 +1194,16 @@
       "volume": 129635308,
       "market_cap": 8592596690,
       "confidence": 27
+    },
+    {
+      "price": 72.36,
+      "change": 29.4,
+      "volume": 117648428,
+      "market_cap": 8535794392,
+      "confidence": 34
     }
   ],
   "XLM": [
-    {
-      "price": 0.200401,
-      "change": 27.1,
-      "volume": 277170727,
-      "market_cap": 6932388770,
-      "confidence": 38
-    },
     {
       "price": 0.19312,
       "change": 24.1,
@@ -1287,16 +1280,16 @@
       "volume": 207270558,
       "market_cap": 6398685156,
       "confidence": 55
+    },
+    {
+      "price": 0.181268,
+      "change": 15.2,
+      "volume": 186663755,
+      "market_cap": 6269053299,
+      "confidence": 51
     }
   ],
   "BCH": [
-    {
-      "price": 273.84,
-      "change": 34.1,
-      "volume": 201088819,
-      "market_cap": 5500226505,
-      "confidence": 31
-    },
     {
       "price": 269.74,
       "change": 33.2,
@@ -1373,16 +1366,16 @@
       "volume": 121682881,
       "market_cap": 5312820682,
       "confidence": 27
+    },
+    {
+      "price": 264.46,
+      "change": 29.4,
+      "volume": 115487984,
+      "market_cap": 5309949510,
+      "confidence": 34
     }
   ],
   "CC": [
-    {
-      "price": 0.118939,
-      "change": 24.6,
-      "volume": 11447674,
-      "market_cap": 4681702280,
-      "confidence": 28
-    },
     {
       "price": 0.121008,
       "change": 26.9,
@@ -1459,16 +1452,16 @@
       "volume": 14760077,
       "market_cap": 4662997035,
       "confidence": 15
+    },
+    {
+      "price": 0.116004,
+      "change": 27.5,
+      "volume": 10697624,
+      "market_cap": 4571492600,
+      "confidence": 22
     }
   ],
   "GRAM": [
-    {
-      "price": 1.53,
-      "change": 13.6,
-      "volume": 61447748,
-      "market_cap": 4217088377,
-      "confidence": 52
-    },
     {
       "price": 1.46,
       "change": 10.4,
@@ -1545,16 +1538,16 @@
       "volume": 49284555,
       "market_cap": 3942987375,
       "confidence": 46
+    },
+    {
+      "price": 1.4,
+      "change": 5.4,
+      "volume": 42269843,
+      "market_cap": 3869218604,
+      "confidence": 46
     }
   ],
   "LTC": [
-    {
-      "price": 52.4,
-      "change": 17.9,
-      "volume": 348899886,
-      "market_cap": 4063838042,
-      "confidence": 71
-    },
     {
       "price": 51.6,
       "change": 17.1,
@@ -1631,16 +1624,16 @@
       "volume": 322146185,
       "market_cap": 3892912625,
       "confidence": 74
+    },
+    {
+      "price": 50.16,
+      "change": 11.7,
+      "volume": 304824025,
+      "market_cap": 3888902238,
+      "confidence": 74
     }
   ],
   "HBAR": [
-    {
-      "price": 0.078894,
-      "change": 21.2,
-      "volume": 97450590,
-      "market_cap": 3458725708,
-      "confidence": 38
-    },
     {
       "price": 0.078415,
       "change": 21.6,
@@ -1717,16 +1710,16 @@
       "volume": 83685654,
       "market_cap": 3407152556,
       "confidence": 49
+    },
+    {
+      "price": 0.077167,
+      "change": 13.9,
+      "volume": 76003965,
+      "market_cap": 3381542809,
+      "confidence": 52
     }
   ],
   "SUI": [
-    {
-      "price": 0.844349,
-      "change": 24.7,
-      "volume": 706879403,
-      "market_cap": 3437997107,
-      "confidence": 69
-    },
     {
       "price": 0.820084,
       "change": 23.0,
@@ -1803,16 +1796,16 @@
       "volume": 508903092,
       "market_cap": 3095502731,
       "confidence": 79
+    },
+    {
+      "price": 0.747817,
+      "change": 13.7,
+      "volume": 446431915,
+      "market_cap": 3046189434,
+      "confidence": 82
     }
   ],
   "AVAX": [
-    {
-      "price": 7.59,
-      "change": 19.5,
-      "volume": 277975773,
-      "market_cap": 3274712729,
-      "confidence": 71
-    },
     {
       "price": 7.45,
       "change": 18.3,
@@ -1889,16 +1882,16 @@
       "volume": 201739153,
       "market_cap": 3188909445,
       "confidence": 71
+    },
+    {
+      "price": 7.3,
+      "change": 15.0,
+      "volume": 171273726,
+      "market_cap": 3153145494,
+      "confidence": 70
     }
   ],
   "SHIB": [
-    {
-      "price": 5.49e-06,
-      "change": 22.7,
-      "volume": 105531268,
-      "market_cap": 3236325362,
-      "confidence": 42
-    },
     {
       "price": 5.37e-06,
       "change": 22.1,
@@ -1975,16 +1968,16 @@
       "volume": 100537423,
       "market_cap": 3115091253,
       "confidence": 53
+    },
+    {
+      "price": 5.24e-06,
+      "change": 17.2,
+      "volume": 92076204,
+      "market_cap": 3088072850,
+      "confidence": 49
     }
   ],
   "OKB": [
-    {
-      "price": 110.79,
-      "change": 6.0,
-      "volume": 34432270,
-      "market_cap": 2326428700,
-      "confidence": 46
-    },
     {
       "price": 110.14,
       "change": 7.1,
@@ -2061,16 +2054,16 @@
       "volume": 30166158,
       "market_cap": 2403309503,
       "confidence": 46
+    },
+    {
+      "price": 111.43,
+      "change": 10.1,
+      "volume": 26224314,
+      "market_cap": 2343193049,
+      "confidence": 46
     }
   ],
   "NEAR": [
-    {
-      "price": 1.96,
-      "change": 22.1,
-      "volume": 351305693,
-      "market_cap": 2561144745,
-      "confidence": 68
-    },
     {
       "price": 1.99,
       "change": 25.8,
@@ -2147,16 +2140,16 @@
       "volume": 201141688,
       "market_cap": 2415666034,
       "confidence": 74
+    },
+    {
+      "price": 1.84,
+      "change": 13.0,
+      "volume": 180924751,
+      "market_cap": 2404286385,
+      "confidence": 70
     }
   ],
   "UNI": [
-    {
-      "price": 4.58,
-      "change": 38.8,
-      "volume": 586359441,
-      "market_cap": 2858058616,
-      "confidence": 56
-    },
     {
       "price": 4.41,
       "change": 36.4,
@@ -2233,16 +2226,16 @@
       "volume": 251946915,
       "market_cap": 2653586591,
       "confidence": 54
+    },
+    {
+      "price": 4.25,
+      "change": 26.6,
+      "volume": 237232002,
+      "market_cap": 2645892512,
+      "confidence": 54
     }
   ],
   "WLFI": [
-    {
-      "price": 0.059556,
-      "change": -1.0,
-      "volume": 75955891,
-      "market_cap": 1891843453,
-      "confidence": 17
-    },
     {
       "price": 0.057771,
       "change": -2.5,
@@ -2319,16 +2312,16 @@
       "volume": 50925287,
       "market_cap": 1864270230,
       "confidence": 17
+    },
+    {
+      "price": 0.058576,
+      "change": -2.3,
+      "volume": 49754315,
+      "market_cap": 1860967635,
+      "confidence": 11
     }
   ],
   "TAO": [
-    {
-      "price": 239.32,
-      "change": 21.8,
-      "volume": 207201275,
-      "market_cap": 2300046372,
-      "confidence": 60
-    },
     {
       "price": 234.76,
       "change": 20.3,
@@ -2405,16 +2398,16 @@
       "volume": 150900186,
       "market_cap": 2241534178,
       "confidence": 56
+    },
+    {
+      "price": 230.54,
+      "change": 19.7,
+      "volume": 139481591,
+      "market_cap": 2212697176,
+      "confidence": 67
     }
   ],
   "ASTER": [
-    {
-      "price": 0.67583,
-      "change": 12.4,
-      "volume": 139576145,
-      "market_cap": 1819758503,
-      "confidence": 70
-    },
     {
       "price": 0.682924,
       "change": 15.7,
@@ -2491,16 +2484,16 @@
       "volume": 121075516,
       "market_cap": 1888246963,
       "confidence": 67
+    },
+    {
+      "price": 0.691863,
+      "change": 15.1,
+      "volume": 109530673,
+      "market_cap": 1866315664,
+      "confidence": 67
     }
   ],
   "ONDO": [
-    {
-      "price": 0.384205,
-      "change": 15.8,
-      "volume": 189092563,
-      "market_cap": 1871987386,
-      "confidence": 75
-    },
     {
       "price": 0.369671,
       "change": 11.5,
@@ -2577,16 +2570,16 @@
       "volume": 122088388,
       "market_cap": 1782432358,
       "confidence": 70
+    },
+    {
+      "price": 0.362353,
+      "change": 10.3,
+      "volume": 103376571,
+      "market_cap": 1765025704,
+      "confidence": 70
     }
   ],
   "HTX": [
-    {
-      "price": 1.76e-06,
-      "change": -1.1,
-      "volume": 32392601,
-      "market_cap": 1586144456,
-      "confidence": 11
-    },
     {
       "price": 1.75e-06,
       "change": -2.1,
@@ -2663,16 +2656,16 @@
       "volume": 25104436,
       "market_cap": 1538591415,
       "confidence": 11
+    },
+    {
+      "price": 1.71e-06,
+      "change": 1.1,
+      "volume": 24994851,
+      "market_cap": 1534886048,
+      "confidence": 7
     }
   ],
   "MNT": [
-    {
-      "price": 0.51626,
-      "change": 17.6,
-      "volume": 38453281,
-      "market_cap": 1705121156,
-      "confidence": 43
-    },
     {
       "price": 0.50854,
       "change": 12.9,
@@ -2749,16 +2742,16 @@
       "volume": 28018721,
       "market_cap": 1679270249,
       "confidence": 43
+    },
+    {
+      "price": 0.500923,
+      "change": 14.7,
+      "volume": 28624818,
+      "market_cap": 1655106914,
+      "confidence": 46
     }
   ],
   "AAVE": [
-    {
-      "price": 140.4,
-      "change": 61.9,
-      "volume": 696666848,
-      "market_cap": 2168257589,
-      "confidence": 46
-    },
     {
       "price": 139.72,
       "change": 60.9,
@@ -2835,16 +2828,16 @@
       "volume": 266600122,
       "market_cap": 1961945493,
       "confidence": 51
+    },
+    {
+      "price": 124.01,
+      "change": 38.9,
+      "volume": 241974246,
+      "market_cap": 1912701009,
+      "confidence": 55
     }
   ],
   "MORPHO": [
-    {
-      "price": 2.68,
-      "change": 33.5,
-      "volume": 58755485,
-      "market_cap": 1759535386,
-      "confidence": 25
-    },
     {
       "price": 2.7,
       "change": 34.9,
@@ -2921,16 +2914,16 @@
       "volume": 39286678,
       "market_cap": 1666715746,
       "confidence": 32
+    },
+    {
+      "price": 2.45,
+      "change": 19.7,
+      "volume": 38070954,
+      "market_cap": 1606819876,
+      "confidence": 43
     }
   ],
   "WLD": [
-    {
-      "price": 0.407486,
-      "change": 12.7,
-      "volume": 192562092,
-      "market_cap": 1471663722,
-      "confidence": 78
-    },
     {
       "price": 0.391789,
       "change": 8.1,
@@ -3007,16 +3000,16 @@
       "volume": 169472615,
       "market_cap": 1420620465,
       "confidence": 64
+    },
+    {
+      "price": 0.390702,
+      "change": 21.1,
+      "volume": 151464515,
+      "market_cap": 1411772202,
+      "confidence": 64
     }
   ],
   "DOT": [
-    {
-      "price": 0.927059,
-      "change": 21.7,
-      "volume": 113629044,
-      "market_cap": 1575542328,
-      "confidence": 56
-    },
     {
       "price": 0.898928,
       "change": 19.0,
@@ -3093,16 +3086,16 @@
       "volume": 104661101,
       "market_cap": 1453511937,
       "confidence": 70
+    },
+    {
+      "price": 0.842514,
+      "change": 8.3,
+      "volume": 100393404,
+      "market_cap": 1431799081,
+      "confidence": 70
     }
   ],
   "ICP": [
-    {
-      "price": 2.43,
-      "change": 6.8,
-      "volume": 75093957,
-      "market_cap": 1352660493,
-      "confidence": 66
-    },
     {
       "price": 2.39,
       "change": 6.0,
@@ -3179,16 +3172,16 @@
       "volume": 44024908,
       "market_cap": 1333023842,
       "confidence": 46
+    },
+    {
+      "price": 2.39,
+      "change": 9.4,
+      "volume": 41238222,
+      "market_cap": 1326949471,
+      "confidence": 46
     }
   ],
   "SKY": [
-    {
-      "price": 0.069409,
-      "change": 30.7,
-      "volume": 16569671,
-      "market_cap": 1625465500,
-      "confidence": 15
-    },
     {
       "price": 0.067868,
       "change": 28.8,
@@ -3265,16 +3258,16 @@
       "volume": 10220307,
       "market_cap": 1624354270,
       "confidence": 28
+    },
+    {
+      "price": 0.068532,
+      "change": 19.4,
+      "volume": 9569215,
+      "market_cap": 1604782259,
+      "confidence": 39
     }
   ],
   "BGB": [
-    {
-      "price": 1.91,
-      "change": 15.4,
-      "volume": 12944481,
-      "market_cap": 1338667443,
-      "confidence": 39
-    },
     {
       "price": 1.89,
       "change": 14.8,
@@ -3351,16 +3344,16 @@
       "volume": 8124088,
       "market_cap": 1327145068,
       "confidence": 42
+    },
+    {
+      "price": 1.9,
+      "change": 13.4,
+      "volume": 7812744,
+      "market_cap": 1327328092,
+      "confidence": 42
     }
   ],
   "PEPE": [
-    {
-      "price": 4.09e-06,
-      "change": 56.9,
-      "volume": 532761693,
-      "market_cap": 1720356289,
-      "confidence": 46
-    },
     {
       "price": 4e-06,
       "change": 55.1,
@@ -3437,16 +3430,16 @@
       "volume": 324336475,
       "market_cap": 1602911956,
       "confidence": 52
+    },
+    {
+      "price": 3.73e-06,
+      "change": 43.1,
+      "volume": 278227698,
+      "market_cap": 1571542485,
+      "confidence": 51
     }
   ],
   "PUMP": [
-    {
-      "price": 0.00513537,
-      "change": 86.9,
-      "volume": 545949816,
-      "market_cap": 2000337281,
-      "confidence": 46
-    },
     {
       "price": 0.00502897,
       "change": 81.9,
@@ -3523,16 +3516,16 @@
       "volume": 263030404,
       "market_cap": 1870196209,
       "confidence": 45
+    },
+    {
+      "price": 0.00471707,
+      "change": 57.1,
+      "volume": 231688487,
+      "market_cap": 1838162768,
+      "confidence": 45
     }
   ],
   "ETC": [
-    {
-      "price": 7.92,
-      "change": 28.1,
-      "volume": 65683237,
-      "market_cap": 1249809622,
-      "confidence": 46
-    },
     {
       "price": 7.71,
       "change": 24.8,
@@ -3609,16 +3602,16 @@
       "volume": 57832916,
       "market_cap": 1220055170,
       "confidence": 32
+    },
+    {
+      "price": 7.62,
+      "change": 24.5,
+      "volume": 52999331,
+      "market_cap": 1204798988,
+      "confidence": 38
     }
   ],
   "BTW": [
-    {
-      "price": 0.435989,
-      "change": 27.3,
-      "volume": 14184201,
-      "market_cap": 1180458791,
-      "confidence": 22
-    },
     {
       "price": 0.423673,
       "change": 12.7,
@@ -3695,16 +3688,16 @@
       "volume": 22589048,
       "market_cap": 1077202971,
       "confidence": 7
+    },
+    {
+      "price": 0.412818,
+      "change": -34.5,
+      "volume": 23300524,
+      "market_cap": 1117579417,
+      "confidence": 7
     }
   ],
   "JST": [
-    {
-      "price": 0.104059,
-      "change": -3.7,
-      "volume": 25505662,
-      "market_cap": 852120155,
-      "confidence": 13
-    },
     {
       "price": 0.100633,
       "change": -7.8,
@@ -3781,16 +3774,16 @@
       "volume": 22994521,
       "market_cap": 818515312,
       "confidence": 9
+    },
+    {
+      "price": 0.099652,
+      "change": -6.9,
+      "volume": 23257183,
+      "market_cap": 816236788,
+      "confidence": 9
     }
   ],
   "QNT": [
-    {
-      "price": 65.53,
-      "change": 14.5,
-      "volume": 15882372,
-      "market_cap": 951195577,
-      "confidence": 44
-    },
     {
       "price": 63.81,
       "change": 14.3,
@@ -3867,16 +3860,16 @@
       "volume": 14854757,
       "market_cap": 906485742,
       "confidence": 44
+    },
+    {
+      "price": 62.05,
+      "change": 9.1,
+      "volume": 15377498,
+      "market_cap": 902922983,
+      "confidence": 44
     }
   ],
   "ENA": [
-    {
-      "price": 0.166633,
-      "change": 99.7,
-      "volume": 717450078,
-      "market_cap": 1640730209,
-      "confidence": 38
-    },
     {
       "price": 0.163964,
       "change": 99.2,
@@ -3953,16 +3946,16 @@
       "volume": 416206405,
       "market_cap": 1403957787,
       "confidence": 46
+    },
+    {
+      "price": 0.139739,
+      "change": 64.6,
+      "volume": 416143953,
+      "market_cap": 1374335417,
+      "confidence": 46
     }
   ],
   "POL": [
-    {
-      "price": 0.106901,
-      "change": 42.0,
-      "volume": 86991344,
-      "market_cap": 1143445199,
-      "confidence": 35
-    },
     {
       "price": 0.106634,
       "change": 40.8,
@@ -4039,16 +4032,16 @@
       "volume": 159807969,
       "market_cap": 1309380791,
       "confidence": 47
+    },
+    {
+      "price": 0.113723,
+      "change": 40.5,
+      "volume": 139602245,
+      "market_cap": 1217079299,
+      "confidence": 47
     }
   ],
   "ATOM": [
-    {
-      "price": 1.61,
-      "change": 9.6,
-      "volume": 34019743,
-      "market_cap": 847977189,
-      "confidence": 48
-    },
     {
       "price": 1.56,
       "change": 8.2,
@@ -4125,16 +4118,16 @@
       "volume": 40758100,
       "market_cap": 808203585,
       "confidence": 62
+    },
+    {
+      "price": 1.53,
+      "change": 9.3,
+      "volume": 40998268,
+      "market_cap": 806902631,
+      "confidence": 62
     }
   ],
   "KAS": [
-    {
-      "price": 0.029095,
-      "change": 10.2,
-      "volume": 9757697,
-      "market_cap": 804669448,
-      "confidence": 44
-    },
     {
       "price": 0.02837446,
       "change": 11.5,
@@ -4211,16 +4204,16 @@
       "volume": 15693402,
       "market_cap": 758344367,
       "confidence": 44
+    },
+    {
+      "price": 0.02723628,
+      "change": 6.3,
+      "volume": 10455726,
+      "market_cap": 753497757,
+      "confidence": 44
     }
   ],
   "ALGO": [
-    {
-      "price": 0.093537,
-      "change": 18.2,
-      "volume": 35754508,
-      "market_cap": 845176916,
-      "confidence": 45
-    },
     {
       "price": 0.091248,
       "change": 15.6,
@@ -4297,16 +4290,16 @@
       "volume": 33293950,
       "market_cap": 817602961,
       "confidence": 45
+    },
+    {
+      "price": 0.089823,
+      "change": 12.3,
+      "volume": 32533483,
+      "market_cap": 811820172,
+      "confidence": 48
     }
   ],
   "RENDER": [
-    {
-      "price": 1.52,
-      "change": 19.7,
-      "volume": 55217521,
-      "market_cap": 786448814,
-      "confidence": 65
-    },
     {
       "price": 1.47,
       "change": 17.1,
@@ -4383,16 +4376,16 @@
       "volume": 54715245,
       "market_cap": 783687775,
       "confidence": 65
+    },
+    {
+      "price": 1.51,
+      "change": 17.0,
+      "volume": 47409666,
+      "market_cap": 781316584,
+      "confidence": 59
     }
   ],
   "BDX": [
-    {
-      "price": 0.082403,
-      "change": 4.1,
-      "volume": 8214848,
-      "market_cap": 648712666,
-      "confidence": 9
-    },
     {
       "price": 0.082429,
       "change": 3.6,
@@ -4469,16 +4462,16 @@
       "volume": 8949875,
       "market_cap": 643077634,
       "confidence": 9
+    },
+    {
+      "price": 0.081184,
+      "change": -2.6,
+      "volume": 8986237,
+      "market_cap": 638781496,
+      "confidence": 9
     }
   ],
   "LIT": [
-    {
-      "price": 3.4,
-      "change": 45.9,
-      "volume": 88221269,
-      "market_cap": 852087011,
-      "confidence": 45
-    },
     {
       "price": 3.58,
       "change": 58.5,
@@ -4555,16 +4548,16 @@
       "volume": 77204346,
       "market_cap": 835015909,
       "confidence": 37
+    },
+    {
+      "price": 3.23,
+      "change": 40.6,
+      "volume": 69061355,
+      "market_cap": 807643979,
+      "confidence": 37
     }
   ],
   "VVV": [
-    {
-      "price": 17.06,
-      "change": 43.4,
-      "volume": 30711560,
-      "market_cap": 810455792,
-      "confidence": 17
-    },
     {
       "price": 16.64,
       "change": 39.2,
@@ -4641,16 +4634,16 @@
       "volume": 35544399,
       "market_cap": 820986463,
       "confidence": 28
+    },
+    {
+      "price": 16.92,
+      "change": 20.3,
+      "volume": 29706858,
+      "market_cap": 804216703,
+      "confidence": 34
     }
   ],
   "JUP": [
-    {
-      "price": 0.217274,
-      "change": 28.8,
-      "volume": 48676419,
-      "market_cap": 721578777,
-      "confidence": 42
-    },
     {
       "price": 0.208098,
       "change": 24.5,
@@ -4727,16 +4720,16 @@
       "volume": 48866448,
       "market_cap": 718258044,
       "confidence": 42
+    },
+    {
+      "price": 0.220507,
+      "change": 29.6,
+      "volume": 50920894,
+      "market_cap": 731722048,
+      "confidence": 48
     }
   ],
   "FIL": [
-    {
-      "price": 0.773046,
-      "change": 13.5,
-      "volume": 74470662,
-      "market_cap": 635709865,
-      "confidence": 76
-    },
     {
       "price": 0.755872,
       "change": 13.8,
@@ -4813,16 +4806,16 @@
       "volume": 67821146,
       "market_cap": 593272212,
       "confidence": 76
+    },
+    {
+      "price": 0.70902,
+      "change": 10.9,
+      "volume": 59680133,
+      "market_cap": 585417159,
+      "confidence": 76
     }
   ],
   "币安人生": [
-    {
-      "price": 0.520051,
-      "change": 4.4,
-      "volume": 7627696,
-      "market_cap": 520252598,
-      "confidence": 9
-    },
     {
       "price": 0.50774,
       "change": 7.2,
@@ -4899,16 +4892,16 @@
       "volume": 8041103,
       "market_cap": 524921679,
       "confidence": 44
+    },
+    {
+      "price": 0.505503,
+      "change": 12.4,
+      "volume": 8396682,
+      "market_cap": 505418163,
+      "confidence": 44
     }
   ],
   "ETHFI": [
-    {
-      "price": 0.617349,
-      "change": 21.5,
-      "volume": 104289991,
-      "market_cap": 628167701,
-      "confidence": 66
-    },
     {
       "price": 0.628854,
       "change": 25.5,
@@ -4985,16 +4978,16 @@
       "volume": 57378228,
       "market_cap": 578356965,
       "confidence": 65
+    },
+    {
+      "price": 0.565048,
+      "change": 17.1,
+      "volume": 55543816,
+      "market_cap": 575255635,
+      "confidence": 65
     }
   ],
   "ARB": [
-    {
-      "price": 0.102072,
-      "change": 37.1,
-      "volume": 96008753,
-      "market_cap": 681850838,
-      "confidence": 49
-    },
     {
       "price": 0.099172,
       "change": 34.4,
@@ -5071,16 +5064,16 @@
       "volume": 56325127,
       "market_cap": 621611077,
       "confidence": 54
+    },
+    {
+      "price": 0.091012,
+      "change": 17.7,
+      "volume": 51155765,
+      "market_cap": 607992562,
+      "confidence": 65
     }
   ],
   "EURC": [
-    {
-      "price": 1.17,
-      "change": 1.3,
-      "volume": 23079789,
-      "market_cap": 455048810,
-      "confidence": 26
-    },
     {
       "price": 1.17,
       "change": 1.0,
@@ -5157,16 +5150,16 @@
       "volume": 31291391,
       "market_cap": 460706502,
       "confidence": 30
+    },
+    {
+      "price": 1.16,
+      "change": 0.2,
+      "volume": 30004257,
+      "market_cap": 459136536,
+      "confidence": 30
     }
   ],
   "CAKE": [
-    {
-      "price": 1.74,
-      "change": 19.7,
-      "volume": 50648882,
-      "market_cap": 559726818,
-      "confidence": 65
-    },
     {
       "price": 1.73,
       "change": 19.6,
@@ -5243,16 +5236,16 @@
       "volume": 38690807,
       "market_cap": 553964462,
       "confidence": 62
+    },
+    {
+      "price": 1.72,
+      "change": 12.3,
+      "volume": 36884799,
+      "market_cap": 553888624,
+      "confidence": 62
     }
   ],
   "APT": [
-    {
-      "price": 0.644994,
-      "change": 21.0,
-      "volume": 86405677,
-      "market_cap": 553850671,
-      "confidence": 62
-    },
     {
       "price": 0.616364,
       "change": 18.2,
@@ -5328,6 +5321,13 @@
       "change": 5.8,
       "volume": 56773307,
       "market_cap": 485055903,
+      "confidence": 79
+    },
+    {
+      "price": 0.562161,
+      "change": 5.2,
+      "volume": 54055979,
+      "market_cap": 482214549,
       "confidence": 79
     }
   ],
@@ -5419,13 +5419,6 @@
   ],
   "INJ": [
     {
-      "price": 5.32,
-      "change": 28.7,
-      "volume": 97764677,
-      "market_cap": 533156423,
-      "confidence": 56
-    },
-    {
       "price": 5.29,
       "change": 30.1,
       "volume": 108650965,
@@ -5501,16 +5494,16 @@
       "volume": 106397760,
       "market_cap": 554068933,
       "confidence": 53
+    },
+    {
+      "price": 5.39,
+      "change": 26.7,
+      "volume": 85392245,
+      "market_cap": 539360768,
+      "confidence": 56
     }
   ],
   "AERO": [
-    {
-      "price": 0.480381,
-      "change": 18.1,
-      "volume": 34742138,
-      "market_cap": 471301307,
-      "confidence": 62
-    },
     {
       "price": 0.47007,
       "change": 14.6,
@@ -5587,16 +5580,16 @@
       "volume": 39538505,
       "market_cap": 504380205,
       "confidence": 42
+    },
+    {
+      "price": 0.516241,
+      "change": 28.4,
+      "volume": 35143633,
+      "market_cap": 505816799,
+      "confidence": 42
     }
   ],
   "CRV": [
-    {
-      "price": 0.327164,
-      "change": 30.1,
-      "volume": 86446741,
-      "market_cap": 507777342,
-      "confidence": 49
-    },
     {
       "price": 0.321932,
       "change": 30.4,
@@ -5673,16 +5666,16 @@
       "volume": 44033989,
       "market_cap": 493924020,
       "confidence": 38
+    },
+    {
+      "price": 0.314695,
+      "change": 31.6,
+      "volume": 39740417,
+      "market_cap": 488134927,
+      "confidence": 38
     }
   ],
   "DASH": [
-    {
-      "price": 43.28,
-      "change": 43.8,
-      "volume": 165715152,
-      "market_cap": 554850095,
-      "confidence": 50
-    },
     {
       "price": 41.19,
       "change": 38.1,
@@ -5759,16 +5752,16 @@
       "volume": 89074240,
       "market_cap": 496240827,
       "confidence": 52
+    },
+    {
+      "price": 38.13,
+      "change": 27.7,
+      "volume": 76695572,
+      "market_cap": 488289033,
+      "confidence": 59
     }
   ],
   "PENGU": [
-    {
-      "price": 0.00976239,
-      "change": 62.1,
-      "volume": 243687554,
-      "market_cap": 614143343,
-      "confidence": 48
-    },
     {
       "price": 0.00943017,
       "change": 60.0,
@@ -5845,16 +5838,16 @@
       "volume": 310496467,
       "market_cap": 590038737,
       "confidence": 40
+    },
+    {
+      "price": 0.00917088,
+      "change": 47.5,
+      "volume": 261797322,
+      "market_cap": 576600155,
+      "confidence": 46
     }
   ],
   "VIRTUAL": [
-    {
-      "price": 0.718367,
-      "change": 28.9,
-      "volume": 74648603,
-      "market_cap": 472880467,
-      "confidence": 59
-    },
     {
       "price": 0.701604,
       "change": 27.3,
@@ -5931,16 +5924,16 @@
       "volume": 81773960,
       "market_cap": 499493394,
       "confidence": 52
+    },
+    {
+      "price": 0.740613,
+      "change": 27.9,
+      "volume": 67555081,
+      "market_cap": 487538602,
+      "confidence": 59
     }
   ],
   "TRUMP": [
-    {
-      "price": 2.7,
-      "change": 91.0,
-      "volume": 1017647574,
-      "market_cap": 678362713,
-      "confidence": 40
-    },
     {
       "price": 2.54,
       "change": 80.0,
@@ -6017,16 +6010,16 @@
       "volume": 343598838,
       "market_cap": 563308313,
       "confidence": 40
+    },
+    {
+      "price": 2.22,
+      "change": 58.2,
+      "volume": 318179888,
+      "market_cap": 557553740,
+      "confidence": 40
     }
   ],
   "SUN": [
-    {
-      "price": 0.01762078,
-      "change": -1.3,
-      "volume": 11929004,
-      "market_cap": 338695997,
-      "confidence": 12
-    },
     {
       "price": 0.01753405,
       "change": -2.0,
@@ -6103,16 +6096,16 @@
       "volume": 17395847,
       "market_cap": 328781082,
       "confidence": 26
+    },
+    {
+      "price": 0.01707407,
+      "change": 0.9,
+      "volume": 17338317,
+      "market_cap": 328183736,
+      "confidence": 26
     }
   ],
   "PYTH": [
-    {
-      "price": 0.052785,
-      "change": 34.2,
-      "volume": 95083893,
-      "market_cap": 415704912,
-      "confidence": 53
-    },
     {
       "price": 0.050154,
       "change": 31.2,
@@ -6189,16 +6182,16 @@
       "volume": 107051897,
       "market_cap": 422221926,
       "confidence": 57
+    },
+    {
+      "price": 0.051076,
+      "change": 33.2,
+      "volume": 139531131,
+      "market_cap": 402356591,
+      "confidence": 57
     }
   ],
   "JTO": [
-    {
-      "price": 0.609407,
-      "change": 3.2,
-      "volume": 45917427,
-      "market_cap": 312707753,
-      "confidence": 38
-    },
     {
       "price": 0.58233,
       "change": -0.4,
@@ -6275,16 +6268,16 @@
       "volume": 55072733,
       "market_cap": 268488447,
       "confidence": 45
+    },
+    {
+      "price": 0.518208,
+      "change": -5.9,
+      "volume": 46585361,
+      "market_cap": 266587020,
+      "confidence": 38
     }
   ],
   "TIA": [
-    {
-      "price": 0.38341,
-      "change": 24.7,
-      "volume": 40710730,
-      "market_cap": 367963730,
-      "confidence": 59
-    },
     {
       "price": 0.370068,
       "change": 23.6,
@@ -6361,16 +6354,16 @@
       "volume": 35105871,
       "market_cap": 338204588,
       "confidence": 70
+    },
+    {
+      "price": 0.351216,
+      "change": 14.8,
+      "volume": 32796567,
+      "market_cap": 337320882,
+      "confidence": 65
     }
   ],
   "FET": [
-    {
-      "price": 0.165799,
-      "change": 33.6,
-      "volume": 95546753,
-      "market_cap": 374802497,
-      "confidence": 53
-    },
     {
       "price": 0.161925,
       "change": 33.7,
@@ -6447,16 +6440,16 @@
       "volume": 81529283,
       "market_cap": 378704702,
       "confidence": 53
+    },
+    {
+      "price": 0.159797,
+      "change": 30.3,
+      "volume": 77176429,
+      "market_cap": 361479971,
+      "confidence": 53
     }
   ],
   "ZRO": [
-    {
-      "price": 1.23,
-      "change": 60.3,
-      "volume": 142979418,
-      "market_cap": 435451444,
-      "confidence": 47
-    },
     {
       "price": 1.16,
       "change": 53.3,
@@ -6533,16 +6526,16 @@
       "volume": 236292495,
       "market_cap": 423519478,
       "confidence": 49
+    },
+    {
+      "price": 1.15,
+      "change": 38.6,
+      "volume": 157272158,
+      "market_cap": 404716832,
+      "confidence": 57
     }
   ],
   "SEI": [
-    {
-      "price": 0.04832502,
-      "change": 21.5,
-      "volume": 34959590,
-      "market_cap": 325584707,
-      "confidence": 59
-    },
     {
       "price": 0.04665658,
       "change": 18.9,
@@ -6619,16 +6612,16 @@
       "volume": 27044497,
       "market_cap": 311627012,
       "confidence": 62
+    },
+    {
+      "price": 0.04574917,
+      "change": 17.3,
+      "volume": 25405649,
+      "market_cap": 308054937,
+      "confidence": 62
     }
   ],
   "LUNC": [
-    {
-      "price": 5.564e-05,
-      "change": 16.2,
-      "volume": 14508182,
-      "market_cap": 307062034,
-      "confidence": 44
-    },
     {
       "price": 5.43e-05,
       "change": 14.1,
@@ -6705,16 +6698,16 @@
       "volume": 8680931,
       "market_cap": 294604471,
       "confidence": 47
+    },
+    {
+      "price": 5.304e-05,
+      "change": 10.5,
+      "volume": 9141298,
+      "market_cap": 292867891,
+      "confidence": 47
     }
   ],
   "BTT": [
-    {
-      "price": 2.95771e-07,
-      "change": 13.0,
-      "volume": 6511154,
-      "market_cap": 291897424,
-      "confidence": 47
-    },
     {
       "price": 2.9568e-07,
       "change": 13.2,
@@ -6791,16 +6784,16 @@
       "volume": 5716484,
       "market_cap": 287440620,
       "confidence": 47
+    },
+    {
+      "price": 2.86326e-07,
+      "change": 8.0,
+      "volume": 5412332,
+      "market_cap": 282623430,
+      "confidence": 47
     }
   ],
   "LDO": [
-    {
-      "price": 0.400681,
-      "change": 30.2,
-      "volume": 67248018,
-      "market_cap": 335527364,
-      "confidence": 53
-    },
     {
       "price": 0.386727,
       "change": 28.4,
@@ -6877,16 +6870,16 @@
       "volume": 48785978,
       "market_cap": 298492727,
       "confidence": 70
+    },
+    {
+      "price": 0.349074,
+      "change": 13.5,
+      "volume": 47439851,
+      "market_cap": 291232576,
+      "confidence": 73
     }
   ],
   "H": [
-    {
-      "price": 0.074952,
-      "change": -34.4,
-      "volume": 7977593,
-      "market_cap": 149346208,
-      "confidence": 26
-    },
     {
       "price": 0.078875,
       "change": -31.4,
@@ -6963,16 +6956,16 @@
       "volume": 6870424,
       "market_cap": 157831291,
       "confidence": 12
+    },
+    {
+      "price": 0.072123,
+      "change": -27.0,
+      "volume": 5564051,
+      "market_cap": 143745325,
+      "confidence": 12
     }
   ],
   "MON": [
-    {
-      "price": 0.02974391,
-      "change": 42.0,
-      "volume": 73928393,
-      "market_cap": 351799688,
-      "confidence": 49
-    },
     {
       "price": 0.02920245,
       "change": 45.9,
@@ -7049,16 +7042,16 @@
       "volume": 54441724,
       "market_cap": 328390595,
       "confidence": 59
+    },
+    {
+      "price": 0.02752403,
+      "change": 25.5,
+      "volume": 43701652,
+      "market_cap": 325817018,
+      "confidence": 53
     }
   ],
   "REAL": [
-    {
-      "price": 0.081517,
-      "change": 11.9,
-      "volume": 7161921,
-      "market_cap": 275378204,
-      "confidence": 47
-    },
     {
       "price": 0.081043,
       "change": 12.2,
@@ -7135,16 +7128,16 @@
       "volume": 7140620,
       "market_cap": 267388978,
       "confidence": 47
+    },
+    {
+      "price": 0.077914,
+      "change": 3.6,
+      "volume": 6992404,
+      "market_cap": 263879535,
+      "confidence": 12
     }
   ],
   "AKE": [
-    {
-      "price": 0.00856351,
-      "change": 38.3,
-      "volume": 6384542,
-      "market_cap": 195285733,
-      "confidence": 20
-    },
     {
       "price": 0.00864799,
       "change": 19.6,
@@ -7221,16 +7214,16 @@
       "volume": 5222678,
       "market_cap": 209018160,
       "confidence": 12
+    },
+    {
+      "price": 0.00865863,
+      "change": -0.2,
+      "volume": 5306381,
+      "market_cap": 197212318,
+      "confidence": 12
     }
   ],
   "KITE": [
-    {
-      "price": 0.113593,
-      "change": 20.4,
-      "volume": 11880125,
-      "market_cap": 271643815,
-      "confidence": 33
-    },
     {
       "price": 0.113128,
       "change": 21.7,
@@ -7307,16 +7300,16 @@
       "volume": 9870683,
       "market_cap": 278725739,
       "confidence": 27
+    },
+    {
+      "price": 0.113051,
+      "change": 23.0,
+      "volume": 10806984,
+      "market_cap": 270330569,
+      "confidence": 33
     }
   ],
   "PENDLE": [
-    {
-      "price": 1.92,
-      "change": 49.3,
-      "volume": 98314286,
-      "market_cap": 330548458,
-      "confidence": 49
-    },
     {
       "price": 1.81,
       "change": 44.8,
@@ -7393,16 +7386,16 @@
       "volume": 42319501,
       "market_cap": 301355545,
       "confidence": 46
+    },
+    {
+      "price": 1.72,
+      "change": 32.3,
+      "volume": 38794918,
+      "market_cap": 296566938,
+      "confidence": 46
     }
   ],
   "GRASS": [
-    {
-      "price": 0.337721,
-      "change": 2.8,
-      "volume": 20235429,
-      "market_cap": 221336457,
-      "confidence": 26
-    },
     {
       "price": 0.355128,
       "change": 7.4,
@@ -7479,16 +7472,16 @@
       "volume": 15695275,
       "market_cap": 218494316,
       "confidence": 61
+    },
+    {
+      "price": 0.33049,
+      "change": 3.9,
+      "volume": 15837193,
+      "market_cap": 216367929,
+      "confidence": 26
     }
   ],
   "XTZ": [
-    {
-      "price": 0.234481,
-      "change": 18.8,
-      "volume": 9037936,
-      "market_cap": 256689220,
-      "confidence": 44
-    },
     {
       "price": 0.226793,
       "change": 16.7,
@@ -7565,16 +7558,16 @@
       "volume": 8887604,
       "market_cap": 246968830,
       "confidence": 47
+    },
+    {
+      "price": 0.227178,
+      "change": 12.4,
+      "volume": 8980233,
+      "market_cap": 248683457,
+      "confidence": 47
     }
   ],
   "BONK": [
-    {
-      "price": 3.27e-06,
-      "change": 39.3,
-      "volume": 84462393,
-      "market_cap": 288092107,
-      "confidence": 53
-    },
     {
       "price": 3.16e-06,
       "change": 36.6,
@@ -7651,16 +7644,16 @@
       "volume": 34030096,
       "market_cap": 264575376,
       "confidence": 46
+    },
+    {
+      "price": 2.96e-06,
+      "change": 27.4,
+      "volume": 28862200,
+      "market_cap": 260382303,
+      "confidence": 53
     }
   ],
   "XPL": [
-    {
-      "price": 0.104045,
-      "change": 36.3,
-      "volume": 132183024,
-      "market_cap": 279819773,
-      "confidence": 49
-    },
     {
       "price": 0.096757,
       "change": 30.3,
@@ -7737,6 +7730,13 @@
       "volume": 52803422,
       "market_cap": 251446998,
       "confidence": 77
+    },
+    {
+      "price": 0.08827,
+      "change": 14.7,
+      "volume": 56463814,
+      "market_cap": 245228050,
+      "confidence": 80
     }
   ],
   "ULTIMA": [
@@ -7827,13 +7827,6 @@
   ],
   "FLOKI": [
     {
-      "price": 2.732e-05,
-      "change": 34.4,
-      "volume": 25732323,
-      "market_cap": 263531847,
-      "confidence": 38
-    },
-    {
       "price": 2.661e-05,
       "change": 33.2,
       "volume": 28172330,
@@ -7909,16 +7902,16 @@
       "volume": 21921947,
       "market_cap": 252677920,
       "confidence": 34
+    },
+    {
+      "price": 2.559e-05,
+      "change": 27.2,
+      "volume": 20658295,
+      "market_cap": 246935645,
+      "confidence": 41
     }
   ],
   "OP": [
-    {
-      "price": 0.112644,
-      "change": 33.0,
-      "volume": 57673207,
-      "market_cap": 258138312,
-      "confidence": 53
-    },
     {
       "price": 0.109023,
       "change": 31.0,
@@ -7995,16 +7988,16 @@
       "volume": 35435450,
       "market_cap": 232502568,
       "confidence": 59
+    },
+    {
+      "price": 0.10112,
+      "change": 21.9,
+      "volume": 29770127,
+      "market_cap": 231544575,
+      "confidence": 59
     }
   ],
   "APEPE": [
-    {
-      "price": 1.24e-06,
-      "change": 34.2,
-      "volume": 15294649,
-      "market_cap": 259605566,
-      "confidence": 34
-    },
     {
       "price": 1.25e-06,
       "change": 34.2,
@@ -8081,16 +8074,16 @@
       "volume": 9977005,
       "market_cap": 258109904,
       "confidence": 20
+    },
+    {
+      "price": 1.2e-06,
+      "change": 25.6,
+      "volume": 10479669,
+      "market_cap": 252629209,
+      "confidence": 27
     }
   ],
   "JASMY": [
-    {
-      "price": 0.00442958,
-      "change": 14.2,
-      "volume": 9993519,
-      "market_cap": 218939404,
-      "confidence": 47
-    },
     {
       "price": 0.00427557,
       "change": 16.9,
@@ -8167,16 +8160,16 @@
       "volume": 35702264,
       "market_cap": 235482378,
       "confidence": 46
+    },
+    {
+      "price": 0.00490759,
+      "change": 41.6,
+      "volume": 32207046,
+      "market_cap": 242443503,
+      "confidence": 42
     }
   ],
   "SYRUP": [
-    {
-      "price": 0.198603,
-      "change": 21.7,
-      "volume": 7392050,
-      "market_cap": 231839026,
-      "confidence": 33
-    },
     {
       "price": 0.19607,
       "change": 21.4,
@@ -8252,6 +8245,13 @@
       "change": 22.9,
       "volume": 7613601,
       "market_cap": 225069328,
+      "confidence": 33
+    },
+    {
+      "price": 0.192505,
+      "change": 20.9,
+      "volume": 6461139,
+      "market_cap": 224670083,
       "confidence": 33
     }
   ],
@@ -8343,13 +8343,6 @@
   ],
   "TWT": [
     {
-      "price": 0.429278,
-      "change": 9.0,
-      "volume": 5995177,
-      "market_cap": 178883564,
-      "confidence": 47
-    },
-    {
       "price": 0.425932,
       "change": 9.3,
       "volume": 5111099,
@@ -8425,16 +8418,16 @@
       "volume": 22472910,
       "market_cap": 193380244,
       "confidence": 55
+    },
+    {
+      "price": 0.451035,
+      "change": 16.1,
+      "volume": 17340098,
+      "market_cap": 187725598,
+      "confidence": 58
     }
   ],
   "STRK": [
-    {
-      "price": 0.02906031,
-      "change": 24.3,
-      "volume": 29805773,
-      "market_cap": 202805809,
-      "confidence": 59
-    },
     {
       "price": 0.02733147,
       "change": 17.8,
@@ -8511,16 +8504,16 @@
       "volume": 18690709,
       "market_cap": 179148940,
       "confidence": 69
+    },
+    {
+      "price": 0.02535408,
+      "change": 10.8,
+      "volume": 13146274,
+      "market_cap": 176908765,
+      "confidence": 61
     }
   ],
   "COMP": [
-    {
-      "price": 20.97,
-      "change": 29.5,
-      "volume": 30302097,
-      "market_cap": 209741660,
-      "confidence": 53
-    },
     {
       "price": 19.97,
       "change": 25.4,
@@ -8597,16 +8590,16 @@
       "volume": 20595822,
       "market_cap": 193288271,
       "confidence": 69
+    },
+    {
+      "price": 19.41,
+      "change": 10.3,
+      "volume": 20717246,
+      "market_cap": 194046173,
+      "confidence": 69
     }
   ],
   "ZBCN": [
-    {
-      "price": 0.00185778,
-      "change": 19.0,
-      "volume": 9475048,
-      "market_cap": 185779583,
-      "confidence": 58
-    },
     {
       "price": 0.00183125,
       "change": 16.8,
@@ -8683,16 +8676,16 @@
       "volume": 8786698,
       "market_cap": 189174422,
       "confidence": 33
+    },
+    {
+      "price": 0.00188773,
+      "change": 18.6,
+      "volume": 8518452,
+      "market_cap": 188691940,
+      "confidence": 44
     }
   ],
   "CVX": [
-    {
-      "price": 2.12,
-      "change": 27.8,
-      "volume": 8442022,
-      "market_cap": 197234473,
-      "confidence": 27
-    },
     {
       "price": 2.06,
       "change": 27.9,
@@ -8769,16 +8762,16 @@
       "volume": 8074064,
       "market_cap": 190312799,
       "confidence": 20
+    },
+    {
+      "price": 2.25,
+      "change": 50.4,
+      "volume": 12637640,
+      "market_cap": 209719081,
+      "confidence": 24
     }
   ],
   "BTSE": [
-    {
-      "price": 0.845348,
-      "change": -10.7,
-      "volume": 8665435,
-      "market_cap": 136900975,
-      "confidence": 26
-    },
     {
       "price": 0.825944,
       "change": -11.8,
@@ -8855,16 +8848,16 @@
       "volume": 8639815,
       "market_cap": 119326532,
       "confidence": 26
+    },
+    {
+      "price": 0.75153,
+      "change": -14.3,
+      "volume": 8682726,
+      "market_cap": 121874777,
+      "confidence": 26
     }
   ],
   "AXS": [
-    {
-      "price": 1.022,
-      "change": 16.4,
-      "volume": 29761420,
-      "market_cap": 178222591,
-      "confidence": 70
-    },
     {
       "price": 0.980471,
       "change": 13.2,
@@ -8941,16 +8934,16 @@
       "volume": 23482098,
       "market_cap": 163606827,
       "confidence": 69
+    },
+    {
+      "price": 0.937464,
+      "change": 9.0,
+      "volume": 22794871,
+      "market_cap": 163407494,
+      "confidence": 69
     }
   ],
   "EIGEN": [
-    {
-      "price": 0.232598,
-      "change": 36.2,
-      "volume": 39492119,
-      "market_cap": 203942976,
-      "confidence": 46
-    },
     {
       "price": 0.223665,
       "change": 34.2,
@@ -9027,16 +9020,16 @@
       "volume": 16909611,
       "market_cap": 182042679,
       "confidence": 47
+    },
+    {
+      "price": 0.202695,
+      "change": 18.6,
+      "volume": 15557107,
+      "market_cap": 177607396,
+      "confidence": 58
     }
   ],
   "IOTA": [
-    {
-      "price": 0.04570334,
-      "change": 42.8,
-      "volume": 15836049,
-      "market_cap": 210595567,
-      "confidence": 30
-    },
     {
       "price": 0.04502173,
       "change": 40.4,
@@ -9113,16 +9106,16 @@
       "volume": 15290526,
       "market_cap": 201262562,
       "confidence": 34
+    },
+    {
+      "price": 0.04247987,
+      "change": 26.5,
+      "volume": 14073714,
+      "market_cap": 195757229,
+      "confidence": 41
     }
   ],
   "FARTCOIN": [
-    {
-      "price": 0.186427,
-      "change": 29.4,
-      "volume": 62917434,
-      "market_cap": 186897947,
-      "confidence": 60
-    },
     {
       "price": 0.173327,
       "change": 23.0,
@@ -9199,16 +9192,16 @@
       "volume": 64571945,
       "market_cap": 205733105,
       "confidence": 49
+    },
+    {
+      "price": 0.201578,
+      "change": 39.8,
+      "volume": 73592262,
+      "market_cap": 201653238,
+      "confidence": 53
     }
   ],
   "RUNE": [
-    {
-      "price": 0.472401,
-      "change": 12.7,
-      "volume": 42226599,
-      "market_cap": 159744743,
-      "confidence": 74
-    },
     {
       "price": 0.468334,
       "change": 12.6,
@@ -9285,16 +9278,16 @@
       "volume": 36383074,
       "market_cap": 160453742,
       "confidence": 60
+    },
+    {
+      "price": 0.481536,
+      "change": 10.3,
+      "volume": 33773178,
+      "market_cap": 159128735,
+      "confidence": 74
     }
   ],
   "WIF": [
-    {
-      "price": 0.199515,
-      "change": 45.2,
-      "volume": 50674661,
-      "market_cap": 199457065,
-      "confidence": 49
-    },
     {
       "price": 0.195703,
       "change": 44.7,
@@ -9371,16 +9364,16 @@
       "volume": 58407931,
       "market_cap": 199811982,
       "confidence": 49
+    },
+    {
+      "price": 0.201412,
+      "change": 47.4,
+      "volume": 53007242,
+      "market_cap": 201137758,
+      "confidence": 49
     }
   ],
   "CHZ": [
-    {
-      "price": 0.01484498,
-      "change": 18.6,
-      "volume": 35117532,
-      "market_cap": 155853017,
-      "confidence": 71
-    },
     {
       "price": 0.0143028,
       "change": 17.4,
@@ -9457,16 +9450,16 @@
       "volume": 27093942,
       "market_cap": 147421103,
       "confidence": 70
+    },
+    {
+      "price": 0.01392983,
+      "change": 15.0,
+      "volume": 27534026,
+      "market_cap": 146410472,
+      "confidence": 73
     }
   ],
   "MANA": [
-    {
-      "price": 0.07684,
-      "change": 20.4,
-      "volume": 20862465,
-      "market_cap": 150496137,
-      "confidence": 55
-    },
     {
       "price": 0.073904,
       "change": 17.9,
@@ -9543,16 +9536,16 @@
       "volume": 21388264,
       "market_cap": 144038533,
       "confidence": 66
+    },
+    {
+      "price": 0.073282,
+      "change": 14.3,
+      "volume": 20392021,
+      "market_cap": 143499302,
+      "confidence": 69
     }
   ],
   "APE": [
-    {
-      "price": 0.148377,
-      "change": 19.9,
-      "volume": 26582983,
-      "market_cap": 148407782,
-      "confidence": 70
-    },
     {
       "price": 0.14439,
       "change": 17.7,
@@ -9628,6 +9621,13 @@
       "change": 16.2,
       "volume": 19636332,
       "market_cap": 142044888,
+      "confidence": 66
+    },
+    {
+      "price": 0.14079,
+      "change": 16.3,
+      "volume": 19230438,
+      "market_cap": 140743925,
       "confidence": 66
     }
   ],
@@ -9810,16 +9810,16 @@
       "volume": 15239522,
       "market_cap": 115097271,
       "confidence": 42
+    },
+    {
+      "price": 0.748804,
+      "change": 37.1,
+      "volume": 14280038,
+      "market_cap": 120146137,
+      "confidence": 42
     }
   ],
   "SAND": [
-    {
-      "price": 0.04625715,
-      "change": 16.5,
-      "volume": 4161839761322,
-      "market_cap": 135857300,
-      "confidence": 77
-    },
     {
       "price": 0.044497,
       "change": 12.8,
@@ -9896,16 +9896,16 @@
       "volume": 17210611,
       "market_cap": 121774314,
       "confidence": 69
+    },
+    {
+      "price": 0.04125021,
+      "change": 5.2,
+      "volume": 15454103,
+      "market_cap": 121135487,
+      "confidence": 69
     }
   ],
   "GOMINING": [
-    {
-      "price": 0.318453,
-      "change": 10.5,
-      "volume": 15477995,
-      "market_cap": 128463025,
-      "confidence": 69
-    },
     {
       "price": 0.314757,
       "change": 9.6,
@@ -9982,16 +9982,16 @@
       "volume": 14949392,
       "market_cap": 132554665,
       "confidence": 69
+    },
+    {
+      "price": 0.330109,
+      "change": 15.1,
+      "volume": 13926132,
+      "market_cap": 133152920,
+      "confidence": 66
     }
   ],
   "1INCH": [
-    {
-      "price": 0.09246,
-      "change": 12.0,
-      "volume": 21836853,
-      "market_cap": 129979984,
-      "confidence": 69
-    },
     {
       "price": 0.089967,
       "change": 9.7,
@@ -10068,16 +10068,16 @@
       "volume": 17299754,
       "market_cap": 125531018,
       "confidence": 69
+    },
+    {
+      "price": 0.089015,
+      "change": 6.6,
+      "volume": 16202274,
+      "market_cap": 125132083,
+      "confidence": 69
     }
   ],
   "SNX": [
-    {
-      "price": 0.232716,
-      "change": 17.2,
-      "volume": 25208446,
-      "market_cap": 135228337,
-      "confidence": 70
-    },
     {
       "price": 0.223028,
       "change": 14.0,
@@ -10154,6 +10154,13 @@
       "volume": 20587599,
       "market_cap": 133641902,
       "confidence": 55
+    },
+    {
+      "price": 0.228968,
+      "change": 18.8,
+      "volume": 18753150,
+      "market_cap": 133024793,
+      "confidence": 66
     }
   ],
   "Q": [
@@ -10187,13 +10194,6 @@
     }
   ],
   "CASHCAT": [
-    {
-      "price": 0.117452,
-      "change": 7.9,
-      "volume": 15738430,
-      "market_cap": 115874905,
-      "confidence": 69
-    },
     {
       "price": 0.14213,
       "change": 56.6,
@@ -10270,16 +10270,16 @@
       "volume": 57752469,
       "market_cap": 220146824,
       "confidence": 39
+    },
+    {
+      "price": 0.214744,
+      "change": 115.3,
+      "volume": 51128867,
+      "market_cap": 211678315,
+      "confidence": 39
     }
   ],
   "DRV": [
-    {
-      "price": 0.112121,
-      "change": 21.3,
-      "volume": 5817535,
-      "market_cap": 112096087,
-      "confidence": 47
-    },
     {
       "price": 0.138827,
       "change": 39.3,
@@ -10356,16 +10356,16 @@
       "volume": 6826861,
       "market_cap": 145864852,
       "confidence": 10
+    },
+    {
+      "price": 0.161276,
+      "change": 86.4,
+      "volume": 25112191,
+      "market_cap": 161640497,
+      "confidence": 36
     }
   ],
   "CAP": [
-    {
-      "price": 0.069993,
-      "change": 6.1,
-      "volume": 21453825,
-      "market_cap": 109197425,
-      "confidence": 69
-    },
     {
       "price": 0.070096,
       "change": 6.2,
@@ -10442,16 +10442,16 @@
       "volume": 16813048,
       "market_cap": 111974758,
       "confidence": 34
+    },
+    {
+      "price": 0.071607,
+      "change": -1.1,
+      "volume": 20667677,
+      "market_cap": 111736640,
+      "confidence": 34
     }
   ],
   "ANSEM": [
-    {
-      "price": 0.265923,
-      "change": 29.4,
-      "volume": 16394180,
-      "market_cap": 110559693,
-      "confidence": 49
-    },
     {
       "price": 0.314209,
       "change": 47.0,
@@ -10528,6 +10528,13 @@
       "volume": 14350044,
       "market_cap": 118124700,
       "confidence": 55
+    },
+    {
+      "price": 0.282131,
+      "change": 18.4,
+      "volume": 16333181,
+      "market_cap": 117126841,
+      "confidence": 66
     }
   ],
   "M": [
@@ -10618,13 +10625,6 @@
   ],
   "BSV": [
     {
-      "price": 17.07,
-      "change": 10.3,
-      "volume": 7560014,
-      "market_cap": 342346456,
-      "confidence": 47
-    },
-    {
       "price": 16.56,
       "change": 7.7,
       "volume": 7510125,
@@ -10700,6 +10700,13 @@
       "volume": 5157783,
       "market_cap": 331472331,
       "confidence": 44
+    },
+    {
+      "price": 16.8,
+      "change": 14.4,
+      "volume": 5042457,
+      "market_cap": 337423561,
+      "confidence": 47
     }
   ],
   "NFT": [
@@ -10790,13 +10797,6 @@
   ],
   "STX": [
     {
-      "price": 0.233286,
-      "change": 89.7,
-      "volume": 68638669,
-      "market_cap": 433515760,
-      "confidence": 42
-    },
-    {
       "price": 0.225799,
       "change": 85.5,
       "volume": 56916211,
@@ -10872,16 +10872,16 @@
       "volume": 90722347,
       "market_cap": 508934913,
       "confidence": 35
+    },
+    {
+      "price": 0.270462,
+      "change": 125.9,
+      "volume": 81572956,
+      "market_cap": 503959587,
+      "confidence": 35
     }
   ],
   "ENS": [
-    {
-      "price": 5.84,
-      "change": 44.9,
-      "volume": 31001265,
-      "market_cap": 245388359,
-      "confidence": 42
-    },
     {
       "price": 5.65,
       "change": 44.4,
@@ -10958,16 +10958,16 @@
       "volume": 26064192,
       "market_cap": 241600145,
       "confidence": 42
+    },
+    {
+      "price": 5.69,
+      "change": 47.7,
+      "volume": 25704169,
+      "market_cap": 239397321,
+      "confidence": 42
     }
   ],
   "XDC": [
-    {
-      "price": 0.02915165,
-      "change": 8.0,
-      "volume": 5544718,
-      "market_cap": 581446322,
-      "confidence": 44
-    },
     {
       "price": 0.0289823,
       "change": 7.4,
@@ -11044,16 +11044,16 @@
       "volume": 5903242,
       "market_cap": 562723050,
       "confidence": 44
+    },
+    {
+      "price": 0.02776217,
+      "change": 0.9,
+      "volume": 6258160,
+      "market_cap": 553859174,
+      "confidence": 9
     }
   ],
   "GRT": [
-    {
-      "price": 0.01733442,
-      "change": 28.8,
-      "volume": 22420345,
-      "market_cap": 190024352,
-      "confidence": 49
-    },
     {
       "price": 0.01710493,
       "change": 27.9,
@@ -11130,16 +11130,16 @@
       "volume": 22735464,
       "market_cap": 194374805,
       "confidence": 42
+    },
+    {
+      "price": 0.01729534,
+      "change": 30.7,
+      "volume": 20118973,
+      "market_cap": 189284113,
+      "confidence": 42
     }
   ],
   "RAY": [
-    {
-      "price": 0.768012,
-      "change": 23.3,
-      "volume": 18614319,
-      "market_cap": 207034107,
-      "confidence": 47
-    },
     {
       "price": 0.739133,
       "change": 20.9,
@@ -11216,16 +11216,16 @@
       "volume": 15580610,
       "market_cap": 210298887,
       "confidence": 41
+    },
+    {
+      "price": 0.77424,
+      "change": 24.6,
+      "volume": 13415786,
+      "market_cap": 208698285,
+      "confidence": 47
     }
   ],
   "EURCV": [
-    {
-      "price": 1.17,
-      "change": 1.3,
-      "volume": 15809409,
-      "market_cap": 170086307,
-      "confidence": 26
-    },
     {
       "price": 1.17,
       "change": 1.0,
@@ -11302,16 +11302,16 @@
       "volume": 22787244,
       "market_cap": 169473433,
       "confidence": 34
+    },
+    {
+      "price": 1.16,
+      "change": 0.2,
+      "volume": 22774159,
+      "market_cap": 169190848,
+      "confidence": 34
     }
   ],
   "FIGR_HELOC": [
-    {
-      "price": 1.025,
-      "change": 2.0,
-      "volume": 408157832,
-      "market_cap": 22216275698,
-      "confidence": 23
-    },
     {
       "price": 1.03,
       "change": -0.7,
@@ -11387,6 +11387,13 @@
       "change": 0.5,
       "volume": 436783325,
       "market_cap": 21960797582,
+      "confidence": 23
+    },
+    {
+      "price": 1.009,
+      "change": 0.5,
+      "volume": 435768128,
+      "market_cap": 21892986886,
       "confidence": 23
     }
   ],
@@ -11478,13 +11485,6 @@
   ],
   "PIEVERSE": [
     {
-      "price": 0.936432,
-      "change": 12.3,
-      "volume": 9034530,
-      "market_cap": 256686125,
-      "confidence": 47
-    },
-    {
       "price": 0.932529,
       "change": 10.1,
       "volume": 9125771,
@@ -11560,16 +11560,16 @@
       "volume": 5535943,
       "market_cap": 288201125,
       "confidence": 33
+    },
+    {
+      "price": 1.016,
+      "change": 17.6,
+      "volume": 5334266,
+      "market_cap": 279057140,
+      "confidence": 44
     }
   ],
   "FF": [
-    {
-      "price": 0.089858,
-      "change": 37.5,
-      "volume": 44545014,
-      "market_cap": 275406698,
-      "confidence": 46
-    },
     {
       "price": 0.087992,
       "change": 33.4,
@@ -11646,16 +11646,16 @@
       "volume": 32216697,
       "market_cap": 310032864,
       "confidence": 36
+    },
+    {
+      "price": 0.098095,
+      "change": 56.6,
+      "volume": 59067743,
+      "market_cap": 300855568,
+      "confidence": 42
     }
   ],
   "CASH": [
-    {
-      "price": 0.999922,
-      "change": 0.1,
-      "volume": 16312685,
-      "market_cap": 120008626,
-      "confidence": 34
-    },
     {
       "price": 0.999793,
       "change": 0.1,
@@ -11731,6 +11731,13 @@
       "change": 0.1,
       "volume": 14700471,
       "market_cap": 121087235,
+      "confidence": 34
+    },
+    {
+      "price": 0.999797,
+      "change": 0.1,
+      "volume": 14149357,
+      "market_cap": 121091722,
       "confidence": 34
     }
   ],
@@ -11810,13 +11817,6 @@
   ],
   "CRO": [
     {
-      "price": 0.059652,
-      "change": 25.5,
-      "volume": 9326399,
-      "market_cap": 2894139104,
-      "confidence": 22
-    },
-    {
       "price": 0.05875,
       "change": 25.3,
       "volume": 8207524,
@@ -11892,16 +11892,16 @@
       "volume": 9387619,
       "market_cap": 2851028687,
       "confidence": 22
+    },
+    {
+      "price": 0.057914,
+      "change": 24.9,
+      "volume": 8466885,
+      "market_cap": 2809461168,
+      "confidence": 28
     }
   ],
   "UB": [
-    {
-      "price": 0.122837,
-      "change": 5.7,
-      "volume": 11321852,
-      "market_cap": 307189038,
-      "confidence": 47
-    },
     {
       "price": 0.11741,
       "change": 1.7,
@@ -11977,6 +11977,13 @@
       "change": 6.9,
       "volume": 13977938,
       "market_cap": 316370370,
+      "confidence": 47
+    },
+    {
+      "price": 0.122555,
+      "change": 5.8,
+      "volume": 11972813,
+      "market_cap": 306348856,
       "confidence": 47
     }
   ],
@@ -12198,13 +12205,6 @@
   ],
   "NIGHT": [
     {
-      "price": 0.02074659,
-      "change": 16.8,
-      "volume": 7142176,
-      "market_cap": 344395362,
-      "confidence": 44
-    },
-    {
       "price": 0.02095626,
       "change": 20.8,
       "volume": 7242808,
@@ -12280,16 +12280,16 @@
       "volume": 6598404,
       "market_cap": 325446274,
       "confidence": 47
+    },
+    {
+      "price": 0.01936088,
+      "change": 8.7,
+      "volume": 5629629,
+      "market_cap": 321554678,
+      "confidence": 47
     }
   ],
   "KCS": [
-    {
-      "price": 7.41,
-      "change": 12.5,
-      "volume": 22322870,
-      "market_cap": 1017204266,
-      "confidence": 42
-    },
     {
       "price": 7.27,
       "change": 11.2,
@@ -12366,6 +12366,13 @@
       "volume": 56830980,
       "market_cap": 992081839,
       "confidence": 68
+    },
+    {
+      "price": 7.2,
+      "change": 9.0,
+      "volume": 47335439,
+      "market_cap": 986701564,
+      "confidence": 48
     }
   ],
   "NEXO": [
@@ -12456,13 +12463,6 @@
   ],
   "VET": [
     {
-      "price": 0.00575886,
-      "change": 30.3,
-      "volume": 7606021,
-      "market_cap": 495047798,
-      "confidence": 20
-    },
-    {
       "price": 0.00561351,
       "change": 27.0,
       "volume": 7134496,
@@ -12538,16 +12538,16 @@
       "volume": 8109847,
       "market_cap": 487786937,
       "confidence": 27
+    },
+    {
+      "price": 0.00566279,
+      "change": 26.1,
+      "volume": 8053311,
+      "market_cap": 486915274,
+      "confidence": 27
     }
   ],
   "SPX": [
-    {
-      "price": 0.471148,
-      "change": 44.8,
-      "volume": 11637864,
-      "market_cap": 438831649,
-      "confidence": 16
-    },
     {
       "price": 0.450464,
       "change": 44.4,
@@ -12624,16 +12624,16 @@
       "volume": 26124067,
       "market_cap": 496487414,
       "confidence": 28
+    },
+    {
+      "price": 0.529563,
+      "change": 63.4,
+      "volume": 25950888,
+      "market_cap": 492803109,
+      "confidence": 28
     }
   ],
   "AR": [
-    {
-      "price": 2.26,
-      "change": 25.7,
-      "volume": 13076628,
-      "market_cap": 148313661,
-      "confidence": 41
-    },
     {
       "price": 2.15,
       "change": 20.1,
@@ -12710,16 +12710,16 @@
       "volume": 9603134,
       "market_cap": 141631361,
       "confidence": 47
+    },
+    {
+      "price": 2.18,
+      "change": 21.6,
+      "volume": 9497461,
+      "market_cap": 143107084,
+      "confidence": 47
     }
   ],
   "A": [
-    {
-      "price": 0.07642,
-      "change": 24.1,
-      "volume": 5701053,
-      "market_cap": 126965372,
-      "confidence": 33
-    },
     {
       "price": 0.073353,
       "change": 21.2,
@@ -12796,16 +12796,16 @@
       "volume": 7592426,
       "market_cap": 124549157,
       "confidence": 47
+    },
+    {
+      "price": 0.075837,
+      "change": 20.7,
+      "volume": 8529001,
+      "market_cap": 126282940,
+      "confidence": 47
     }
   ],
   "ZAMA": [
-    {
-      "price": 0.057934,
-      "change": 39.7,
-      "volume": 25921624,
-      "market_cap": 127494938,
-      "confidence": 47
-    },
     {
       "price": 0.054911,
       "change": 32.0,
@@ -12882,6 +12882,13 @@
       "volume": 12856075,
       "market_cap": 118813859,
       "confidence": 42
+    },
+    {
+      "price": 0.053372,
+      "change": 29.3,
+      "volume": 12292273,
+      "market_cap": 117412039,
+      "confidence": 49
     }
   ],
   "PI": [
@@ -12972,13 +12979,6 @@
   ],
   "CFX": [
     {
-      "price": 0.04664205,
-      "change": 9.4,
-      "volume": 5768140,
-      "market_cap": 244089304,
-      "confidence": 47
-    },
-    {
       "price": 0.04992162,
       "change": 19.2,
       "volume": 6052665,
@@ -13054,16 +13054,16 @@
       "volume": 5615168,
       "market_cap": 249418245,
       "confidence": 44
+    },
+    {
+      "price": 0.04784604,
+      "change": 14.8,
+      "volume": 5134887,
+      "market_cap": 250348834,
+      "confidence": 47
     }
   ],
   "THETA": [
-    {
-      "price": 0.195126,
-      "change": 38.4,
-      "volume": 5858413,
-      "market_cap": 195421700,
-      "confidence": 20
-    },
     {
       "price": 0.19134,
       "change": 38.4,
@@ -13139,6 +13139,13 @@
       "change": 24.0,
       "volume": 6128344,
       "market_cap": 175878516,
+      "confidence": 33
+    },
+    {
+      "price": 0.175545,
+      "change": 23.9,
+      "volume": 5292510,
+      "market_cap": 175470917,
       "confidence": 33
     }
   ],
@@ -13230,13 +13237,6 @@
   ],
   "MET": [
     {
-      "price": 0.236847,
-      "change": 46.3,
-      "volume": 12819369,
-      "market_cap": 129188331,
-      "confidence": 30
-    },
-    {
       "price": 0.238475,
       "change": 46.1,
       "volume": 16867251,
@@ -13312,16 +13312,16 @@
       "volume": 6148037,
       "market_cap": 113700307,
       "confidence": 58
+    },
+    {
+      "price": 0.209476,
+      "change": 20.9,
+      "volume": 5920730,
+      "market_cap": 114237511,
+      "confidence": 47
     }
   ],
   "KMNO": [
-    {
-      "price": 0.02472289,
-      "change": 36.9,
-      "volume": 5990881,
-      "market_cap": 132673082,
-      "confidence": 20
-    },
     {
       "price": 0.02501052,
       "change": 39.8,
@@ -13398,16 +13398,16 @@
       "volume": 16162011,
       "market_cap": 128159050,
       "confidence": 49
+    },
+    {
+      "price": 0.02363031,
+      "change": 23.4,
+      "volume": 10447924,
+      "market_cap": 127315733,
+      "confidence": 47
     }
   ],
   "KAIA": [
-    {
-      "price": 0.03216081,
-      "change": 32.5,
-      "volume": 15372503,
-      "market_cap": 205797383,
-      "confidence": 34
-    },
     {
       "price": 0.03101234,
       "change": 31.7,
@@ -13483,6 +13483,13 @@
       "change": 47.9,
       "volume": 9821926,
       "market_cap": 209825135,
+      "confidence": 16
+    },
+    {
+      "price": 0.03224395,
+      "change": 40.7,
+      "volume": 9674377,
+      "market_cap": 206447294,
       "confidence": 16
     }
   ],
@@ -13648,13 +13655,6 @@
   ],
   "NEO": [
     {
-      "price": 2.05,
-      "change": 21.8,
-      "volume": 5597594,
-      "market_cap": 144240796,
-      "confidence": 33
-    },
-    {
       "price": 2.17,
       "change": 27.7,
       "volume": 5031274,
@@ -13729,6 +13729,13 @@
       "change": 29.1,
       "volume": 5259781,
       "market_cap": 154443889,
+      "confidence": 27
+    },
+    {
+      "price": 2.22,
+      "change": 28.4,
+      "volume": 5344388,
+      "market_cap": 156666984,
       "confidence": 27
     }
   ],
@@ -14017,13 +14024,6 @@
   ],
   "IMX": [
     {
-      "price": 0.134739,
-      "change": 24.3,
-      "volume": 17711588,
-      "market_cap": 118481467,
-      "confidence": 55
-    },
-    {
       "price": 0.127758,
       "change": 18.2,
       "volume": 19429154,
@@ -14099,16 +14099,16 @@
       "volume": 15582334,
       "market_cap": 110628783,
       "confidence": 42
+    },
+    {
+      "price": 0.125235,
+      "change": 28.5,
+      "volume": 15033687,
+      "market_cap": 110128851,
+      "confidence": 49
     }
   ],
   "S": [
-    {
-      "price": 0.02799581,
-      "change": 24.6,
-      "volume": 18478071,
-      "market_cap": 108772950,
-      "confidence": 55
-    },
     {
       "price": 0.02743226,
       "change": 26.1,
@@ -14184,6 +14184,13 @@
       "change": 30.9,
       "volume": 18813344,
       "market_cap": 109515115,
+      "confidence": 42
+    },
+    {
+      "price": 0.02995121,
+      "change": 33.7,
+      "volume": 21529863,
+      "market_cap": 116295660,
       "confidence": 42
     }
   ],
@@ -14402,13 +14409,6 @@
   ],
   "TRAC": [
     {
-      "price": 0.364562,
-      "change": 41.3,
-      "volume": 43680587,
-      "market_cap": 163053491,
-      "confidence": 43
-    },
-    {
       "price": 0.414801,
       "change": 61.4,
       "volume": 49630247,
@@ -14484,6 +14484,13 @@
       "volume": 6087502,
       "market_cap": 152172726,
       "confidence": 20
+    },
+    {
+      "price": 0.324583,
+      "change": 26.5,
+      "volume": 5631531,
+      "market_cap": 145311995,
+      "confidence": 27
     }
   ],
   "GLM": [
@@ -14620,6 +14627,13 @@
       "volume": 36490966,
       "market_cap": 149893491,
       "confidence": 43
+    },
+    {
+      "price": 6.24,
+      "change": 35.0,
+      "volume": 29004406,
+      "market_cap": 141317910,
+      "confidence": 47
     }
   ],
   "UP": [
@@ -14638,6 +14652,13 @@
       "volume": 8036667,
       "market_cap": 127087560,
       "confidence": 34
+    },
+    {
+      "price": 1.44,
+      "change": 26.7,
+      "volume": 23814759,
+      "market_cap": 120572981,
+      "confidence": 49
     }
   ]
 }
