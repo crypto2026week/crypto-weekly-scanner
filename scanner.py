@@ -20,7 +20,6 @@ MIN_VOLUME_USD = 5_000_000
 MIN_CONFIDENCE = 65
 MAX_HISTORY = 12
 
-# عدد القراءات التاريخية المستخدمة لحساب متوسط الحجم
 HISTORICAL_VOLUME_LOOKBACK = 6
 
 
@@ -37,7 +36,6 @@ VOLUME_BONUS_STRONG = 3
 VOLUME_BONUS_STABLE = 1
 VOLUME_PENALTY_WEAK = 3
 
-# الحد الأقصى النظري لتأثير تأكيد الحجم
 MAX_VOLUME_ADJUSTMENT = 6
 
 
@@ -475,6 +473,12 @@ for coin in coins:
     )
 
 
+    # عدد القراءات السابقة قبل إضافة القراءة الحالية
+    previous_count = len(
+        previous_history
+    )
+
+
     # =====================================================
     # HISTORICAL VOLUME
     # =====================================================
@@ -546,9 +550,6 @@ for coin in coins:
     volume_continuation = "⚪ NEW"
 
 
-    # نحتاج 3 قراءات تاريخية على الأقل
-    # حتى نستطيع تقييم استمرار ارتفاع الحجم بشكل حقيقي
-
     if len(historical_volumes) >= 3:
 
         recent_volumes = historical_volumes[-3:]
@@ -571,7 +572,8 @@ for coin in coins:
 
         if (
             rising_volume_count >= 2
-            and volume_spike_x >= VOLUME_STRONG_THRESHOLD
+            and volume_spike_x
+            >= VOLUME_STRONG_THRESHOLD
         ):
 
             volume_continuation = (
@@ -591,7 +593,8 @@ for coin in coins:
 
         elif (
             volume_spike_x > 0
-            and volume_spike_x <= VOLUME_WEAK_THRESHOLD
+            and volume_spike_x
+            <= VOLUME_WEAK_THRESHOLD
         ):
 
             volume_continuation = (
@@ -608,7 +611,10 @@ for coin in coins:
 
     elif len(historical_volumes) == 2:
 
-        if volume_spike_x >= VOLUME_STRONG_THRESHOLD:
+        if (
+            volume_spike_x
+            >= VOLUME_STRONG_THRESHOLD
+        ):
 
             volume_continuation = (
                 "🟡 INITIAL STRONG"
@@ -622,7 +628,8 @@ for coin in coins:
 
         elif (
             volume_spike_x > 0
-            and volume_spike_x <= VOLUME_WEAK_THRESHOLD
+            and volume_spike_x
+            <= VOLUME_WEAK_THRESHOLD
         ):
 
             volume_continuation = (
@@ -638,7 +645,10 @@ for coin in coins:
 
     elif len(historical_volumes) == 1:
 
-        if volume_spike_x >= VOLUME_STRONG_THRESHOLD:
+        if (
+            volume_spike_x
+            >= VOLUME_STRONG_THRESHOLD
+        ):
 
             volume_continuation = (
                 "🟡 INITIAL RISE"
@@ -646,7 +656,8 @@ for coin in coins:
 
         elif (
             volume_spike_x > 0
-            and volume_spike_x <= VOLUME_WEAK_THRESHOLD
+            and volume_spike_x
+            <= VOLUME_WEAK_THRESHOLD
         ):
 
             volume_continuation = (
@@ -715,54 +726,24 @@ for coin in coins:
     # SAFETY LIMIT FOR VOLUME ADJUSTMENT
     # =====================================================
 
-    if volume_confirmation > MAX_VOLUME_ADJUSTMENT:
+    if (
+        volume_confirmation
+        > MAX_VOLUME_ADJUSTMENT
+    ):
 
         volume_confirmation = (
             MAX_VOLUME_ADJUSTMENT
         )
 
 
-    if volume_confirmation < -MAX_VOLUME_ADJUSTMENT:
+    if (
+        volume_confirmation
+        < -MAX_VOLUME_ADJUSTMENT
+    ):
 
         volume_confirmation = (
             -MAX_VOLUME_ADJUSTMENT
         )
-
-
-    # =====================================================
-    # ADD CURRENT OBSERVATION TO HISTORY
-    # =====================================================
-
-    history[symbol].append(
-        {
-            "price": price,
-            "change": change,
-            "volume": volume,
-            "market_cap": market_cap,
-            "base_score": base_score,
-            "volume_spike_x": volume_spike_x,
-            "volume_confirmation": volume_confirmation
-        }
-    )
-
-
-    # Keep only latest observations
-
-    history[symbol] = (
-        history[symbol][
-            -MAX_HISTORY:
-        ]
-    )
-
-
-    # =====================================================
-    # PREVIOUS OBSERVATION COUNT
-    # =====================================================
-
-    previous_count = max(
-        0,
-        len(history[symbol]) - 1
-    )
 
 
     # =====================================================
@@ -790,6 +771,30 @@ for coin in coins:
     if previous_count >= 6:
 
         persistence_score = 10
+
+
+    # =====================================================
+    # ADD CURRENT OBSERVATION TO HISTORY
+    # =====================================================
+
+    history[symbol].append(
+        {
+            "price": price,
+            "change": change,
+            "volume": volume,
+            "market_cap": market_cap,
+            "base_score": base_score,
+            "volume_spike_x": volume_spike_x,
+            "volume_confirmation": volume_confirmation
+        }
+    )
+
+
+    history[symbol] = (
+        history[symbol][
+            -MAX_HISTORY:
+        ]
+    )
 
 
     # =====================================================
@@ -1057,11 +1062,6 @@ except Exception as error:
 # =========================================================
 # END OF PART 1
 # =========================================================
-
-# =========================================================
-# PART 2 — REPORT + TELEGRAM
-# ========================================================
-
 # =========================================================
 # PART 2 — REPORT + TELEGRAM
 # =========================================================
@@ -1127,7 +1127,7 @@ if signals:
 
 
         # -------------------------------------------------
-        # BUILD SIGNAL
+        # BUILD SIGNAL REPORT
         # -------------------------------------------------
 
         report += (
@@ -1243,8 +1243,8 @@ if telegram_token and telegram_chat_id:
     # TELEGRAM MESSAGE LIMIT
     # -----------------------------------------------------
 
-    # Telegram allows approximately 4096 characters.
-    # We use 4000 to keep a safety margin.
+    # Telegram message limit is approximately 4096 characters.
+    # Keep a small safety margin.
 
     telegram_text = report[:4000]
 
