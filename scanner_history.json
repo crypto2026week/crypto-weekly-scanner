@@ -15085,6 +15085,18 @@
       "volume_spike_x": 0.6793110311885576,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "price": 78631.0,
+      "change": 2.0,
+      "volume": 15910820597.0,
+      "market_cap": 1578554991945.0,
+      "base_score": 23,
+      "volume_spike_x": 0.8737437260446204,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "ethereum": [
@@ -15183,6 +15195,18 @@
       "volume_spike_x": 0.775894386426644,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "ETH",
+      "name": "Ethereum",
+      "price": 2493.42,
+      "change": 2.2,
+      "volume": 8157492320.0,
+      "market_cap": 300878944323.0,
+      "base_score": 23,
+      "volume_spike_x": 1.1100005283621097,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "binancecoin": [
@@ -15280,6 +15304,18 @@
       "base_score": 23,
       "volume_spike_x": 0.9228616664146725,
       "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "BNB",
+      "name": "BNB",
+      "price": 697.97,
+      "change": 0.0,
+      "volume": 606492542.0,
+      "market_cap": 92937763768.0,
+      "base_score": 23,
+      "volume_spike_x": 1.0606537264073324,
+      "volume_confirmation": 1,
       "volume_weight": 1.0
     }
   ],
@@ -15379,6 +15415,18 @@
       "volume_spike_x": 0.6573338604955975,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "XRP",
+      "name": "XRP",
+      "price": 1.4,
+      "change": -6.4,
+      "volume": 1351388072.0,
+      "market_cap": 87675590365.0,
+      "base_score": 23,
+      "volume_spike_x": 0.9535294273842433,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "solana": [
@@ -15477,6 +15525,18 @@
       "volume_spike_x": 0.6391373390867756,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "SOL",
+      "name": "Solana",
+      "price": 104.9,
+      "change": 11.0,
+      "volume": 2446318037.0,
+      "market_cap": 61360743412.0,
+      "base_score": 58,
+      "volume_spike_x": 0.8434478749118558,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "tron": [
@@ -15575,6 +15635,18 @@
       "volume_spike_x": 0.7138320074573832,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "TRX",
+      "name": "TRON",
+      "price": 0.339828,
+      "change": -1.0,
+      "volume": 264603100.0,
+      "market_cap": 32259580090.0,
+      "base_score": 23,
+      "volume_spike_x": 0.8074477563264087,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "figure-heloc": [
@@ -15735,6 +15807,18 @@
       "volume_spike_x": 0.7544584029218989,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "HYPE",
+      "name": "Hyperliquid",
+      "price": 81.86,
+      "change": 2.1,
+      "volume": 826500665.0,
+      "market_cap": 18207641274.0,
+      "base_score": 23,
+      "volume_spike_x": 0.8442630378022536,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "dogecoin": [
@@ -15833,6 +15917,18 @@
       "volume_spike_x": 0.793213013197596,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "DOGE",
+      "name": "Dogecoin",
+      "price": 0.08522,
+      "change": -7.7,
+      "volume": 410134745.0,
+      "market_cap": 13264582261.0,
+      "base_score": 23,
+      "volume_spike_x": 1.0616133047002554,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "zcash": [
@@ -15931,6 +16027,18 @@
       "volume_spike_x": 0.9878745118028688,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "ZEC",
+      "name": "Zcash",
+      "price": 856.95,
+      "change": -0.8,
+      "volume": 1134882467.0,
+      "market_cap": 14496658394.0,
+      "base_score": 37,
+      "volume_spike_x": 1.0137763378092892,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "rain": [
@@ -16027,6 +16135,18 @@
       "market_cap": 12443321758.0,
       "base_score": 30,
       "volume_spike_x": 1.069185085907956,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "RAIN",
+      "name": "Rain",
+      "price": 0.01729759,
+      "change": 24.0,
+      "volume": 39180127.0,
+      "market_cap": 12262583777.0,
+      "base_score": 30,
+      "volume_spike_x": 1.0023154742681535,
       "volume_confirmation": 1,
       "volume_weight": 1.0
     }
@@ -16127,6 +16247,18 @@
       "volume_spike_x": 0.8617491275319233,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "LINK",
+      "name": "Chainlink",
+      "price": 11.52,
+      "change": 0.0,
+      "volume": 264488713.0,
+      "market_cap": 8616482345.0,
+      "base_score": 23,
+      "volume_spike_x": 1.069132498991774,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "whitebit": [
@@ -16225,6 +16357,18 @@
       "volume_spike_x": 0.6304064797105791,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "WBT",
+      "name": "WhiteBIT Coin",
+      "price": 72.72,
+      "change": 0.8,
+      "volume": 51182637.0,
+      "market_cap": 8577465154.0,
+      "base_score": 15,
+      "volume_spike_x": 1.0608334312369365,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "monero": [
@@ -16321,6 +16465,18 @@
       "market_cap": 9310475978.0,
       "base_score": 40,
       "volume_spike_x": 1.7212316285022988,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
+    },
+    {
+      "symbol": "XMR",
+      "name": "Monero",
+      "price": 497.39,
+      "change": 14.4,
+      "volume": 166241521.0,
+      "market_cap": 9347859101.0,
+      "base_score": 54,
+      "volume_spike_x": 1.9481980320414978,
       "volume_confirmation": 5,
       "volume_weight": 1.1
     }
@@ -16421,6 +16577,18 @@
       "volume_spike_x": 0.8051356036235904,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "ADA",
+      "name": "Cardano",
+      "price": 0.201615,
+      "change": -9.7,
+      "volume": 235931294.0,
+      "market_cap": 7558637007.0,
+      "base_score": 23,
+      "volume_spike_x": 1.066415325759781,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "stellar": [
@@ -16519,6 +16687,18 @@
       "volume_spike_x": 0.8274612366135228,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "XLM",
+      "name": "Stellar",
+      "price": 0.179572,
+      "change": -10.0,
+      "volume": 90499551.0,
+      "market_cap": 6227504510.0,
+      "base_score": 15,
+      "volume_spike_x": 1.1136745062917979,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "bitcoin-cash": [
@@ -16617,6 +16797,18 @@
       "volume_spike_x": 0.7929668826190347,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "BCH",
+      "name": "Bitcoin Cash",
+      "price": 250.9,
+      "change": -8.2,
+      "volume": 102041930.0,
+      "market_cap": 5038547903.0,
+      "base_score": 19,
+      "volume_spike_x": 0.9599202600178255,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "canton-network": [
@@ -16714,6 +16906,18 @@
       "base_score": 7,
       "volume_spike_x": 1.0444099575448624,
       "volume_confirmation": 1,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "CC",
+      "name": "Canton",
+      "price": 0.11814,
+      "change": -0.7,
+      "volume": 10536000.0,
+      "market_cap": 4658893752.0,
+      "base_score": 7,
+      "volume_spike_x": 0.9721794075158898,
+      "volume_confirmation": 0,
       "volume_weight": 1.0
     }
   ],
@@ -16813,6 +17017,18 @@
       "volume_spike_x": 0.7891087231701905,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "GRAM",
+      "name": "Gram (prev. Toncoin)",
+      "price": 1.37,
+      "change": -9.9,
+      "volume": 21677593.0,
+      "market_cap": 3788769562.0,
+      "base_score": 7,
+      "volume_spike_x": 0.812330555967727,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "litecoin": [
@@ -16909,6 +17125,18 @@
       "market_cap": 3882436189.0,
       "base_score": 21,
       "volume_spike_x": 0.868978248613395,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "LTC",
+      "name": "Litecoin",
+      "price": 49.36,
+      "change": -5.2,
+      "volume": 166791625.0,
+      "market_cap": 3827168324.0,
+      "base_score": 21,
+      "volume_spike_x": 0.8702026876867364,
       "volume_confirmation": 0,
       "volume_weight": 1.0
     }
@@ -17009,6 +17237,18 @@
       "volume_spike_x": 0.7633547362246439,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "HBAR",
+      "name": "Hedera",
+      "price": 0.075284,
+      "change": -4.0,
+      "volume": 45389659.0,
+      "market_cap": 3298503073.0,
+      "base_score": 11,
+      "volume_spike_x": 0.9461601474414442,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "avalanche-2": [
@@ -17106,6 +17346,18 @@
       "base_score": 21,
       "volume_spike_x": 0.8453116505228163,
       "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "AVAX",
+      "name": "Avalanche",
+      "price": 7.36,
+      "change": -2.3,
+      "volume": 124735636.0,
+      "market_cap": 3178486012.0,
+      "base_score": 21,
+      "volume_spike_x": 1.0565262684370242,
+      "volume_confirmation": 1,
       "volume_weight": 1.0
     }
   ],
@@ -17205,6 +17457,18 @@
       "volume_spike_x": 0.7972825306943179,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "SUI",
+      "name": "Sui",
+      "price": 0.748153,
+      "change": -10.4,
+      "volume": 300077340.0,
+      "market_cap": 3047332763.0,
+      "base_score": 39,
+      "volume_spike_x": 1.1415723412241865,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "shiba-inu": [
@@ -17302,6 +17566,18 @@
       "base_score": 17,
       "volume_spike_x": 0.8396126209790631,
       "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "SHIB",
+      "name": "Shiba Inu",
+      "price": 5.13e-06,
+      "change": -5.7,
+      "volume": 56826938.0,
+      "market_cap": 3019802346.0,
+      "base_score": 17,
+      "volume_spike_x": 1.004030422600824,
+      "volume_confirmation": 1,
       "volume_weight": 1.0
     }
   ],
@@ -17401,6 +17677,18 @@
       "volume_spike_x": 2.215906691300331,
       "volume_confirmation": 5,
       "volume_weight": 1.1
+    },
+    {
+      "symbol": "UNI",
+      "name": "Uniswap",
+      "price": 5.3,
+      "change": 16.4,
+      "volume": 802587245.0,
+      "market_cap": 3300175938.0,
+      "base_score": 80,
+      "volume_spike_x": 2.0691526479644096,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "crypto-com-chain": [
@@ -17461,6 +17749,18 @@
       "market_cap": 2891137221.0,
       "base_score": 7,
       "volume_spike_x": 2.585232844601054,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
+    },
+    {
+      "symbol": "CRO",
+      "name": "Cronos",
+      "price": 0.059288,
+      "change": -0.2,
+      "volume": 19853929.0,
+      "market_cap": 2877965941.0,
+      "base_score": 7,
+      "volume_spike_x": 2.2472371018610326,
       "volume_confirmation": 5,
       "volume_weight": 1.1
     }
@@ -17561,6 +17861,18 @@
       "volume_spike_x": 0.9976874526513437,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "NEAR",
+      "name": "NEAR Protocol",
+      "price": 1.88,
+      "change": -3.5,
+      "volume": 166098322.0,
+      "market_cap": 2457621165.0,
+      "base_score": 35,
+      "volume_spike_x": 1.1309358035100048,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "bittensor": [
@@ -17659,6 +17971,18 @@
       "volume_spike_x": 0.6820462607959202,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "TAO",
+      "name": "Bittensor",
+      "price": 235.77,
+      "change": -0.7,
+      "volume": 95377718.0,
+      "market_cap": 2262222582.0,
+      "base_score": 17,
+      "volume_spike_x": 0.9600456589233193,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "okb": [
@@ -17755,6 +18079,18 @@
       "market_cap": 2410180226.0,
       "base_score": 7,
       "volume_spike_x": 1.013482383386606,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "OKB",
+      "name": "OKB",
+      "price": 114.12,
+      "change": 3.3,
+      "volume": 19323317.0,
+      "market_cap": 2396959965.0,
+      "base_score": 7,
+      "volume_spike_x": 1.02643726237778,
       "volume_confirmation": 1,
       "volume_weight": 1.0
     }
@@ -17855,6 +18191,18 @@
       "volume_spike_x": 1.0270258186846524,
       "volume_confirmation": 1,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "AAVE",
+      "name": "Aave",
+      "price": 126.44,
+      "change": -9.2,
+      "volume": 249129019.0,
+      "market_cap": 1949648831.0,
+      "base_score": 47,
+      "volume_spike_x": 1.1902074222609045,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "world-liberty-financial": [
@@ -17951,6 +18299,18 @@
       "market_cap": 1848131217.0,
       "base_score": 7,
       "volume_spike_x": 0.5477201056391734,
+      "volume_confirmation": -7,
+      "volume_weight": 0.9
+    },
+    {
+      "symbol": "WLFI",
+      "name": "World Liberty Financial",
+      "price": 0.057639,
+      "change": -2.8,
+      "volume": 19893578.0,
+      "market_cap": 1831337068.0,
+      "base_score": 7,
+      "volume_spike_x": 0.6913890070071264,
       "volume_confirmation": -7,
       "volume_weight": 0.9
     }
@@ -18051,6 +18411,18 @@
       "volume_spike_x": 0.9761084773374021,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "PUMP",
+      "name": "Pump.fun",
+      "price": 0.00466122,
+      "change": -8.9,
+      "volume": 193783530.0,
+      "market_cap": 1846395911.0,
+      "base_score": 43,
+      "volume_spike_x": 1.059929776254913,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "aster-2": [
@@ -18147,6 +18519,18 @@
       "market_cap": 1899167625.0,
       "base_score": 17,
       "volume_spike_x": 0.8863509153070886,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "ASTER",
+      "name": "Aster",
+      "price": 0.698937,
+      "change": 4.2,
+      "volume": 86583995.0,
+      "market_cap": 1886215366.0,
+      "base_score": 17,
+      "volume_spike_x": 0.9992370253684685,
       "volume_confirmation": 0,
       "volume_weight": 1.0
     }
@@ -18247,6 +18631,18 @@
       "volume_spike_x": 0.7085547074945142,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "ONDO",
+      "name": "Ondo",
+      "price": 0.356164,
+      "change": -6.8,
+      "volume": 57499939.0,
+      "market_cap": 1734859554.0,
+      "base_score": 17,
+      "volume_spike_x": 0.9955591148450857,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "ethena": [
@@ -18345,6 +18741,18 @@
       "volume_spike_x": 0.49022330095280925,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "ENA",
+      "name": "Ethena",
+      "price": 0.159169,
+      "change": -4.2,
+      "volume": 442395143.0,
+      "market_cap": 1564085795.0,
+      "base_score": 48,
+      "volume_spike_x": 0.873103424430899,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "mantle": [
@@ -18443,6 +18851,18 @@
       "volume_spike_x": 0.8118999094267251,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "MNT",
+      "name": "Mantle",
+      "price": 0.566886,
+      "change": 10.6,
+      "volume": 36544247.0,
+      "market_cap": 1872009965.0,
+      "base_score": 46,
+      "volume_spike_x": 2.029259682642678,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "morpho": [
@@ -18539,6 +18959,18 @@
       "market_cap": 1670603452.0,
       "base_score": 11,
       "volume_spike_x": 0.8459943020782302,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "MORPHO",
+      "name": "Morpho",
+      "price": 2.49,
+      "change": -6.8,
+      "volume": 26547963.0,
+      "market_cap": 1638782907.0,
+      "base_score": 11,
+      "volume_spike_x": 0.9841835438879508,
       "volume_confirmation": 0,
       "volume_weight": 1.0
     }
@@ -18639,6 +19071,18 @@
       "volume_spike_x": 0.7826462336306945,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "PEPE",
+      "name": "Pepe",
+      "price": 3.67e-06,
+      "change": -9.3,
+      "volume": 176213201.0,
+      "market_cap": 1544527687.0,
+      "base_score": 43,
+      "volume_spike_x": 1.1834674156760197,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "sky": [
@@ -18689,6 +19133,18 @@
       "volume_spike_x": 0.6815164035574532,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "SKY",
+      "name": "Sky",
+      "price": 0.07047,
+      "change": 2.4,
+      "volume": 6284880.0,
+      "market_cap": 1650356379.0,
+      "base_score": 7,
+      "volume_spike_x": 0.8633737795382758,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "worldcoin-wld": [
@@ -18787,6 +19243,18 @@
       "volume_spike_x": 0.7951123850622527,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "WLD",
+      "name": "Worldcoin",
+      "price": 0.380256,
+      "change": -5.8,
+      "volume": 100329641.0,
+      "market_cap": 1376090839.0,
+      "base_score": 35,
+      "volume_spike_x": 1.0450232677177902,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "polkadot": [
@@ -18885,6 +19353,18 @@
       "volume_spike_x": 1.0482445189280039,
       "volume_confirmation": 1,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "DOT",
+      "name": "Polkadot",
+      "price": 0.851667,
+      "change": -7.1,
+      "volume": 92690919.0,
+      "market_cap": 1448604137.0,
+      "base_score": 31,
+      "volume_spike_x": 1.2007987194975582,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "htx-dao": [
@@ -18981,6 +19461,18 @@
       "market_cap": 1509864085.0,
       "base_score": 11,
       "volume_spike_x": 1.3438890060464612,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
+    },
+    {
+      "symbol": "HTX",
+      "name": "HTX DAO",
+      "price": 1.68e-06,
+      "change": -4.5,
+      "volume": 29563226.0,
+      "market_cap": 1513085254.0,
+      "base_score": 11,
+      "volume_spike_x": 1.3533709462156545,
       "volume_confirmation": 5,
       "volume_weight": 1.1
     }
@@ -19081,6 +19573,18 @@
       "volume_spike_x": 0.8318366406422378,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "BGB",
+      "name": "Bitget Token",
+      "price": 1.96,
+      "change": 2.9,
+      "volume": 6808557.0,
+      "market_cap": 1371066020.0,
+      "base_score": 7,
+      "volume_spike_x": 0.9478304352020595,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "internet-computer": [
@@ -19177,6 +19681,18 @@
       "market_cap": 1367290762.0,
       "base_score": 11,
       "volume_spike_x": 0.7510984229592104,
+      "volume_confirmation": -7,
+      "volume_weight": 0.9
+    },
+    {
+      "symbol": "ICP",
+      "name": "Internet Computer",
+      "price": 2.43,
+      "change": 0.8,
+      "volume": 28666537.0,
+      "market_cap": 1349981521.0,
+      "base_score": 11,
+      "volume_spike_x": 0.7575767687504511,
       "volume_confirmation": -7,
       "volume_weight": 0.9
     }
@@ -19277,6 +19793,18 @@
       "volume_spike_x": 1.0456302710119614,
       "volume_confirmation": 1,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "ETC",
+      "name": "Ethereum Classic",
+      "price": 7.37,
+      "change": -5.9,
+      "volume": 41303512.0,
+      "market_cap": 1165206434.0,
+      "base_score": 11,
+      "volume_spike_x": 1.1411351790704427,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "polygon-ecosystem-token": [
@@ -19373,6 +19901,18 @@
       "market_cap": 1088858247.0,
       "base_score": 31,
       "volume_spike_x": 1.2963404765648865,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
+    },
+    {
+      "symbol": "POL",
+      "name": "POL (ex-MATIC)",
+      "price": 0.099653,
+      "change": -6.8,
+      "volume": 79308441.0,
+      "market_cap": 1066280897.0,
+      "base_score": 31,
+      "volume_spike_x": 1.3401542553333503,
       "volume_confirmation": 5,
       "volume_weight": 1.1
     }
@@ -19473,6 +20013,18 @@
       "volume_spike_x": 1.1566890685272353,
       "volume_confirmation": 5,
       "volume_weight": 1.1
+    },
+    {
+      "symbol": "BTW",
+      "name": "Bitway",
+      "price": 0.398891,
+      "change": -6.7,
+      "volume": 11332074.0,
+      "market_cap": 1081526254.0,
+      "base_score": 7,
+      "volume_spike_x": 0.8871392500736994,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "pi-network": [
@@ -19609,6 +20161,18 @@
       "volume_spike_x": 1.4981255723465499,
       "volume_confirmation": 5,
       "volume_weight": 1.1
+    },
+    {
+      "symbol": "KCS",
+      "name": "KuCoin",
+      "price": 7.01,
+      "change": -5.2,
+      "volume": 29418412.0,
+      "market_cap": 961902140.0,
+      "base_score": 13,
+      "volume_spike_x": 1.8058372758867658,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "lighter": [
@@ -19707,6 +20271,18 @@
       "volume_spike_x": 0.7290924921154405,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "LIT",
+      "name": "Lighter",
+      "price": 3.78,
+      "change": 13.5,
+      "volume": 50552366.0,
+      "market_cap": 946159532.0,
+      "base_score": 68,
+      "volume_spike_x": 1.1929223442406196,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "quant-network": [
@@ -19804,6 +20380,18 @@
       "base_score": 9,
       "volume_spike_x": 0.9494824022918983,
       "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "QNT",
+      "name": "Quant",
+      "price": 61.29,
+      "change": -6.0,
+      "volume": 12448647.0,
+      "market_cap": 891623218.0,
+      "base_score": 9,
+      "volume_spike_x": 1.0469129803440278,
+      "volume_confirmation": 1,
       "volume_weight": 1.0
     }
   ],
@@ -19903,6 +20491,18 @@
       "volume_spike_x": 0.6116960810837146,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "VVV",
+      "name": "Venice Token",
+      "price": 17.42,
+      "change": 1.5,
+      "volume": 15006973.0,
+      "market_cap": 830165672.0,
+      "base_score": 9,
+      "volume_spike_x": 0.9114391743784818,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "algorand": [
@@ -19999,6 +20599,18 @@
       "market_cap": 797501363.0,
       "base_score": 9,
       "volume_spike_x": 0.9317403435953815,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "ALGO",
+      "name": "Algorand",
+      "price": 0.087387,
+      "change": -5.7,
+      "volume": 21465483.0,
+      "market_cap": 789387673.0,
+      "base_score": 9,
+      "volume_spike_x": 0.9992400546546175,
       "volume_confirmation": 0,
       "volume_weight": 1.0
     }
@@ -20099,6 +20711,18 @@
       "volume_spike_x": 0.803101566863552,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "ATOM",
+      "name": "Cosmos Hub",
+      "price": 1.49,
+      "change": -7.4,
+      "volume": 24874951.0,
+      "market_cap": 784309210.0,
+      "base_score": 9,
+      "volume_spike_x": 0.9016537195482167,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "kaspa": [
@@ -20173,6 +20797,18 @@
       "volume_spike_x": 0.7720153597884268,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "KAS",
+      "name": "Kaspa",
+      "price": 0.0281119,
+      "change": -2.8,
+      "volume": 7892193.0,
+      "market_cap": 778006857.0,
+      "base_score": 9,
+      "volume_spike_x": 0.8994684353601892,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "jupiter-exchange-solana": [
@@ -20269,6 +20905,18 @@
       "market_cap": 731491815.0,
       "base_score": 27,
       "volume_spike_x": 0.8173369927310191,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "JUP",
+      "name": "Jupiter",
+      "price": 0.215831,
+      "change": 0.0,
+      "volume": 37251643.0,
+      "market_cap": 716381519.0,
+      "base_score": 27,
+      "volume_spike_x": 0.934612493089504,
       "volume_confirmation": 0,
       "volume_weight": 1.0
     }
@@ -20369,6 +21017,18 @@
       "volume_spike_x": 0.8173937905110339,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "RENDER",
+      "name": "Render",
+      "price": 1.44,
+      "change": -4.1,
+      "volume": 28445033.0,
+      "market_cap": 748786480.0,
+      "base_score": 13,
+      "volume_spike_x": 0.9671141671991634,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "just": [
@@ -20467,6 +21127,18 @@
       "volume_spike_x": 1.1527422562812417,
       "volume_confirmation": 5,
       "volume_weight": 1.1
+    },
+    {
+      "symbol": "JST",
+      "name": "JUST",
+      "price": 0.095022,
+      "change": -8.8,
+      "volume": 26187887.0,
+      "market_cap": 778081185.0,
+      "base_score": 13,
+      "volume_spike_x": 1.3504711933860867,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "official-trump": [
@@ -20563,6 +21235,18 @@
       "market_cap": 641254494.0,
       "base_score": 42,
       "volume_spike_x": 0.42915917994783953,
+      "volume_confirmation": -7,
+      "volume_weight": 0.9
+    },
+    {
+      "symbol": "TRUMP",
+      "name": "Official Trump",
+      "price": 2.52,
+      "change": -6.4,
+      "volume": 307342417.0,
+      "market_cap": 633254820.0,
+      "base_score": 42,
+      "volume_spike_x": 0.4948325206505755,
       "volume_confirmation": -7,
       "volume_weight": 0.9
     }
@@ -20751,6 +21435,18 @@
       "volume_spike_x": 0.9810096834445611,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "BDX",
+      "name": "Beldex",
+      "price": 0.079181,
+      "change": -3.6,
+      "volume": 11310030.0,
+      "market_cap": 623324730.0,
+      "base_score": 9,
+      "volume_spike_x": 1.0934116707706554,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "arbitrum": [
@@ -20849,6 +21545,18 @@
       "volume_spike_x": 0.9913326857491374,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "ARB",
+      "name": "Arbitrum",
+      "price": 0.088876,
+      "change": -12.4,
+      "volume": 47546959.0,
+      "market_cap": 593011780.0,
+      "base_score": 27,
+      "volume_spike_x": 1.333741934219764,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "vechain": [
@@ -20947,6 +21655,18 @@
       "volume_spike_x": 1.0329850748854268,
       "volume_confirmation": 1,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "VET",
+      "name": "VeChain",
+      "price": 0.00692637,
+      "change": 22.2,
+      "volume": 16138513.0,
+      "market_cap": 595374840.0,
+      "base_score": 30,
+      "volume_spike_x": 1.2458080595126035,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "pudgy-penguins": [
@@ -21045,6 +21765,18 @@
       "volume_spike_x": 0.7668818489125706,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "PENGU",
+      "name": "Pudgy Penguins",
+      "price": 0.00906299,
+      "change": -6.6,
+      "volume": 132395737.0,
+      "market_cap": 568250213.0,
+      "base_score": 46,
+      "volume_spike_x": 0.9708773327316438,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "filecoin": [
@@ -21143,6 +21875,18 @@
       "volume_spike_x": 0.6791094881638187,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "FIL",
+      "name": "Filecoin",
+      "price": 0.684621,
+      "change": -11.0,
+      "volume": 39523413.0,
+      "market_cap": 569057126.0,
+      "base_score": 27,
+      "volume_spike_x": 0.9808148145041546,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "pancakeswap-token": [
@@ -21239,6 +21983,18 @@
       "market_cap": 609680356.0,
       "base_score": 76,
       "volume_spike_x": 1.9701302988548408,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
+    },
+    {
+      "symbol": "CAKE",
+      "name": "PancakeSwap",
+      "price": 1.85,
+      "change": 6.8,
+      "volume": 82086796.0,
+      "market_cap": 594125754.0,
+      "base_score": 76,
+      "volume_spike_x": 2.0257515007162343,
       "volume_confirmation": 5,
       "volume_weight": 1.1
     }
@@ -21339,6 +22095,18 @@
       "volume_spike_x": 0.9602696861370029,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "ETHFI",
+      "name": "Ether.fi",
+      "price": 0.538875,
+      "change": -12.2,
+      "volume": 38604602.0,
+      "market_cap": 520223647.0,
+      "base_score": 27,
+      "volume_spike_x": 1.0648097727587105,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "spx6900": [
@@ -21437,6 +22205,18 @@
       "volume_spike_x": 0.7663146436020135,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "SPX",
+      "name": "SPX6900",
+      "price": 0.558172,
+      "change": 19.8,
+      "volume": 9718438.0,
+      "market_cap": 519542144.0,
+      "base_score": 41,
+      "volume_spike_x": 0.7928975205201667,
+      "volume_confirmation": -7,
+      "volume_weight": 0.9
     }
   ],
   "xdce-crowd-sale": [
@@ -21499,6 +22279,18 @@
       "volume_spike_x": 0.7335105946676018,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "XDC",
+      "name": "XDC Network",
+      "price": 0.02751173,
+      "change": -5.5,
+      "volume": 5475816.0,
+      "market_cap": 548716996.0,
+      "base_score": 9,
+      "volume_spike_x": 0.8345469673546748,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "injective-protocol": [
@@ -21596,6 +22388,18 @@
       "base_score": 33,
       "volume_spike_x": 0.8869991968606853,
       "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "INJ",
+      "name": "Injective",
+      "price": 5.24,
+      "change": -1.7,
+      "volume": 56299936.0,
+      "market_cap": 523627518.0,
+      "base_score": 41,
+      "volume_spike_x": 1.0467751058115597,
+      "volume_confirmation": 1,
       "volume_weight": 1.0
     }
   ],
@@ -21695,6 +22499,18 @@
       "volume_spike_x": 0.6073882185591821,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "AERO",
+      "name": "Aerodrome Finance",
+      "price": 0.492269,
+      "change": 3.0,
+      "volume": 12682060.0,
+      "market_cap": 483628356.0,
+      "base_score": 12,
+      "volume_spike_x": 0.8459763537319787,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "curve-dao-token": [
@@ -21793,6 +22609,18 @@
       "volume_spike_x": 1.0082918567379382,
       "volume_confirmation": 1,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "CRV",
+      "name": "Curve DAO",
+      "price": 0.303689,
+      "change": -6.3,
+      "volume": 38247113.0,
+      "market_cap": 471299586.0,
+      "base_score": 30,
+      "volume_spike_x": 1.144495224745657,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "dash": [
@@ -21891,6 +22719,18 @@
       "volume_spike_x": 0.8363991528658934,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "DASH",
+      "name": "Dash",
+      "price": 42.83,
+      "change": 0.8,
+      "volume": 104995073.0,
+      "market_cap": 549184734.0,
+      "base_score": 45,
+      "volume_spike_x": 1.1819687851824008,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "aptos": [
@@ -21989,6 +22829,18 @@
       "volume_spike_x": 0.9647198713818825,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "APT",
+      "name": "Aptos",
+      "price": 0.541106,
+      "change": -15.6,
+      "volume": 40576192.0,
+      "market_cap": 464345149.0,
+      "base_score": 30,
+      "volume_spike_x": 1.126745578223938,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "blockstack": [
@@ -22087,6 +22939,18 @@
       "volume_spike_x": 0.5551906347709972,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "STX",
+      "name": "Stacks",
+      "price": 0.242695,
+      "change": 4.0,
+      "volume": 18776012.0,
+      "market_cap": 451100596.0,
+      "base_score": 12,
+      "volume_spike_x": 1.0254324581770125,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "virtual-protocol": [
@@ -22185,6 +23049,18 @@
       "volume_spike_x": 0.7661846606956795,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "VIRTUAL",
+      "name": "Virtuals Protocol",
+      "price": 0.698505,
+      "change": -2.1,
+      "volume": 34525628.0,
+      "market_cap": 459701390.0,
+      "base_score": 30,
+      "volume_spike_x": 0.8772857037733601,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "euro-coin": [
@@ -22283,6 +23159,18 @@
       "volume_spike_x": 0.5563427220477644,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "EURC",
+      "name": "EURC",
+      "price": 1.16,
+      "change": -1.1,
+      "volume": 14503123.0,
+      "market_cap": 460629534.0,
+      "base_score": 12,
+      "volume_spike_x": 0.9165590055845712,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "layerzero": [
@@ -22381,6 +23269,18 @@
       "volume_spike_x": 0.7966204669872874,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "ZRO",
+      "name": "LayerZero",
+      "price": 1.08,
+      "change": -11.1,
+      "volume": 43246882.0,
+      "market_cap": 381458371.0,
+      "base_score": 38,
+      "volume_spike_x": 0.9489579637303767,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "pyth-network": [
@@ -22477,6 +23377,18 @@
       "market_cap": 386441347.0,
       "base_score": 30,
       "volume_spike_x": 1.0006971072203172,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "PYTH",
+      "name": "Pyth Network",
+      "price": 0.04878151,
+      "change": -6.8,
+      "volume": 38169133.0,
+      "market_cap": 384056567.0,
+      "base_score": 30,
+      "volume_spike_x": 1.0847696697763345,
       "volume_confirmation": 1,
       "volume_weight": 1.0
     }
@@ -22577,6 +23489,18 @@
       "volume_spike_x": 0.8315004419528774,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "FET",
+      "name": "Artificial Superintelligence Alliance",
+      "price": 0.153677,
+      "change": -6.2,
+      "volume": 73830724.0,
+      "market_cap": 347549286.0,
+      "base_score": 45,
+      "volume_spike_x": 0.9720128519824619,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "celestia": [
@@ -22673,6 +23597,18 @@
       "market_cap": 329897672.0,
       "base_score": 26,
       "volume_spike_x": 0.9466352248477038,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "TIA",
+      "name": "Celestia",
+      "price": 0.337908,
+      "change": -11.1,
+      "volume": 22482109.0,
+      "market_cap": 324987675.0,
+      "base_score": 26,
+      "volume_spike_x": 0.9263093678785017,
       "volume_confirmation": 0,
       "volume_weight": 1.0
     }
@@ -22787,6 +23723,18 @@
       "volume_spike_x": 0.7842342236928542,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "MON",
+      "name": "Monad",
+      "price": 0.02769677,
+      "change": -5.3,
+      "volume": 33310147.0,
+      "market_cap": 328111419.0,
+      "base_score": 38,
+      "volume_spike_x": 0.8913759701949739,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "sei-network": [
@@ -22885,6 +23833,18 @@
       "volume_spike_x": 0.7526714011925847,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "SEI",
+      "name": "Sei",
+      "price": 0.0455667,
+      "change": -5.3,
+      "volume": 15852366.0,
+      "market_cap": 306853780.0,
+      "base_score": 26,
+      "volume_spike_x": 1.1249320218465384,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "sun-token": [
@@ -22981,6 +23941,18 @@
       "market_cap": 322444616.0,
       "base_score": 12,
       "volume_spike_x": 0.8581600720737174,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "SUN",
+      "name": "Sun Token",
+      "price": 0.01680758,
+      "change": -4.6,
+      "volume": 9655743.0,
+      "market_cap": 322915440.0,
+      "base_score": 12,
+      "volume_spike_x": 0.9559662654524437,
       "volume_confirmation": 0,
       "volume_weight": 1.0
     }
@@ -23081,6 +24053,18 @@
       "volume_spike_x": 0.7150920472184887,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "UB",
+      "name": "Unibase",
+      "price": 0.129723,
+      "change": 5.8,
+      "volume": 8650600.0,
+      "market_cap": 324397898.0,
+      "base_score": 47,
+      "volume_spike_x": 0.7407959278746027,
+      "volume_confirmation": -7,
+      "volume_weight": 0.9
     }
   ],
   "pendle": [
@@ -23177,6 +24161,18 @@
       "market_cap": 305644549.0,
       "base_score": 38,
       "volume_spike_x": 1.1451146951678512,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
+    },
+    {
+      "symbol": "PENDLE",
+      "name": "Pendle",
+      "price": 1.78,
+      "change": -6.9,
+      "volume": 41957972.0,
+      "market_cap": 306300864.0,
+      "base_score": 38,
+      "volume_spike_x": 1.271420575821565,
       "volume_confirmation": 5,
       "volume_weight": 1.1
     }
@@ -23277,6 +24273,18 @@
       "volume_spike_x": 0.9658251373431513,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "LDO",
+      "name": "Lido DAO",
+      "price": 0.370047,
+      "change": -7.6,
+      "volume": 37167908.0,
+      "market_cap": 308571199.0,
+      "base_score": 38,
+      "volume_spike_x": 1.126193532743092,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "kite-2": [
@@ -23375,6 +24383,18 @@
       "volume_spike_x": 0.6001936000769376,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "KITE",
+      "name": "Kite",
+      "price": 0.123311,
+      "change": 10.5,
+      "volume": 7816857.0,
+      "market_cap": 294742282.0,
+      "base_score": 47,
+      "volume_spike_x": 0.5625796303680335,
+      "volume_confirmation": -7,
+      "volume_weight": 0.9
     }
   ],
   "terra-luna": [
@@ -23461,6 +24481,18 @@
       "volume_spike_x": 0.7232472567023959,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "LUNC",
+      "name": "Terra Luna Classic",
+      "price": 5.2e-05,
+      "change": -6.0,
+      "volume": 5597417.0,
+      "market_cap": 287292588.0,
+      "base_score": 12,
+      "volume_spike_x": 0.8315785243500128,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "bittorrent": [
@@ -23558,6 +24590,18 @@
       "base_score": 12,
       "volume_spike_x": 1.0373398031921484,
       "volume_confirmation": 1,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "BTT",
+      "name": "BitTorrent",
+      "price": 2.91723e-07,
+      "change": -1.0,
+      "volume": 5084806.0,
+      "market_cap": 287913221.0,
+      "base_score": 12,
+      "volume_spike_x": 0.9025606720821979,
+      "volume_confirmation": 0,
       "volume_weight": 1.0
     }
   ],
@@ -23657,6 +24701,18 @@
       "volume_spike_x": 0.8843905321034388,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "BONK",
+      "name": "Bonk",
+      "price": 2.91e-06,
+      "change": -9.8,
+      "volume": 23003455.0,
+      "market_cap": 256292149.0,
+      "base_score": 26,
+      "volume_spike_x": 1.008889009287636,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "falcon-finance-ff": [
@@ -23743,6 +24799,18 @@
       "volume_spike_x": 0.6908074440078481,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "FF",
+      "name": "Falcon Finance",
+      "price": 0.093875,
+      "change": 4.6,
+      "volume": 9099936.0,
+      "market_cap": 287937275.0,
+      "base_score": 12,
+      "volume_spike_x": 1.0704072369448363,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "jito-governance-token": [
@@ -23841,6 +24909,18 @@
       "volume_spike_x": 0.7075438105670036,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "JTO",
+      "name": "Jito",
+      "price": 0.481046,
+      "change": -20.2,
+      "volume": 22931505.0,
+      "market_cap": 247907459.0,
+      "base_score": 26,
+      "volume_spike_x": 0.8215422912192046,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "plasma": [
@@ -23939,6 +25019,18 @@
       "volume_spike_x": 0.6764961020616349,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "XPL",
+      "name": "Plasma",
+      "price": 0.087272,
+      "change": -15.4,
+      "volume": 33243805.0,
+      "market_cap": 242347689.0,
+      "base_score": 38,
+      "volume_spike_x": 0.8838315960376371,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "floki": [
@@ -24036,6 +25128,18 @@
       "base_score": 12,
       "volume_spike_x": 0.8613473218033121,
       "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "FLOKI",
+      "name": "FLOKI",
+      "price": 2.519e-05,
+      "change": -7.3,
+      "volume": 12617766.0,
+      "market_cap": 242905604.0,
+      "base_score": 26,
+      "volume_spike_x": 1.0540262221939007,
+      "volume_confirmation": 1,
       "volume_weight": 1.0
     }
   ],
@@ -24135,6 +25239,18 @@
       "volume_spike_x": 0.9851358274558359,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "REAL",
+      "name": "RealLink",
+      "price": 0.071141,
+      "change": -12.5,
+      "volume": 5154634.0,
+      "market_cap": 240623793.0,
+      "base_score": 12,
+      "volume_spike_x": 0.9986688636143181,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "tezos": [
@@ -24231,6 +25347,18 @@
       "market_cap": 240569268.0,
       "base_score": 12,
       "volume_spike_x": 0.7380592430453892,
+      "volume_confirmation": -7,
+      "volume_weight": 0.9
+    },
+    {
+      "symbol": "XTZ",
+      "name": "Tezos",
+      "price": 0.217496,
+      "change": -6.7,
+      "volume": 6306591.0,
+      "market_cap": 237927887.0,
+      "base_score": 12,
+      "volume_spike_x": 0.7885453576773376,
       "volume_confirmation": -7,
       "volume_weight": 0.9
     }
@@ -24345,6 +25473,18 @@
       "volume_spike_x": 0.8954509613173339,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "ENS",
+      "name": "Ethereum Name Service",
+      "price": 5.85,
+      "change": 1.0,
+      "volume": 11563189.0,
+      "market_cap": 246146174.0,
+      "base_score": 12,
+      "volume_spike_x": 1.2880322635130808,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "grass": [
@@ -24442,6 +25582,18 @@
       "base_score": 61,
       "volume_spike_x": 0.9326942978705954,
       "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "GRASS",
+      "name": "Grass",
+      "price": 0.362212,
+      "change": 7.7,
+      "volume": 14520632.0,
+      "market_cap": 245283670.0,
+      "base_score": 61,
+      "volume_spike_x": 1.0514724154923372,
+      "volume_confirmation": 1,
       "volume_weight": 1.0
     }
   ],
@@ -24541,6 +25693,18 @@
       "volume_spike_x": 0.5086496042159288,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "JASMY",
+      "name": "JasmyCoin",
+      "price": 0.00446808,
+      "change": 3.6,
+      "volume": 6435719.0,
+      "market_cap": 220745728.0,
+      "base_score": 12,
+      "volume_spike_x": 0.62267374454149,
+      "volume_confirmation": -7,
+      "volume_weight": 0.9
     }
   ],
   "ape-and-pepe": [
@@ -24638,6 +25802,18 @@
       "base_score": 26,
       "volume_spike_x": 1.0524648924429358,
       "volume_confirmation": 1,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "APEPE",
+      "name": "Ape and Pepe",
+      "price": 1.11e-06,
+      "change": -10.6,
+      "volume": 12783447.0,
+      "market_cap": 233171336.0,
+      "base_score": 26,
+      "volume_spike_x": 0.9309924999449846,
+      "volume_confirmation": 0,
       "volume_weight": 1.0
     }
   ],
@@ -24775,6 +25951,18 @@
       "volume_spike_x": 0.8570401189459481,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "OP",
+      "name": "Optimism",
+      "price": 0.088969,
+      "change": -21.5,
+      "volume": 26530253.0,
+      "market_cap": 203538941.0,
+      "base_score": 38,
+      "volume_spike_x": 0.9950641836532654,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "raydium": [
@@ -24873,6 +26061,18 @@
       "volume_spike_x": 1.022964290972075,
       "volume_confirmation": 1,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "RAY",
+      "name": "Raydium",
+      "price": 0.808335,
+      "change": 6.0,
+      "volume": 9114795.0,
+      "market_cap": 217696307.0,
+      "base_score": 47,
+      "volume_spike_x": 1.149838924316947,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "syrup": [
@@ -25009,6 +26209,18 @@
       "volume_spike_x": 0.8021619127105734,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "WIF",
+      "name": "dogwifhat",
+      "price": 0.199045,
+      "change": 0.7,
+      "volume": 37067648.0,
+      "market_cap": 198702534.0,
+      "base_score": 38,
+      "volume_spike_x": 0.9709002360761749,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "zebec-network": [
@@ -25107,6 +26319,18 @@
       "volume_spike_x": 1.0390657148125637,
       "volume_confirmation": 1,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "ZBCN",
+      "name": "Zebec Network",
+      "price": 0.00184264,
+      "change": -0.9,
+      "volume": 10081611.0,
+      "market_cap": 184236280.0,
+      "base_score": 26,
+      "volume_spike_x": 1.1283917064896871,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "fartcoin": [
@@ -25204,6 +26428,18 @@
       "base_score": 38,
       "volume_spike_x": 0.856545733337561,
       "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "FARTCOIN",
+      "name": "Fartcoin",
+      "price": 0.181618,
+      "change": -3.1,
+      "volume": 30379677.0,
+      "market_cap": 181408252.0,
+      "base_score": 38,
+      "volume_spike_x": 1.0057995988214075,
+      "volume_confirmation": 1,
       "volume_weight": 1.0
     }
   ],
@@ -25341,6 +26577,18 @@
       "volume_spike_x": 1.0799858558905733,
       "volume_confirmation": 1,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "CASHCAT",
+      "name": "Cash Cat",
+      "price": 0.22622,
+      "change": 102.7,
+      "volume": 35577171.0,
+      "market_cap": 223532013.0,
+      "base_score": 32,
+      "volume_spike_x": 1.0120103626571593,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "iota": [
@@ -25439,6 +26687,18 @@
       "volume_spike_x": 1.0244728572758113,
       "volume_confirmation": 1,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "IOTA",
+      "name": "IOTA",
+      "price": 0.04082729,
+      "change": -10.9,
+      "volume": 15315424.0,
+      "market_cap": 188063600.0,
+      "base_score": 26,
+      "volume_spike_x": 1.1844197777855943,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "the-graph": [
@@ -25535,6 +26795,18 @@
       "market_cap": 183081668.0,
       "base_score": 26,
       "volume_spike_x": 0.9051381867365839,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "GRT",
+      "name": "The Graph",
+      "price": 0.0164856,
+      "change": -4.4,
+      "volume": 15864194.0,
+      "market_cap": 180489118.0,
+      "base_score": 26,
+      "volume_spike_x": 0.9449015489429669,
       "volume_confirmation": 0,
       "volume_weight": 1.0
     }
@@ -25635,6 +26907,18 @@
       "volume_spike_x": 0.7872425591774577,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "COMP",
+      "name": "Compound",
+      "price": 18.29,
+      "change": -12.1,
+      "volume": 18429664.0,
+      "market_cap": 182900549.0,
+      "base_score": 34,
+      "volume_spike_x": 0.9149657540642228,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "trust-wallet-token": [
@@ -25731,6 +27015,18 @@
       "market_cap": 198669405.0,
       "base_score": 61,
       "volume_spike_x": 0.6811241656316842,
+      "volume_confirmation": -7,
+      "volume_weight": 0.9
+    },
+    {
+      "symbol": "TWT",
+      "name": "Trust Wallet",
+      "price": 0.478695,
+      "change": 10.2,
+      "volume": 8709046.0,
+      "market_cap": 199413330.0,
+      "base_score": 47,
+      "volume_spike_x": 0.48503253601190227,
       "volume_confirmation": -7,
       "volume_weight": 0.9
     }
@@ -25831,6 +27127,18 @@
       "volume_spike_x": 1.498573960203226,
       "volume_confirmation": 5,
       "volume_weight": 1.1
+    },
+    {
+      "symbol": "STRK",
+      "name": "Starknet",
+      "price": 0.02600915,
+      "change": -10.6,
+      "volume": 28834296.0,
+      "market_cap": 181366216.0,
+      "base_score": 38,
+      "volume_spike_x": 1.4919665844103096,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "eigenlayer": [
@@ -25929,6 +27237,18 @@
       "volume_spike_x": 0.909833335066379,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "EIGEN",
+      "name": "EigenCloud (prev. EigenLayer)",
+      "price": 0.194395,
+      "change": -15.8,
+      "volume": 24604567.0,
+      "market_cap": 178469550.0,
+      "base_score": 34,
+      "volume_spike_x": 1.7397345898202135,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "thorchain": [
@@ -26025,6 +27345,18 @@
       "market_cap": 155054757.0,
       "base_score": 39,
       "volume_spike_x": 1.4104178101354126,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
+    },
+    {
+      "symbol": "RUNE",
+      "name": "THORChain",
+      "price": 0.469997,
+      "change": 0.1,
+      "volume": 46180910.0,
+      "market_cap": 155299844.0,
+      "base_score": 39,
+      "volume_spike_x": 1.5444552379283174,
       "volume_confirmation": 5,
       "volume_weight": 1.1
     }
@@ -26139,6 +27471,18 @@
       "volume_spike_x": 0.45190165302562874,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "EURCV",
+      "name": "EUR CoinVertible",
+      "price": 1.16,
+      "change": -1.1,
+      "volume": 6533751.0,
+      "market_cap": 181270340.0,
+      "base_score": 12,
+      "volume_spike_x": 0.5628419369231203,
+      "volume_confirmation": -7,
+      "volume_weight": 0.9
     }
   ],
   "axie-infinity": [
@@ -26237,6 +27581,18 @@
       "volume_spike_x": 0.9240157098926965,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "AXS",
+      "name": "Axie Infinity",
+      "price": 0.906388,
+      "change": -10.7,
+      "volume": 18129393.0,
+      "market_cap": 157842584.0,
+      "base_score": 34,
+      "volume_spike_x": 1.018914154657407,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "akedo": [
@@ -26333,6 +27689,18 @@
       "market_cap": 184753313.0,
       "base_score": 26,
       "volume_spike_x": 0.38950393203322614,
+      "volume_confirmation": -7,
+      "volume_weight": 0.9
+    },
+    {
+      "symbol": "AKE",
+      "name": "Akedo",
+      "price": 0.0079286,
+      "change": -7.0,
+      "volume": 16698029.0,
+      "market_cap": 180814977.0,
+      "base_score": 26,
+      "volume_spike_x": 0.39095855247156647,
       "volume_confirmation": -7,
       "volume_weight": 0.9
     }
@@ -26447,6 +27815,18 @@
       "volume_spike_x": 0.8245056816633618,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "CHZ",
+      "name": "Chiliz",
+      "price": 0.01365826,
+      "change": -7.3,
+      "volume": 17880762.0,
+      "market_cap": 143578424.0,
+      "base_score": 34,
+      "volume_spike_x": 0.8895846022585332,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "the-black-bull": [
@@ -26543,6 +27923,18 @@
       "market_cap": 144306431.0,
       "base_score": 34,
       "volume_spike_x": 0.7422888002568053,
+      "volume_confirmation": -7,
+      "volume_weight": 0.9
+    },
+    {
+      "symbol": "ANSEM",
+      "name": "The Black Bull",
+      "price": 0.323189,
+      "change": 27.5,
+      "volume": 8137603.0,
+      "market_cap": 133797372.0,
+      "base_score": 41,
+      "volume_spike_x": 0.7797438697177154,
       "volume_confirmation": -7,
       "volume_weight": 0.9
     }
@@ -26667,6 +28059,18 @@
       "market_cap": 148143547.0,
       "base_score": 34,
       "volume_spike_x": 1.153633029422242,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
+    },
+    {
+      "symbol": "MANA",
+      "name": "Decentraland",
+      "price": 0.074589,
+      "change": -1.7,
+      "volume": 23215154.0,
+      "market_cap": 146053457.0,
+      "base_score": 34,
+      "volume_spike_x": 1.1215818913450817,
       "volume_confirmation": 5,
       "volume_weight": 1.1
     }
@@ -26855,6 +28259,18 @@
       "volume_spike_x": 0.7960977498060209,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "APE",
+      "name": "ApeCoin",
+      "price": 0.137328,
+      "change": -6.4,
+      "volume": 17133694.0,
+      "market_cap": 137296407.0,
+      "base_score": 34,
+      "volume_spike_x": 0.8405451199742112,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "non-playable-coin": [
@@ -27003,6 +28419,18 @@
       "volume_spike_x": 1.067350541840252,
       "volume_confirmation": 1,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "GOMINING",
+      "name": "GoMining Token",
+      "price": 0.336575,
+      "change": 5.7,
+      "volume": 21408270.0,
+      "market_cap": 135741112.0,
+      "base_score": 69,
+      "volume_spike_x": 1.0446162490623636,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "havven": [
@@ -27101,6 +28529,18 @@
       "volume_spike_x": 0.8934987015897937,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "SNX",
+      "name": "Synthetix",
+      "price": 0.20681,
+      "change": -10.2,
+      "volume": 13433780.0,
+      "market_cap": 120131809.0,
+      "base_score": 34,
+      "volume_spike_x": 0.9542573367459093,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "btse-token": [
@@ -27149,6 +28589,18 @@
       "market_cap": 113462650.0,
       "base_score": 26,
       "volume_spike_x": 1.3136813230515683,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
+    },
+    {
+      "symbol": "BTSE",
+      "name": "BTSE Token",
+      "price": 0.701002,
+      "change": -17.9,
+      "volume": 7534555.0,
+      "market_cap": 113444211.0,
+      "base_score": 26,
+      "volume_spike_x": 1.2431961002751735,
       "volume_confirmation": 5,
       "volume_weight": 1.1
     }
@@ -27311,6 +28763,18 @@
       "volume_spike_x": 0.8897301020440779,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "1INCH",
+      "name": "1INCH",
+      "price": 0.089698,
+      "change": -2.5,
+      "volume": 17541176.0,
+      "market_cap": 126056743.0,
+      "base_score": 34,
+      "volume_spike_x": 0.9256982002419584,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
     }
   ],
   "cysic": [
@@ -27371,6 +28835,18 @@
       "market_cap": 126090376.0,
       "base_score": 43,
       "volume_spike_x": 1.5722503416336349,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
+    },
+    {
+      "symbol": "CYS",
+      "name": "Cysic",
+      "price": 0.824341,
+      "change": 38.2,
+      "volume": 33822178.0,
+      "market_cap": 132005376.0,
+      "base_score": 47,
+      "volume_spike_x": 1.5450504030412382,
       "volume_confirmation": 5,
       "volume_weight": 1.1
     }
@@ -27583,6 +29059,18 @@
       "volume_spike_x": 0.8061281682416717,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "CASH",
+      "name": "CASH",
+      "price": 0.99983,
+      "change": 0.0,
+      "volume": 11039664.0,
+      "market_cap": 125448797.0,
+      "base_score": 26,
+      "volume_spike_x": 1.0153735203649827,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "the-sandbox": [
@@ -27681,6 +29169,18 @@
       "volume_spike_x": 0.6972575736059932,
       "volume_confirmation": -7,
       "volume_weight": 0.9
+    },
+    {
+      "symbol": "SAND",
+      "name": "The Sandbox",
+      "price": 0.03853412,
+      "change": -15.8,
+      "volume": 6006851.0,
+      "market_cap": 113247968.0,
+      "base_score": 26,
+      "volume_spike_x": 0.7381684587183766,
+      "volume_confirmation": -7,
+      "volume_weight": 0.9
     }
   ],
   "zama": [
@@ -27741,6 +29241,18 @@
       "market_cap": 114600835.0,
       "base_score": 12,
       "volume_spike_x": 0.6543431442004582,
+      "volume_confirmation": -7,
+      "volume_weight": 0.9
+    },
+    {
+      "symbol": "ZAMA",
+      "name": "Zama",
+      "price": 0.052921,
+      "change": -7.9,
+      "volume": 5880253.0,
+      "market_cap": 116419335.0,
+      "base_score": 26,
+      "volume_spike_x": 0.7230056905968795,
       "volume_confirmation": -7,
       "volume_weight": 0.9
     }
@@ -27839,6 +29351,18 @@
       "market_cap": 114604587.0,
       "base_score": 69,
       "volume_spike_x": 0.8124906606743224,
+      "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "S",
+      "name": "Sonic",
+      "price": 0.02890557,
+      "change": 5.0,
+      "volume": 13617356.0,
+      "market_cap": 112306904.0,
+      "base_score": 69,
+      "volume_spike_x": 0.8676957732674703,
       "volume_confirmation": 0,
       "volume_weight": 1.0
     }
@@ -28065,6 +29589,18 @@
       "volume_spike_x": 1.5965258654405787,
       "volume_confirmation": 5,
       "volume_weight": 1.1
+    },
+    {
+      "symbol": "PONS",
+      "name": "Pons",
+      "price": 0.361461,
+      "change": 642.6,
+      "volume": 82222363.0,
+      "market_cap": 256917053.0,
+      "base_score": 39,
+      "volume_spike_x": 1.9207095918621875,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "gnosis": [
@@ -28165,6 +29701,18 @@
       "volume_spike_x": 1.8376472786704736,
       "volume_confirmation": 5,
       "volume_weight": 1.1
+    },
+    {
+      "symbol": "PROM",
+      "name": "Prom",
+      "price": 6.63,
+      "change": 132.6,
+      "volume": 129324989.0,
+      "market_cap": 120984463.0,
+      "base_score": 35,
+      "volume_spike_x": 1.1004077067696973,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "safecoin": [
@@ -28227,6 +29775,18 @@
       "volume_spike_x": 1.097216564115316,
       "volume_confirmation": 1,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "SAFE",
+      "name": "SAFEbit",
+      "price": 0.181749,
+      "change": 37.6,
+      "volume": 7158674.0,
+      "market_cap": 129043741.0,
+      "base_score": 34,
+      "volume_spike_x": 1.0768701260156384,
+      "volume_confirmation": 1,
+      "volume_weight": 1.0
     }
   ],
   "collector-crypt": [
@@ -28277,6 +29837,18 @@
       "volume_spike_x": 1.30113111161049,
       "volume_confirmation": 5,
       "volume_weight": 1.1
+    },
+    {
+      "symbol": "CARDS",
+      "name": "Collector Crypt",
+      "price": 0.214686,
+      "change": 14.9,
+      "volume": 10147317.0,
+      "market_cap": 200146070.0,
+      "base_score": 61,
+      "volume_spike_x": 0.7856238957226992,
+      "volume_confirmation": -7,
+      "volume_weight": 0.9
     }
   ],
   "elrond-erd-2": [
@@ -28301,6 +29873,18 @@
       "market_cap": 118761894.0,
       "base_score": 69,
       "volume_spike_x": 1.6109307503413737,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
+    },
+    {
+      "symbol": "EGLD",
+      "name": "MultiversX",
+      "price": 3.84,
+      "change": 8.7,
+      "volume": 15931358.0,
+      "market_cap": 117905062.0,
+      "base_score": 69,
+      "volume_spike_x": 1.1168108395864969,
       "volume_confirmation": 5,
       "volume_weight": 1.1
     }
@@ -28329,6 +29913,18 @@
       "volume_spike_x": 1.7047111644999229,
       "volume_confirmation": 5,
       "volume_weight": 1.1
+    },
+    {
+      "symbol": "HNT",
+      "name": "Helium",
+      "price": 0.834844,
+      "change": 383.3,
+      "volume": 246175999.0,
+      "market_cap": 156614511.0,
+      "base_score": 39,
+      "volume_spike_x": 1.1902825288691963,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ],
   "niu-lai": [
@@ -28342,6 +29938,18 @@
       "base_score": 35,
       "volume_spike_x": 0.0,
       "volume_confirmation": 0,
+      "volume_weight": 1.0
+    },
+    {
+      "symbol": "牛来",
+      "name": "牛来 (Niu Lai)",
+      "price": 0.121459,
+      "change": 208.1,
+      "volume": 119889093.0,
+      "market_cap": 121647960.0,
+      "base_score": 35,
+      "volume_spike_x": 1.0168478002181665,
+      "volume_confirmation": 1,
       "volume_weight": 1.0
     }
   ],
@@ -28357,6 +29965,18 @@
       "volume_spike_x": 0.0,
       "volume_confirmation": 0,
       "volume_weight": 1.0
+    },
+    {
+      "symbol": "SKR",
+      "name": "Seeker",
+      "price": 0.02562745,
+      "change": 160.0,
+      "volume": 181390804.0,
+      "market_cap": 176702381.0,
+      "base_score": 35,
+      "volume_spike_x": 1.751670216280242,
+      "volume_confirmation": 5,
+      "volume_weight": 1.1
     }
   ]
 }
