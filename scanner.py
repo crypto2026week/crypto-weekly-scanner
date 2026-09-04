@@ -2,9 +2,10 @@ import os
 import requests
 import json
 from pathlib import Path
+from datetime import datetime, timezone
 
 
-print("Crypto Early Trend Scanner V4.5 Started")
+print("Crypto Early Trend Scanner V4.6 Started")
 
 
 # =========================================================
@@ -17,7 +18,7 @@ coingecko_api_key = os.getenv("COINGECKO_API_KEY")
 
 
 # =========================================================
-# V4.5 CONFIGURATION
+# V4.6 CONFIGURATION
 # =========================================================
 
 HISTORY_FILE = Path("scanner_history.json")
@@ -29,13 +30,20 @@ MIN_CONFIDENCE = 65
 
 MAX_HISTORY = 12
 
+# ---------------------------------------------------------
+# TRUE SIGNAL PERSISTENCE
+# ---------------------------------------------------------
+
+PERSISTENCE_WINDOW = 10
+
+# Historical volume lookback
 HISTORICAL_VOLUME_LOOKBACK = 6
 
 TOP_SIGNALS = 5
 
 
 # =========================================================
-# V4.5 VOLUME CONFIRMATION
+# V4.6 VOLUME CONFIRMATION
 # =========================================================
 
 VOLUME_CONFIRMATION_ENABLED = True
@@ -51,13 +59,33 @@ MAX_VOLUME_ADJUSTMENT = 8
 
 
 # =========================================================
-# V4.5 VOLUME WEIGHT
+# V4.6 VOLUME WEIGHT
 # =========================================================
 
 VOLUME_WEIGHT_STRONG = 1.10
 VOLUME_WEIGHT_STABLE = 1.00
 VOLUME_WEIGHT_NEUTRAL = 1.00
 VOLUME_WEIGHT_WEAK = 0.90
+
+
+# =========================================================
+# V4.6 VOLUME QUALITY FLAGS
+# =========================================================
+
+# IMPORTANT:
+# This is a classification flag.
+# It does NOT automatically penalize EXTREME volume.
+# We will test its predictive value during backtesting
+# before changing the scoring model.
+
+VOLUME_EXTREME_SPIKE = 3.00
+VOLUME_EXTREME_RATIO = 50.00
+
+VOLUME_HIGH_SPIKE = 2.00
+VOLUME_HIGH_RATIO = 30.00
+
+VOLUME_ELEVATED_SPIKE = 1.50
+VOLUME_ELEVATED_RATIO = 20.00
 
 
 # =========================================================
@@ -79,6 +107,15 @@ excluded_symbols = {
     "PAXG",
     "XAUT"
 }
+
+
+# =========================================================
+# CURRENT UTC TIMESTAMP
+# =========================================================
+
+scan_timestamp = datetime.now(
+    timezone.utc
+).isoformat()
 
 
 # =========================================================
@@ -161,7 +198,10 @@ try:
     coins = response.json()
 
 
-    if not isinstance(coins, list):
+    if not isinstance(
+        coins,
+        list
+    ):
 
         print(
             "CoinGecko returned invalid data"
@@ -201,6 +241,169 @@ except Exception as error:
 
 
 signals = []
+
+
+# =========================================================
+# HELPER FUNCTIONS
+# =========================================================
+
+def calculate_volume_quality_flag(
+    volume_spike_x,
+    volume_ratio
+):
+    """
+    Classify unusual volume activity.
+
+    IMPORTANT:
+    This is a diagnostic flag only.
+    It does not directly modify confidence.
+    """
+
+    if (
+        volume_spike_x >= VOLUME_EXTREME_SPIKE
+        or volume_ratio >= VOLUME_EXTREME_RATIO
+    ):
+
+        return "🔴 EXTREME ⚠️"
+
+
+    if (
+        volume_spike_x >= VOLUME_HIGH_SPIKE
+        or volume_ratio >= VOLUME_HIGH_RATIO
+    ):
+
+        return "🟠 HIGH"
+
+
+    if (
+        volume_spike_x >= VOLUME_ELEVATED_SPIKE
+        or volume_ratio >= VOLUME_ELEVATED_RATIO
+    ):
+
+        return "🟡 ELEVATED"
+
+
+    if volume_spike_x > 0:
+
+        return "🟢 NORMAL"
+
+
+    return "⚪ NEW"
+
+
+def clamp_confidence(value):
+    """
+    Display confidence remains within 0-100.
+    Raw confidence remains UNCLIPPED.
+    """
+
+    return max(
+        0,
+        min(
+            100,
+            value
+        )
+    )
+
+
+def get_persistence_data(
+    previous_history
+):
+    """
+    TRUE SIGNAL PERSISTENCE
+
+    Persistence is based on whether previous observations
+    actually qualified as signals.
+
+    It is NOT based simply on coin appearance.
+
+    Older V4.5 records without qualified_signal are ignored
+    as qualified observations.
+    """
+
+    recent_observations = (
+        previous_history[
+            -PERSISTENCE_WINDOW:
+        ]
+    )
+
+    observations = len(
+        recent_observations
+    )
+
+    qualified_signals = 0
+
+
+    for record in recent_observations:
+
+        if not isinstance(
+            record,
+            dict
+        ):
+
+            continue
+
+
+        if record.get(
+            "qualified_signal",
+            False
+        ) is True:
+
+            qualified_signals += 1
+
+
+    persistence_ratio = 0.0
+
+
+    if observations > 0:
+
+        persistence_ratio = (
+            qualified_signals
+            / observations
+        )
+
+
+    persistence_score = (
+        persistence_ratio * 10
+    )
+
+
+    # -----------------------------------------------------
+    # Persistence label
+    # -----------------------------------------------------
+
+    if observations == 0:
+
+        persistence_label = "🆕 New"
+
+
+    elif persistence_ratio >= 0.80:
+
+        persistence_label = "🔥 Persistent"
+
+
+    elif persistence_ratio >= 0.60:
+
+        persistence_label = "📌 Repeated"
+
+
+    elif persistence_ratio >= 0.30:
+
+        persistence_label = "👀 Returning"
+
+
+    else:
+
+        persistence_label = "⚪ Weak Persistence"
+
+
+    return (
+        observations,
+        qualified_signals,
+        persistence_ratio,
+        persistence_score,
+        persistence_label
+    )
 
 
 # =========================================================
@@ -588,6 +791,12 @@ for coin in coins:
     # BASE SCORE
     # =====================================================
 
+    # IMPORTANT V4.6:
+    # NO 100 CAP.
+    #
+    # Raw score remains unrestricted so the ranking can
+    # distinguish very strong candidates.
+
     base_score = (
         momentum
         + volume_quality
@@ -601,20 +810,13 @@ for coin in coins:
 
     base_score = max(
         0,
-        min(
-            100,
-            base_score
-        )
+        base_score
     )
 
 
     # =====================================================
     # HISTORY VALIDATION
     # =====================================================
-
-    # IMPORTANT:
-    # Use CoinGecko ID instead of symbol.
-    # Symbols are not guaranteed to be unique.
 
     if coin_id not in history:
 
@@ -858,10 +1060,6 @@ for coin in coins:
 
     if VOLUME_CONFIRMATION_ENABLED:
 
-        # -------------------------------------------------
-        # No historical baseline = neutral.
-        # -------------------------------------------------
-
         if historical_volume_avg <= 0:
 
             volume_confirmation = 0
@@ -926,9 +1124,6 @@ for coin in coins:
     # VOLUME WEIGHT
     # =====================================================
 
-    # No historical baseline:
-    # do NOT penalize the first observation.
-
     volume_weight = (
         VOLUME_WEIGHT_NEUTRAL
     )
@@ -980,40 +1175,23 @@ for coin in coins:
 
 
     # =====================================================
-    # PERSISTENCE SCORE
+    # TRUE PERSISTENCE
     # =====================================================
 
-    # Previous observations only.
-    # Current observation is NOT included.
-
-    persistence_score = 0
-
-
-    if previous_count >= 1:
-
-        persistence_score = 3
-
-
-    if previous_count >= 2:
-
-        persistence_score = 5
-
-
-    if previous_count >= 4:
-
-        persistence_score = 7
-
-
-    if previous_count >= 6:
-
-        persistence_score = 10
+    (
+        observations,
+        qualified_signals,
+        persistence_ratio,
+        persistence_score,
+        persistence_label
+    ) = get_persistence_data(
+        previous_history
+    )
 
 
     # =====================================================
     # TREND CONTINUITY
     # =====================================================
-
-    # Calculate BEFORE adding current observation.
 
     rising_observations = 0
 
@@ -1093,38 +1271,8 @@ for coin in coins:
 
 
     # =====================================================
-    # FINAL CONFIDENCE
-    # =====================================================
-
-    raw_confidence = (
-        base_score
-        + persistence_score
-        + continuity_bonus
-        + volume_confirmation
-    )
-
-
-    confidence = (
-        raw_confidence
-        * volume_weight
-    )
-
-
-    confidence = max(
-        0,
-        min(
-            100,
-            confidence
-        )
-    )
-
-
-    # =====================================================
     # STAGE DETECTION
     # =====================================================
-
-    # IMPORTANT:
-    # Negative / low momentum must NOT be labeled EARLY.
 
     if 5 <= change <= 15:
 
@@ -1152,35 +1300,103 @@ for coin in coins:
 
 
     # =====================================================
-    # PERSISTENCE LABEL
+    # PRE-PERSISTENCE QUALIFICATION
     # =====================================================
 
-    if previous_count >= 4:
+    # IMPORTANT:
+    #
+    # Persistence must NOT make a signal qualify itself.
+    #
+    # Therefore qualification is calculated WITHOUT the
+    # current persistence_score.
+    #
+    # This prevents:
+    #
+    # "It is strong because it is persistent,
+    #  and it is persistent because it was strong."
 
-        persistence_label = (
-            "🔥 Persistent"
+    qualification_raw_confidence = (
+        base_score
+        + continuity_bonus
+        + volume_confirmation
+    )
+
+
+    qualification_weighted_confidence = (
+        qualification_raw_confidence
+        * volume_weight
+    )
+
+
+    qualification_confidence = (
+        clamp_confidence(
+            qualification_weighted_confidence
         )
+    )
 
 
-    elif previous_count >= 2:
+    # =====================================================
+    # QUALIFIED SIGNAL
+    # =====================================================
 
-        persistence_label = (
-            "📌 Repeated"
+    qualified_signal = (
+        qualification_confidence
+        >= MIN_CONFIDENCE
+        and stage != "⚪ NO MOMENTUM"
+    )
+
+
+    # =====================================================
+    # FINAL RAW CONFIDENCE
+    # =====================================================
+
+    # V4.6:
+    # This value is NOT capped at 100.
+
+    raw_confidence = (
+        base_score
+        + persistence_score
+        + continuity_bonus
+        + volume_confirmation
+    )
+
+
+    # =====================================================
+    # WEIGHTED RAW CONFIDENCE
+    # =====================================================
+
+    # This is the ranking score.
+
+    weighted_raw_confidence = (
+        raw_confidence
+        * volume_weight
+    )
+
+
+    # =====================================================
+    # DISPLAY CONFIDENCE
+    # =====================================================
+
+    # Display value is still 0-100 for easy reading.
+    # The raw value remains available for ranking/backtesting.
+
+    confidence = (
+        clamp_confidence(
+            weighted_raw_confidence
         )
+    )
 
 
-    elif previous_count >= 1:
+    # =====================================================
+    # VOLUME QUALITY FLAG
+    # =====================================================
 
-        persistence_label = (
-            "👀 Returning"
+    volume_quality_flag = (
+        calculate_volume_quality_flag(
+            volume_spike_x,
+            volume_ratio
         )
-
-
-    else:
-
-        persistence_label = (
-            "🆕 New"
-        )
+    )
 
 
     # =====================================================
@@ -1241,8 +1457,25 @@ for coin in coins:
 
     history[coin_id].append(
         {
+            # -------------------------------------------------
+            # BACKTEST TIMESTAMP
+            # -------------------------------------------------
+
+            "timestamp": scan_timestamp,
+
+            # -------------------------------------------------
+            # IDENTITY
+            # -------------------------------------------------
+
+            "coin_id": coin_id,
+
             "symbol": symbol,
+
             "name": name,
+
+            # -------------------------------------------------
+            # MARKET DATA
+            # -------------------------------------------------
 
             "price": price,
 
@@ -1252,15 +1485,99 @@ for coin in coins:
 
             "market_cap": market_cap,
 
+            "volume_ratio": volume_ratio,
+
+            # -------------------------------------------------
+            # SCORE
+            # -------------------------------------------------
+
             "base_score": base_score,
 
-            "volume_spike_x": volume_spike_x,
+            "raw_confidence": raw_confidence,
+
+            "weighted_raw_confidence": (
+                weighted_raw_confidence
+            ),
+
+            "confidence": confidence,
+
+            # -------------------------------------------------
+            # QUALIFICATION
+            # -------------------------------------------------
+
+            "qualified_signal": qualified_signal,
+
+            "qualification_raw_confidence": (
+                qualification_raw_confidence
+            ),
+
+            "qualification_weighted_confidence": (
+                qualification_weighted_confidence
+            ),
+
+            "qualification_confidence": (
+                qualification_confidence
+            ),
+
+            # -------------------------------------------------
+            # SIGNAL CONTEXT
+            # -------------------------------------------------
+
+            "stage": stage,
+
+            "opportunity": opportunity,
+
+            # -------------------------------------------------
+            # PERSISTENCE
+            # -------------------------------------------------
+
+            "persistence_observations": (
+                observations
+            ),
+
+            "persistence_qualified_signals": (
+                qualified_signals
+            ),
+
+            "persistence_ratio": (
+                persistence_ratio
+            ),
+
+            "persistence_score": (
+                persistence_score
+            ),
+
+            # -------------------------------------------------
+            # CONTINUITY
+            # -------------------------------------------------
+
+            "continuity_bonus": (
+                continuity_bonus
+            ),
+
+            # -------------------------------------------------
+            # VOLUME
+            # -------------------------------------------------
+
+            "volume_spike_x": (
+                volume_spike_x
+            ),
 
             "volume_confirmation": (
                 volume_confirmation
             ),
 
-            "volume_weight": volume_weight
+            "volume_weight": (
+                volume_weight
+            ),
+
+            "volume_quality_flag": (
+                volume_quality_flag
+            ),
+
+            "volume_continuation": (
+                volume_continuation
+            )
         }
     )
 
@@ -1277,7 +1594,7 @@ for coin in coins:
 
 
     # =====================================================
-    # SAVE ONLY QUALIFYING SIGNALS
+    # SAVE QUALIFYING SIGNALS
     # =====================================================
 
     if confidence < MIN_CONFIDENCE:
@@ -1297,6 +1614,10 @@ for coin in coins:
 
             "raw_confidence": raw_confidence,
 
+            "weighted_raw_confidence": (
+                weighted_raw_confidence
+            ),
+
             "base_score": base_score,
 
             "opportunity": opportunity,
@@ -1305,6 +1626,18 @@ for coin in coins:
 
             "persistence_label": (
                 persistence_label
+            ),
+
+            "persistence_observations": (
+                observations
+            ),
+
+            "persistence_qualified_signals": (
+                qualified_signals
+            ),
+
+            "persistence_ratio": (
+                persistence_ratio
             ),
 
             "persistence_score": (
@@ -1320,6 +1653,18 @@ for coin in coins:
             ),
 
             "volume_weight": volume_weight,
+
+            "volume_quality_flag": (
+                volume_quality_flag
+            ),
+
+            "qualified_signal": (
+                qualified_signal
+            ),
+
+            "qualification_confidence": (
+                qualification_confidence
+            ),
 
             "price": price,
 
@@ -1400,23 +1745,24 @@ except Exception as error:
 
 
 # =========================================================
-# END OF PART 1
-# =========================================================
-# PART 2 CONTINUES BELOW
-# =========================================================
-# =========================================================
-# PART 2 — REPORT + TELEGRAM
-# =========================================================
-
-
-# =========================================================
 # SORT SIGNALS
 # =========================================================
 
+# V4.6 ranking:
+#
+# 1. Weighted Raw Confidence
+# 2. Raw Confidence
+# 3. Persistence Ratio
+# 4. Volume Confirmation
+# 5. 7D Change
+#
+# This prevents all 100/100 scores from becoming tied.
+
 signals.sort(
     key=lambda x: (
-        x["confidence"],
-        x["persistence_score"],
+        x["weighted_raw_confidence"],
+        x["raw_confidence"],
+        x["persistence_ratio"],
         x["volume_confirmation"],
         x["change"]
     ),
@@ -1431,9 +1777,14 @@ signals.sort(
 if signals:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V4.5\n\n"
-        "🧪 V4.5 Volume Confirmation Mode\n"
-        "📊 Volume confirmation affects confidence.\n\n"
+        "🚨 Crypto Early Trend Scanner V4.6\n\n"
+
+        "🧠 V4.6 Logic Update\n"
+
+        "• True Signal Persistence\n"
+        "• Uncapped Raw Confidence\n"
+        "• Volume Quality Classification\n"
+        "• Timestamped History for Backtesting\n\n"
     )
 
     rank = 1
@@ -1476,6 +1827,31 @@ if signals:
 
 
         # -------------------------------------------------
+        # PERSISTENCE DISPLAY
+        # -------------------------------------------------
+
+        persistence_observations = (
+            item["persistence_observations"]
+        )
+
+        persistence_qualified = (
+            item["persistence_qualified_signals"]
+        )
+
+
+        if persistence_observations > 0:
+
+            persistence_fraction = (
+                f"{persistence_qualified}/"
+                f"{persistence_observations}"
+            )
+
+        else:
+
+            persistence_fraction = "0/0"
+
+
+        # -------------------------------------------------
         # BUILD SIGNAL TEXT
         # -------------------------------------------------
 
@@ -1498,8 +1874,17 @@ if signals:
             f"🎯 Confidence: "
             f"{item['confidence']:.0f}/100\n"
 
-            f"🧠 Base Score: "
-            f"{item['base_score']:.0f}/100\n"
+            f"🧠 Raw Confidence: "
+            f"{item['raw_confidence']:.2f}\n"
+
+            f"⚖️ Weighted Raw: "
+            f"{item['weighted_raw_confidence']:.2f}\n"
+
+            f"📊 Base Score: "
+            f"{item['base_score']:.2f}\n"
+
+            f"🧪 Qualification Confidence: "
+            f"{item['qualification_confidence']:.2f}\n"
 
             f"🧪 Volume Confirmation: "
             f"{confirmation_label}\n"
@@ -1515,7 +1900,7 @@ if signals:
             f"📈 Momentum: "
             f"{item['momentum']}/20\n"
 
-            f"📊 Volume Quality: "
+            f"📊 Volume Score: "
             f"{item['volume_quality']}/20\n"
 
             f"🔥 Vol/Cap: "
@@ -1535,11 +1920,14 @@ if signals:
 
 
             # -------------------------------------------------
-            # HISTORY / CONTINUITY
+            # TRUE PERSISTENCE
             # -------------------------------------------------
 
-            f"🔁 Persistence: "
-            f"{item['persistence_score']}/10\n"
+            f"🔁 Signal Persistence: "
+            f"{persistence_fraction}\n"
+
+            f"📊 Persistence Score: "
+            f"{item['persistence_score']:.2f}/10\n"
 
             f"📌 Continuity Bonus: "
             f"+{item['continuity_bonus']}\n\n"
@@ -1566,16 +1954,26 @@ if signals:
             # VOLUME ANALYSIS
             # -------------------------------------------------
 
-            f"🧪 V4.5 VOLUME ANALYSIS\n"
+            f"🧪 V4.6 VOLUME ANALYSIS\n"
 
             f"📊 Historical Vol Avg: "
             f"${item['historical_volume_avg']:,.0f}\n"
 
-            f"🔥 Historical Volume Spike: "
+            f"🔥 Volume Spike: "
             f"{item['volume_spike_x']:.2f}x\n"
+
+            f"🚦 Volume Quality: "
+            f"{item['volume_quality_flag']}\n"
 
             f"🔄 Volume Continuation: "
             f"{item['volume_continuation']}\n\n"
+
+            # -------------------------------------------------
+            # BACKTEST DATA
+            # -------------------------------------------------
+
+            f"🕒 Scan Timestamp: "
+            f"{scan_timestamp}\n\n"
 
             "────────────────────\n\n"
         )
@@ -1589,11 +1987,14 @@ if signals:
 else:
 
     report = (
-        "🚨 Crypto Early Trend Scanner V4.5\n\n"
+        "🚨 Crypto Early Trend Scanner V4.6\n\n"
 
-        "🧪 V4.5 Volume Confirmation Mode\n"
+        "🧠 V4.6 Logic Update\n"
 
-        "📊 Volume confirmation affects confidence.\n\n"
+        "• True Signal Persistence\n"
+        "• Uncapped Raw Confidence\n"
+        "• Volume Quality Classification\n"
+        "• Timestamped History for Backtesting\n\n"
 
         "❌ No qualifying signals found."
     )
@@ -1632,9 +2033,6 @@ if telegram_token and telegram_chat_id:
     # TELEGRAM SAFE MESSAGE SENDER
     # =====================================================
 
-    # Telegram message limit is approximately 4096 characters.
-    # Keep a safety margin.
-
     MAX_TELEGRAM_LENGTH = 4000
 
 
@@ -1667,8 +2065,6 @@ if telegram_token and telegram_chat_id:
                 continue
 
 
-            # Restore separator
-
             section = (
                 section
                 + "\n\n────────────────────\n\n"
@@ -1689,8 +2085,6 @@ if telegram_token and telegram_chat_id:
 
 
             else:
-
-                # Save existing part
 
                 if current_part.strip():
 
@@ -1750,7 +2144,7 @@ if telegram_token and telegram_chat_id:
     if not telegram_messages:
 
         telegram_messages = [
-            "🚨 Crypto Early Trend Scanner V4.5\n\n"
+            "🚨 Crypto Early Trend Scanner V4.6\n\n"
             "❌ Empty report."
         ]
 
@@ -1906,5 +2300,5 @@ else:
 # =========================================================
 
 print(
-    "Crypto Early Trend Scanner V4.5 Finished"
-        )
+    "Crypto Early Trend Scanner V4.6 Finished"
+)
